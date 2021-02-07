@@ -10,5 +10,5 @@ npm i -D nodemon concurrently
 
 ##### Front-end Server : http://localhost:3000
 
-### To run Back-end & front-end concurrently :
+### To run Back-end & Front-end concurrently :
 npm run dev
