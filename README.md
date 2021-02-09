@@ -2,7 +2,7 @@
 
 ## To install dependencies 
 npm install  (in current directory) <br />
-npm install   (in cliend directory)
+npm install   (in client directory)
 
 
 ## To install Dev Dependencies
