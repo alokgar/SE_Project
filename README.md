@@ -1,7 +1,7 @@
 # SE_Project
 
 ## To install dependencies 
-npm install  (in current directory) /br
+npm install  (in current directory) <br />
 npm install   (in cliend directory)
 
 
