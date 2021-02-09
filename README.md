@@ -1,7 +1,9 @@
 # SE_Project
 
 ## To install dependencies 
-npm i express bcryptjs jsonwebtoken config express-validator mongoose
+npm install  (in current directory)
+npm install   (in cliend directory)
+
 
 ## To install Dev Dependencies
 npm i -D nodemon concurrently
