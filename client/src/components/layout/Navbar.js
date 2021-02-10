@@ -7,12 +7,7 @@ import { logout } from '../../actions/auth';
 const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
   const authLinks = (
     <ul>
-      <li>
-        <Link to='/profiles'>Developers</Link>
-      </li>
-      <li>
-        <Link to='/posts'>Posts</Link>
-      </li>
+      
       <li>
         <Link to='/dashboard'>
           <i className='fas fa-user' />{' '}
@@ -30,9 +25,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
 
   const guestLinks = (
     <ul>
-      <li>
-        <Link to='/profiles'>Developers</Link>
-      </li>
+      
       <li>
         <Link to='/register'>Register</Link>
       </li>
@@ -46,7 +39,7 @@ const Navbar = ({ auth: { isAuthenticated, loading }, logout }) => {
     <nav className='navbar bg-dark'>
       <h1>
         <Link to='/'>
-          <i className='fas fa-code' /> Orderbook
+          <i className='fas fa-code' /> IndustryAssist
         </Link>
       </h1>
       {!loading && (
