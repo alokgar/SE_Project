@@ -34,12 +34,11 @@ const UserSchema = new mongoose.Schema({
     required: true
   },
   salary: {
-    type: Number,
-    required: true
+    type: Number
   },
   status: {
     type: String,
-    required: true
+    default: "Pending"
   },
   address: {
     type: mongoose.Schema.Types.ObjectId,
