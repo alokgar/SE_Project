@@ -25,3 +25,4 @@ export const REMOVE_COMMENT = 'REMOVE_COMMENT';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
 export const GET_USERS = 'GET_USERS';
 export const CLEAR_USERS = 'CLEAR_USERS';
+export const CHANGE_STATUS = 'CHANGE_STATUS';

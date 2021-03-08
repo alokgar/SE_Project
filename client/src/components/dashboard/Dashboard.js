@@ -3,23 +3,23 @@ import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
-
+import Approve_status from '../approve_status/approve_status'
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
-import { getUsers } from '../../actions/status';
+
 
 const Dashboard = ({
   getCurrentProfile,
-  getUsers,
+
   deleteAccount,
   auth: { user },
-  status:{users},
+
   profile: { profile, loading }
 }) => {
   useEffect(() => {
     getCurrentProfile();
-    getUsers();
-  }, [getCurrentProfile,getUsers]);
+
+  }, [getCurrentProfile]);
 
   return loading && profile === null ? (
     <Spinner />
@@ -52,10 +52,8 @@ const Dashboard = ({
 
           {/* {getUsers[0]} */}
           {/* {status} */}
-
-          Following are the list of USERS with there status
-          {users.map(user => <div>{user.first_name}{  user.first_name}{  user.status}</div>)}
-
+          <Approve_status />
+         
           
         </Fragment>
       )}
@@ -67,20 +65,20 @@ const Dashboard = ({
 
 Dashboard.propTypes = {
   getCurrentProfile: PropTypes.func.isRequired,
-  getUsers: PropTypes.func.isRequired,
+
   deleteAccount: PropTypes.func.isRequired,
   auth: PropTypes.object.isRequired,
   profile: PropTypes.object.isRequired,
-  status: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired
+ 
 };
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  profile: state.profile,
-  status: state.status
+  profile: state.profile
+
 });
 
 export default connect(
   mapStateToProps,
-  { getCurrentProfile, deleteAccount ,getUsers }
+  { getCurrentProfile, deleteAccount }
 )(Dashboard);
