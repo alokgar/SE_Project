@@ -7,13 +7,17 @@ import PropTypes from 'prop-types';
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
-    name: '',
+  
+    first_name:'',
+    last_name:'',
+    mobile_no:'',
+    type:'Admin',
     email: '',
     password: '',
     password2: ''
   });
 
-  const { name, email, password, password2 } = formData;
+  const { first_name,last_name,mobile_no,type, email, password, password2 } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,7 +27,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
     if (password !== password2) {
       setAlert('Passwords do not match', 'danger');
     } else {
-      register({ name, email, password });
+      register({first_name,last_name,mobile_no,type, email, password });
     }
   };
 
@@ -41,12 +45,48 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
         <div className='form-group'>
           <input
             type='text'
-            placeholder='Name'
-            name='name'
-            value={name}
+            placeholder='first_name'
+            name='first_name'
+            value={first_name}
             onChange={e => onChange(e)}
           />
         </div>
+
+        <div className='form-group'>
+          <input
+            type='text'
+            placeholder='last_name'
+            name='last_name'
+            value={last_name}
+            onChange={e => onChange(e)}
+          />
+        </div>
+        <div className='form-group'>
+          <input
+            type='text'
+            placeholder='mobile_no'
+            name='mobile_no'
+            value={mobile_no}
+            onChange={e => onChange(e)}
+          />
+        </div>
+        <div className='form-group'>
+
+        <select  name="type" onChange={e => onChange(e)}>
+        <option value="Employee">Employee</option>
+        <option value="Admin" selected>Admin</option>
+       
+      </select>
+      </div>
+        {/* <div className='form-group'>
+          <input
+            type='text'
+            placeholder='type'
+            name='type'
+            value={type}
+            onChange={e => onChange(e)}
+          />
+        </div> */}
         <div className='form-group'>
           <input
             type='email'

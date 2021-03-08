@@ -61,6 +61,14 @@ router.post(
         }
       };
 
+      // if(user.status=="Pending"){
+      //   return res
+      //     .status(400)
+      //     .json({ errors: [{ msg: 'You have not been verified by administrator' }] });
+      // }
+
+
+
       jwt.sign(
         payload,
         config.get('jwtSecret'),

@@ -33,14 +33,14 @@ export const loadUser = () => async dispatch => {
 };
 
 // Register User
-export const register = ({ name, email, password }) => async dispatch => {
+export const register = ({ first_name,last_name,mobile_no,type, email, password }) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
     }
   };
 
-  const body = JSON.stringify({ name, email, password });
+  const body = JSON.stringify({ first_name,last_name,mobile_no,type, email, password });
 
   try {
     const res = await axios.post('/api/users', body, config);
