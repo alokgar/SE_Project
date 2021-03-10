@@ -9,7 +9,8 @@ const auth = require('../../middleware/auth');
 
 
 async function getOrderByid(id){
-    const order = await Order.findById(id).populate('details.product_id details.size_id customer_id employee_id');
+    const order = await Order.findById(id).populate({path : 'employee_id customer_id details.product_id details.size_id',
+    populate: 'category_id'});
     return order;
 }
 
@@ -18,10 +19,11 @@ async function getOrderByid(id){
 // @access    Private
 router.get('/', async (req, res) => {
     try {
-      const order = await Order.find().populate('employee_id customer_id');
+      const order = await Order.find().populate({path : 'employee_id customer_id details.product_id details.size_id',
+                                                populate: 'category_id'});
     
       if (!order) {
-        return res.status(400).json({ msg: 'No Orders found !' });
+        return res.status(400).json({ msg: 'No Orders found !'});
       }
       res.json(order);
     } catch (err) {
@@ -53,8 +55,9 @@ router.get('/:id', async (req, res) => {
 // req : { customer_id : ------, detail: [ { items }]}
 router.post('/', async (req, res) => {
     try {
+      
       const { customer_id, details} = req.body;
-      let employee_id = "6022465e0f7944170295296a";
+      let employee_id = "6045947b0eeecc03af04900f";
 
       let placed_order = new Order({details,customer_id,employee_id});
       await placed_order.save();

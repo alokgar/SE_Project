@@ -12,9 +12,11 @@ const { addAddress, getAddress, updateAddress } = require('./address');
 
 
 async function AddCustomer(first_name,last_name,mobile_no,add_id,employee_id){
+    
     let newcustomer = new Customer({
         first_name,last_name,mobile_no,address : add_id,employee_id
     });
+    
     await newcustomer.save();
 }
 
@@ -48,16 +50,14 @@ router.post('/',async (req, res) => {
       const {first_name , last_name , mobile_no , line1 , landmark , pincode , name ,employee_id}  = req.body; // name is City name
       try {   
         const cust1 = await Customer.findOne({mobile_no});
-        console.log(cust1);
         if(cust1){
             res.json({ msg: 'Customer Already exist with the mobile number !' });
         }
         else{
             var curr_city = await checkAndaddCity(name);   
-            console.log(curr_city._id)
 
             var add = await Address.findOne({line1});
-            console.log(add)
+            
             if(!add){
                 add = await addAddress(line1,landmark,pincode,curr_city._id);
             }         

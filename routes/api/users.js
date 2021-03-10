@@ -30,7 +30,7 @@ router.get('/:email',  async (req, res) => {
     var user = await User.findOneAndUpdate({
       email: req.params.email
     },
-    {status:"Appaasdfiasha"}
+    {status:"Approved"}
     );
 
     user = await User.find();
