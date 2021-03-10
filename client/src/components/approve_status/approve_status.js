@@ -7,6 +7,7 @@ import Spinner from '../layout/Spinner';
 import {changeStatus }from '../../actions/status';
 import { getUsers } from '../../actions/status';
 
+import {Button ,Row,Col} from "react-bootstrap";
 const Approve_status = ({
  
   getUsers,
@@ -19,28 +20,38 @@ const Approve_status = ({
 
   return (
     <Fragment>
-      
 
-      Following are the list of USERS with there status
+    Following are the list of USERS with there status
+    <div style = {{height:"150px" , width:"500px" , overflow:"scroll",overflowX:"hidden",margin:"10px"}}>
 
-      
+    {users.map(function(user){
 
-      {users.map(function(user){
+      var id=user.email;
 
-        var id=user.email;
-        
 
 
       return (
-        <div>
-          
-          {user.status}
-           <button onClick={()=>{changeStatus({id})}}  >Approve</button>{" "} <button>Reject</button>
-           </div>
-       )
+         <div style = {{margin:"5px"}}>
+           
+        {user.status=="Pending" ?
+        <Row>
+        <Col>
+        {user.first_name}{" "}{user.last_name}
+        </Col>
+        <Col>
+        <Button variant="success" onClick={()=>{changeStatus({id})}}  >Approve for {user.type}</Button>
+
+        </Col>
+        </Row>
+        :null}
+        
+         </div>
+)
 
 
-      })}
+})}
+    </div>
+      
 
       
      

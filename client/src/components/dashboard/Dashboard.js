@@ -6,6 +6,7 @@ import Spinner from '../layout/Spinner';
 import Approve_status from '../approve_status/approve_status'
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
 
+import {Container} from 'react-bootstrap';
 
 
 const Dashboard = ({
@@ -44,16 +45,14 @@ const Dashboard = ({
           </div>
         </Fragment>
       ) : (
-        <Fragment>
-          {/* <p>You have not yet setup a profile, please add some info</p>
-          <Link to='/create-profile' className='btn btn-primary my-1'>
-            Create Profile
-          </Link> */}
-
-          {/* {getUsers[0]} */}
-          {/* {status} */}
-          <Approve_status />
+        <Fragment >
+        
+          <div >
+          
+          <Container > <Approve_status /></Container>
          
+          </div>
+  
           
         </Fragment>
       )}

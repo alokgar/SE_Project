@@ -23,12 +23,15 @@
   "homepage": "https://github.com/alokgar/SE_Project#readme",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "bootstrap": "^4.6.0",
     "config": "^3.3.3",
     "express": "^4.17.1",
     "express-validator": "^6.9.2",
     "gravatar": "^1.8.1",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.11.15",
+    "react-bootstrap": "^1.5.1",
+    "react-scroll-motion": "^0.2.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
