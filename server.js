@@ -23,8 +23,6 @@ app.use('/api/stock', require('./routes/api/stock'));
 
 
 
-
-
 const PORT = process.env.PORT || 5000 ;
 
 app.listen(PORT, () => console.log(`server started at port ${PORT}`));
