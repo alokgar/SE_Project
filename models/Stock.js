@@ -15,11 +15,11 @@ const StockSchema = new mongoose.Schema({
     },
     product_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Product'
+        ref: 'product'
     },
     size_id: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Size'
+        ref: 'size'
     }
 
 });

@@ -14,6 +14,15 @@ app.use(express.json({extended:false}));
 app.use('/api/users', require('./routes/api/users'));
 app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
+app.use('/api/products', require('./routes/api/product'));
+app.use('/api/category', require('./routes/api/category'));
+app.use('/api/supplier', require('./routes/api/supplier'));
+app.use('/api/raw_material', require('./routes/api/raw_material'));
+app.use('/api/size', require('./routes/api/size'));
+app.use('/api/stock', require('./routes/api/stock'));
+
+
+
 
 
 const PORT = process.env.PORT || 5000 ;
