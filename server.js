@@ -20,6 +20,8 @@ app.use('/api/supplier', require('./routes/api/supplier'));
 app.use('/api/raw_material', require('./routes/api/raw_material'));
 app.use('/api/size', require('./routes/api/size'));
 app.use('/api/stock', require('./routes/api/stock'));
+app.use('/api/customer', require('./routes/api/customer'));
+app.use('/api/order', require('./routes/api/order'));
 
 
 

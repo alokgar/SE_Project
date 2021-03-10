@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const OrderSchema = new mongoose.Schema({
   status: {
     type: String,
-    default: "Notconfirmed"
+    default: "Pending"
   },
   order_date: {
     type: Date,
@@ -12,13 +12,22 @@ const OrderSchema = new mongoose.Schema({
   dispatched_date: {
     type: Date,
   },
+  details: [
+    {
+      product_id: { type: mongoose.Schema.Types.ObjectId, ref: 'product', required: true},
+      quantity: {type: Number, require: true},
+      size_id: {type: mongoose.Schema.Types.ObjectId,ref: 'size',required:true}
+    }
+  ],
   customer_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Customer'
+    ref: 'customer',
+    required:true
   },
   employee_id: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'user',
+    required:true
   }
 });
 
