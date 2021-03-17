@@ -9,8 +9,11 @@ const auth = require('../../middleware/auth');
 
 
 async function getOrderByid(id){
-    const order = await Order.findById(id).populate({path : 'employee_id customer_id details.product_id details.size_id',
-    populate: 'category_id'});
+    const order = await Order.findById(id).populate(
+      {
+      path : 'employee_id customer_id details.product_id details.size_id',
+      populate: 'category_id'
+      });
     return order;
 }
 
@@ -123,5 +126,29 @@ router.delete('/:id', async (req, res) => {
         res.status(500).send('Server Error');
         }
   });
+
+// @route     POST api/order/:id/confirm-----------------
+// @desc      confirm an order
+// @access    Private
+router.post('/:id/confirm', async (req, res) => {
+  try {
+    const order = await getOrderByid(req.params.id);
+      if (!order || order.length ===0) {
+        return res.status(400).json({ msg: 'No Order found !' });
+      }
+    
+      let up_order = await Order.findByIdAndUpdate(
+        req.params.id,
+        {status : "Confirmed"},
+        {new:true}
+      );
+
+      res.json(up_order);
+  } 
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 
 module.exports = router;

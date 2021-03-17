@@ -22,6 +22,7 @@ app.use('/api/size', require('./routes/api/size'));
 app.use('/api/stock', require('./routes/api/stock'));
 app.use('/api/customer', require('./routes/api/customer'));
 app.use('/api/order', require('./routes/api/order'));
+app.use('/api/feedback', require('./routes/api/feedback'));
 
 
 
