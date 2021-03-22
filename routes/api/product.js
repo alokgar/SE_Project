@@ -17,6 +17,11 @@ router.get('/', async (req, res) => {
     res.json(products);
   } catch (err) {
     console.error(err.message);
+
+    // return res
+    // .status(400)
+    // .json({ errors: [{ msg: 'You have not been verified by administrator' }] });
+
     res.status(500).send('Server Error');
   }
 });
