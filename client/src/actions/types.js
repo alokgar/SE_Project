@@ -28,3 +28,5 @@ export const CLEAR_USERS = 'CLEAR_USERS';
 export const CHANGE_STATUS = 'CHANGE_STATUS';
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const PRODUCTS_ERROR = 'PRODUCTS_ERROR';
+export const ADD_PRODUCT = 'ADD_PRODUCT';
+export const PRODUCTS_SUCCESS = 'PRODUCT_SUCCESS';

@@ -2,14 +2,14 @@ import React, { Fragment, useEffect,useState} from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getProducts ,addProduct,editProduct} from '../../actions/product';
+import { getProducts ,editProduct,deleteProduct} from '../../actions/product';
+import {Button ,Row,Col} from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
-import Edit_product from './Edit_product'
-
-const Product = ({ 
+const Edit_product = ({ 
+    product,
   getProducts ,
-  addProduct,
   editProduct,
+  deleteProduct,
   products
 
 }) => {
@@ -23,18 +23,20 @@ const Product = ({
 
 
   const [formData, setFormData] = useState({
-  
-    name:'',
+    id:product._id,
+    name:product.name,
 
-    description:'',
+    description:product.description,
 
-    category_name:'DEFAULT'
+    category_name:product.category_id.name
     
   });
 
+  const [isEdit,setIsEdit]=useState(false);
+
   
 
-  const { name,description,category_name } = formData;
+  const { id, name,description,category_name } = formData;
 
   const onChange = e =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -42,50 +44,49 @@ const Product = ({
 
 const onSubmit = async e => {
       e.preventDefault();
-      console.log(category_name);
-     addProduct({ name,description,category_name });
+      console.log(formData);
+      editProduct({  id,name,description,category_name });
 
-     setFormData({ name:'',
+     setFormData({
+        id:product._id,
+        name:product.name,
 
-     description:'',
- 
-     category_name:'DEFAULT' });
+    description:product.description,
 
-       }
+    category_name:product.category_id.name
+    
+    });
+
+    setIsEdit(!isEdit)
+}
+
+       
 
 
-return products===null?(
+return(
 
-  <div></div>):( 
     <Fragment>
-     All products are shown here
+        <Row style={{marginTop:"5px"}}>
 
-     <Table striped bordered hover>
-                <thead>
-                    <tr>
-                    <th>First Name</th>
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                 {products.map(function(product){
+        <Col> <b>{product.name}</b>
+        </Col>
+        <Col>
+        <Button variant="success" onClick={()=>{setIsEdit(!isEdit)}}  >Edit</Button>
+        </Col>
+        <Col>
+        <Button variant="danger" onClick={()=>{deleteProduct(id)} }  >Delete</Button>
+        </Col>
 
-              return (
-                <div >
-              <Edit_product   product={product} />
-                
-              </div>
-              )
+        </Row>
 
-              })}
-                    
-                </tbody>
-                </Table>
    
-     
+   
 
-<form className='form' onSubmit={e => onSubmit(e)}>
+    {isEdit===true?<div>
+
+
+
+        <form className='form' onSubmit={e => onSubmit(e)}>
         <div className='form-group'>
           <input
             type='text'
@@ -116,8 +117,11 @@ return products===null?(
       </select>
       </div>
        
-      <input type='submit' className='btn btn-primary' value='Add Product' />
-</form>
+      <input type='submit' className='btn btn-primary' value='Edit Product' />
+    </form>
+
+    </div>:null}
+    
 
 </Fragment>
   );
@@ -125,9 +129,9 @@ return products===null?(
 
 
 
-Product.propTypes = {
+Edit_product.propTypes = {
   getProducts: PropTypes.func.isRequired,
-  addProduct: PropTypes.func.isRequired,
+  deleteProduct: PropTypes.func.isRequired,
   editProduct: PropTypes.func.isRequired
 };
 
@@ -137,5 +141,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getProducts ,addProduct,editProduct}
-)(Product);
+  { getProducts ,editProduct,deleteProduct}
+)(Edit_product);

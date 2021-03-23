@@ -46,7 +46,10 @@ router.post('/', async (req, res) => {
           category_id : category._id
         });
         const product = await newProduct.save();
-        res.json({category,product});
+
+        const products = await Product.find({}).populate('category_id');
+        res.json(products);
+       
       } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');
@@ -59,6 +62,7 @@ router.post('/', async (req, res) => {
 // @desc      Update product
 // @access    Private
 router.put('/:id', async (req, res) => {
+
     const {name, description, category_id} = req.body;
   
     // Build product object
@@ -77,8 +81,11 @@ router.put('/:id', async (req, res) => {
         {$set: productFields},
         {new: true},
       );
+
+      const products = await Product.find({}).populate('category_id');
+      res.json(products);
   
-      res.json(product);
+ 
     } catch (err) {
       console.error(er.message);
       res.status(500).send('Server Error');
@@ -96,8 +103,11 @@ router.delete('/:id', async (req, res) => {
       if (!product) return res.status(404).json({msg: 'Product not found'});
   
       await Product.findByIdAndRemove(req.params.id);
-  
-      res.json({msg: 'Product removed'});
+      
+      const products = await Product.find({}).populate('category_id');
+      res.json(products);
+
+      // res.json({msg: 'Product removed'});
     } catch (err) {
       console.error(err.message);
       res.status(500).send('Server Error');
