@@ -5,6 +5,9 @@ import profile from './profile';
 import status from './status';
 import product from './product';
 import customer from './customer';
+import raw_material from './raw_material';
+import supplier from './supplier';
+
 
 export default combineReducers({
   alert,
@@ -12,5 +15,7 @@ export default combineReducers({
   profile,
   status,
   product,
-  customer
+  customer,
+  raw_material,
+  supplier
 });
