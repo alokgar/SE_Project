@@ -201,10 +201,12 @@ return customers===null
             </Form.Row>
         
         
-            <Button variant="primary" type="submit" >
+            <Button variant="primary" size="lg" type="submit" >
             Submit
             </Button>
-            
+            <Button variant="outline-primary" size="lg" href = "/customers" style={{float:"right",marginRight:"20px"}}>
+            Cancel
+            </Button>
         </Form>
 
         </div>
