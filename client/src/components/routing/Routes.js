@@ -10,6 +10,7 @@ import Product from '../products/product';
 import Customer from '../customers/customer';
 import Raw_material from '../raw_materials/raw_material';
 import Supplier from '../suppliers/supplier';
+import Feedback from '../feedbacks/feedback';
 
 import PrivateRoute from '../routing/PrivateRoute';
 
@@ -24,7 +25,7 @@ const Routes = () => {
         <PrivateRoute exact path='/dashboard' component={Dashboard} />
         <PrivateRoute exact path='/products' component={Product} />
         <PrivateRoute exact path='/customers' component={Customer} />
-        
+        <PrivateRoute exact path='/feedbacks' component={Feedback} />
         <PrivateRoute exact path='/raw_materials' component={Raw_material} />
         <PrivateRoute exact path='/suppliers' component={Supplier} />
       </Switch>
