@@ -8,12 +8,8 @@ import {
 } from './types';
 
 
-
 // Get all products data
 export const getProducts = () => async dispatch => {
-
-  
-
   try {
    
     const res = await axios.get('/api/products');

@@ -12,6 +12,10 @@ const OrderSchema = new mongoose.Schema({
   dispatched_date: {
     type: Date,
   },
+  dispatch_num: {
+     type : Number,
+     default: -1
+  },
   details: [
     {
       product_id: { type: mongoose.Schema.Types.ObjectId, ref: 'product', required: true},

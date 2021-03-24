@@ -11,7 +11,6 @@ const Product = ({
   addProduct,
   editProduct,
   products
-
 }) => {
 
   useEffect(() => {

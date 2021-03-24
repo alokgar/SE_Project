@@ -4,12 +4,13 @@ import auth from './auth';
 import profile from './profile';
 import status from './status';
 import product from './product';
-
+import customer from './customer';
 
 export default combineReducers({
   alert,
   auth,
   profile,
   status,
-  product
+  product,
+  customer
 });

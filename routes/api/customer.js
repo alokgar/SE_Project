@@ -47,7 +47,10 @@ router.post('/',async (req, res) => {
       return res.status(400).json({errors: errors.array()});
       }
       
-      const {first_name , last_name , mobile_no , line1 , landmark , pincode , name ,employee_id}  = req.body; // name is City name
+      //const {first_name , last_name , mobile_no , line1 , landmark , pincode , name ,employee_id}  = req.body; // name is City name
+      const {first_name , last_name , mobile_no , line1 , landmark , pincode , name }  = req.body;
+      console.log(req.body)
+      var employee_id = "6048450ab5eef151323aa5da"; 
       try {   
         const cust1 = await Customer.findOne({mobile_no});
         if(cust1){
@@ -103,7 +106,7 @@ router.put('/:id', async (req, res) => {
         res.json(up_customer);
         } 
     catch (err) {
-        console.error(er.message);
+        console.error(err.message);
         res.status(500).send('Server Error');
         }
   });

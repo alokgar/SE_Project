@@ -33,6 +33,7 @@ const Dashboard = ({
         <i className='fas fa-user' /> Welcome {user && user.first_name}
       </p>
       <Link to="/products">link1</Link>
+      <Link to="/customers">Customers</Link>
       {profile !== null ? (
         <Fragment>
           {/* <DashboardActions /> */}

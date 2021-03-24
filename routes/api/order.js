@@ -151,4 +151,24 @@ router.post('/:id/confirm', async (req, res) => {
   }
 });
 
+router.post('/:id/dispatch', async (req, res) => {
+  try {
+    const order = await getOrderByid(req.params.id);
+      if (!order || order.length ===0) {
+        return res.status(400).json({ msg: 'No Order found !' });
+      }
+    
+      let up_order = await Order.findByIdAndUpdate(
+        req.params.id,
+        {status : "Dispatched", dispatch_num : req.body.dispatch_num},
+        {new:true}
+      );
+
+      res.json(up_order);
+  } 
+  catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server Error');
+  }
+});
 module.exports = router;
