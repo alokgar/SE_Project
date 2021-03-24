@@ -53,7 +53,7 @@ const onSubmit = async e => {
        }
 
 
-return products===null?(
+return products.length===0?(
 
   <div></div>):( 
     <Fragment>
@@ -70,11 +70,19 @@ return products===null?(
                     
                  {products.map(function(product){
 
+                   if(product===undefined){
+                     return (
+                      <div></div>
+                     )
+                   }
+
               return (
-                <div >
-              <Edit_product   product={product} />
+                  <div>
+                  <Edit_product   product={product} />
+                    
+                  </div>
                 
-              </div>
+              
               )
 
               })}
