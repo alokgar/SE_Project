@@ -4,6 +4,8 @@ import auth from './auth';
 import profile from './profile';
 import status from './status';
 import product from './product';
+import raw_material from './raw_material';
+import supplier from './supplier';
 
 
 export default combineReducers({
@@ -11,5 +13,7 @@ export default combineReducers({
   auth,
   profile,
   status,
-  product
+  product,
+  raw_material,
+  supplier
 });
