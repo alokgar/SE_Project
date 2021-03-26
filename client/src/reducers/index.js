@@ -10,6 +10,7 @@ import supplier from './supplier';
 import size from './size';
 import stock from './stock';
 
+import feedback from './feedback';
 
 export default combineReducers({
   alert,
@@ -21,5 +22,6 @@ export default combineReducers({
   raw_material,
   supplier,
   size,
-  stock
+  stock,
+  feedback
 });
