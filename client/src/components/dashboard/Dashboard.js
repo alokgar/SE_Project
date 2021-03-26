@@ -39,6 +39,10 @@ const Dashboard = ({
       <Link to="/raw_materials"> Raw-Materials Page </Link>
       <br/>
       <Link to="/suppliers"> Suppliers Page </Link>
+      <br/>
+      <Link to="/stocks"> Stocks Page </Link>
+      <br/>
+      <Link to="/sizes"> Sizes Page </Link>
       {profile !== null ? (
         <Fragment>
           {/* <DashboardActions /> */}

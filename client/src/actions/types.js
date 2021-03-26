@@ -34,9 +34,20 @@ export const GET_CUSTOMERS = 'GET_CUSTOMERS';
 export const CUSTOMERS_ERROR = 'CUSTOMERS_ERROR';
 export const CUSTOMERS_SUCCESS = 'CUSTOMERS_SUCCESS';
 
+
 export const GET_RAW_MATERIALS = 'GET_RAW_MATERIALS';
-export const RAW_MATERIALS_ERROR = 'RAW_MATERIALS_ERROR';
 export const GET_SUPPLIERS = 'GET_SUPPLIERS';
+export const GET_SIZES = 'GET_SIZES';
+export const GET_STOCKS = 'GET_STOCKS';
+export const RAW_MATERIALS_ERROR = 'RAW_MATERIALS_ERROR';
+export const SIZE_ERROR = 'SIZE_ERROR';
 export const SUPPLIERS_ERROR = 'SUPPLIERS_ERROR';
+export const STOCKS_ERROR = 'STOCKS_ERROR';
 export const ADD_RAW_MATERIAL = 'ADD_RAW_MATERIAL';
 export const ADD_SUPPLIER = 'ADD_SUPPLIER';
+export const ADD_SIZE = 'ADD_SIZE';
+export const ADD_STOCK = 'ADD_STOCK';
+    
+
+
+

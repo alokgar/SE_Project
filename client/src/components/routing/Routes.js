@@ -10,6 +10,8 @@ import Product from '../products/product';
 import Customer from '../customers/customer';
 import Raw_material from '../raw_materials/raw_material';
 import Supplier from '../suppliers/supplier';
+import Stock from '../stocks/stock';
+import Size from '../sizes/size';
 
 import PrivateRoute from '../routing/PrivateRoute';
 
@@ -27,6 +29,8 @@ const Routes = () => {
         
         <PrivateRoute exact path='/raw_materials' component={Raw_material} />
         <PrivateRoute exact path='/suppliers' component={Supplier} />
+        <PrivateRoute exact path='/stocks' component={Stock} />
+        <PrivateRoute exact path='/sizes' component={Size} />
       </Switch>
     </section>
   );
