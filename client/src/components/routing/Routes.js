@@ -11,6 +11,8 @@ import Customer from '../customers/customer';
 import Raw_material from '../raw_materials/raw_material';
 import Supplier from '../suppliers/supplier';
 import Feedback from '../feedbacks/feedback';
+import Payment from '../payments/payment';
+import Cust_profile from '../customers/customerProfile';
 
 import PrivateRoute from '../routing/PrivateRoute';
 
@@ -28,6 +30,8 @@ const Routes = () => {
         <PrivateRoute exact path='/feedbacks' component={Feedback} />
         <PrivateRoute exact path='/raw_materials' component={Raw_material} />
         <PrivateRoute exact path='/suppliers' component={Supplier} />
+        <PrivateRoute exact path='/payments' component={Payment} />
+        <PrivateRoute exact path='/customer/:id' component={Cust_profile} />
       </Switch>
     </section>
   );

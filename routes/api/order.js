@@ -22,8 +22,8 @@ async function getOrderByid(id){
 // @access    Private
 router.get('/', async (req, res) => {
     try {
-      const order = await Order.find().populate({path : 'employee_id customer_id details.product_id details.size_id',
-                                                populate: 'category_id'});
+      const order = await Order.find().sort({"order_date":-1}).populate({path : 'employee_id customer_id details.product_id details.size_id',
+                                                                        populate: 'category_id'});
     
       if (!order) {
         return res.status(400).json({ msg: 'No Orders found !'});
@@ -52,6 +52,30 @@ router.get('/:id', async (req, res) => {
     }
   });
 
+// @route     GET api/orders/:id/customer
+// @desc      Get order by customer_id
+// @access    Private
+  router.get('/:id/customer', async (req, res) => {
+    try {
+      const order = await Order.find({"customer_id":req.params.id})
+                               .populate(
+                                {
+                                path : 'employee_id customer_id details.product_id details.size_id',
+                                populate: 'category_id'
+                                }
+                                );
+      if (!order) {
+        return res.status(400).json({ msg: 'No Orders found !' });
+      }
+      res.json(order);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
+
+
+//--------------------------------------------------------------------------------------------------------------------------------------------------------
 // @route     POST api/orders
 // @desc      Place an order
 // @access    Private

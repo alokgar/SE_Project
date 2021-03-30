@@ -6,6 +6,8 @@ import { getCustomers ,addCustomer,editCustomer,deleteCustomer} from '../../acti
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import {Button ,Row,Col} from "react-bootstrap";
+import Sidebar from '../sidebar/sidebar';
+
 
 
 const Customer = ({ getCustomers ,addCustomer,editCustomer,deleteCustomer,customers}) => {
@@ -14,20 +16,14 @@ const [ showTable, setTable] = useState(true);
 const [ showEdit, setEdit] = useState(false);
 
 const [formData, setFormData] = useState({
-  
     id: '',
     first_name:'',
-
     last_name:'',
-
     mobile_no:'',
-
     line1 : '',
-
     landmark:'',
     name:'',
-    pincode:''
-    
+    pincode:'' 
   });
 
 
@@ -92,29 +88,6 @@ const onEditclick = cust =>{
       });
 }
 
-const onSubmitEdit = async e => {
-    e.preventDefault();
-    console.log(formData);
-
-   editCustomer({ first_name,last_name,mobile_no,line1,landmark,name,pincode });
-   setFormData({
-  
-    first_name:'',
-
-    last_name:'',
-
-    mobile_no:'',
-
-    line1 : '',
-
-    landmark:'',
-    name:'',
-    pincode:''
-    
-  });
-  setTable(!showTable)
-  setEdit(!showEdit)
-}
 return customers===null
     ?
     (   
@@ -123,9 +96,9 @@ return customers===null
     :
     (   
         showTable===true ?<div>
-             <Fragment>
-            
-            <div>
+            <Fragment>
+            <Sidebar/>
+            <div >
 
                 All Cusomers are shown here
                 
@@ -152,13 +125,14 @@ return customers===null
                     
                 </tbody>
                 </Table>
-                <button onClick={() => setTable(false)}>Click me!</button>
+                <Button onClick={() => setTable(false)}>Add Customer</Button>
                 
             </div>
         </Fragment>
         </div>
         :
             <div>
+            <Sidebar/>
             <Form onSubmit={e => onSubmit(e)}>
             <Form.Row>
             <Form.Group as={Col} controlId="formGridEmail">
@@ -210,6 +184,7 @@ return customers===null
         </Form>
 
         </div>
+        
         
           
     );

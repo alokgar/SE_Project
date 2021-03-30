@@ -37,6 +37,20 @@ router.get('/', async (req, res) => {
     }
   });
 
+  router.get('/:id', async (req, res) => {
+    try {
+      const cust = await Customer.findById(req.params.id).populate('address employee_id');
+    
+      if (!cust) {
+        return res.status(400).json({ msg: 'There are no Customer !' });
+      }
+      res.json(cust);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send('Server Error');
+    }
+  });
+
 // @route     POST api/customer
 // @desc      Add a new customer
 // @access    Private

@@ -8,6 +8,7 @@ import customer from './customer';
 import raw_material from './raw_material';
 import supplier from './supplier';
 import feedback from './feedback';
+import payment from './payment';
 
 export default combineReducers({
   alert,
@@ -18,5 +19,6 @@ export default combineReducers({
   customer,
   raw_material,
   supplier,
-  feedback
+  feedback,
+  payment
 });
