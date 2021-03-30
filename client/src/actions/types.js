@@ -54,3 +54,8 @@ export const ADD_STOCK = 'ADD_STOCK';
 export const FEEDBACKS_SUCCESS = 'FEEDBACKS_SUCCESS';
 export const FEEDBACKS_ERROR = 'FEEDBACKS_ERROR';
 export const GET_FEEDBACKS = 'GET_FEEDBACKS';
+
+
+
+export const GET_ORDERS ='GET_ORDERS'
+export const ORDER_ERROR = 'ORDER_ERROR'

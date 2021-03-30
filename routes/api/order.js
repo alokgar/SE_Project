@@ -59,13 +59,24 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     try {
       
-      const { customer_id, details} = req.body;
-      let employee_id = "6045947b0eeecc03af04900f";
-
+      const { customer_id, details,employee_id} = req.body;
+    
+     
       let placed_order = new Order({details,customer_id,employee_id});
       await placed_order.save();
       
-      res.json(placed_order);
+     
+      const order = await Order.find().populate({path : 'employee_id customer_id details.product_id details.size_id',
+      populate: 'category_id'});
+
+      if (!order) {
+        return res.status(400).json({ msg: 'No Order found !' });
+      }
+      
+      res.json(order);
+
+
+
     } 
     catch (err) {
       console.error(err.message);
@@ -143,7 +154,13 @@ router.post('/:id/confirm', async (req, res) => {
         {new:true}
       );
 
-      res.json(up_order);
+      const allorder = await Order.find().populate({path : 'employee_id customer_id details.product_id details.size_id',
+      populate: 'category_id'});
+
+
+    res.json(allorder);
+
+    
   } 
   catch (err) {
     console.error(err.message);
@@ -163,8 +180,13 @@ router.post('/:id/dispatch', async (req, res) => {
         {status : "Dispatched", dispatch_num : req.body.dispatch_num},
         {new:true}
       );
+      const allorder = await Order.find().populate({path : 'employee_id customer_id details.product_id details.size_id',
+      populate: 'category_id'});
 
-      res.json(up_order);
+
+    res.json(allorder);
+
+      
   } 
   catch (err) {
     console.error(err.message);

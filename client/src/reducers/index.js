@@ -11,6 +11,7 @@ import size from './size';
 import stock from './stock';
 
 import feedback from './feedback';
+import order from './order';
 
 export default combineReducers({
   alert,
@@ -23,5 +24,6 @@ export default combineReducers({
   supplier,
   size,
   stock,
-  feedback
+  feedback,
+  order
 });
