@@ -32,6 +32,7 @@
     "mongoose": "^5.11.15",
     "react-bootstrap": "^1.5.1",
     "react-scroll-motion": "^0.2.1",
+    "react-sidebar-ui": "^1.2.1",
     "request": "^2.88.2"
   },
   "devDependencies": {
