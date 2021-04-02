@@ -15,9 +15,9 @@ const Edit_stock = ({
     editStock,
     stocks
 }) => {
-    useEffect(() => {
-        getStocks();
-    }, [getStocks]);
+    // useEffect(() => {
+    //     getStocks();
+    // }, [getStocks]);
 
 
     const [formData, setFormData] = useState({

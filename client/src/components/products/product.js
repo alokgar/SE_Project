@@ -4,7 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getProducts ,addProduct,editProduct} from '../../actions/product';
 import Table from 'react-bootstrap/Table';
-import Edit_product from './Edit_product'
+import Edit_product from './Edit_product';
+import FilterProducts from './filterProducts';
 
 const Product = ({ 
   getProducts ,
@@ -57,8 +58,8 @@ return products.length===0?(
 
   <div></div>):( 
     <Fragment>
+    <FilterProducts/>
      All products are shown here
-
      <Table striped bordered hover>
                 <thead>
                     <tr>
@@ -68,7 +69,8 @@ return products.length===0?(
                 </thead>
                 <tbody>
                     
-                 {products.map(function(product){
+                 {
+                 products.map(function(product){
 
                    if(product===undefined){
                      return (
@@ -81,12 +83,9 @@ return products.length===0?(
                   <Edit_product   product={product} />
                     
                   </div>
-                
-              
               )
-
-              })}
-                    
+              })
+              }
                 </tbody>
                 </Table>
    

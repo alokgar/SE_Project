@@ -2,24 +2,17 @@ import React, { Fragment, useEffect, useState } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getRaw_materials, addRaw_material, editRaw_material } from '../../actions/raw_material';
+import { addRaw_material, clearFilter_raw_material } from '../../actions/raw_material';
 import Table from 'react-bootstrap/Table';
+import {Button ,Row,Col} from "react-bootstrap";
 import SupplierOptions from '../suppliers/supplierOptions';
 import Edit_raw_material from './Edit_raw_material';
-import FilterRaw_materials from './filterRaw_materials';
 
-const Raw_material = ({
-  getRaw_materials,
+const ShowFilteredRaw_materials = ({
   addRaw_material,
-  editRaw_material,
-  raw_materials
-
+  clearFilter_raw_material,
+  filtered_raw_materials
 }) => {
-
-  useEffect(() => {
-    getRaw_materials();
-  }, [getRaw_materials]);
-
 
   const [formData, setFormData] = useState({
     name: '',
@@ -45,11 +38,10 @@ const Raw_material = ({
     });
   }
 
-  return raw_materials === null ? (
+  return filtered_raw_materials === null ? (
     <div></div>) : (
     <Fragment>
-      <FilterRaw_materials />
-       All raw-materials are shown here
+      All the filtered raw-materials are shown here
       <Table striped bordered hover>
         <thead>
           <tr>
@@ -57,7 +49,7 @@ const Raw_material = ({
           </tr>
         </thead>
         <tbody>
-          {raw_materials.map(function (raw_material) {
+          {filtered_raw_materials.map(function (raw_material) {
             return (
               <div >
                 <Edit_raw_material raw_material={raw_material} />
@@ -105,24 +97,29 @@ const Raw_material = ({
             <SupplierOptions />
           </select>
         </div>
-
         <input type='submit' className='btn btn-primary' value='Add Raw_material' />
+        <Button variant="outline-primary" size="lg" href="/raw_materials" style={{ float: "right", marginRight: "20px" }}
+        onClick={() => clearFilter_raw_material()}>
+          Back
+        </Button>
       </form>
+
     </Fragment>
   );
 };
 
-Raw_material.propTypes = {
-  getRaw_materials: PropTypes.func.isRequired,
+
+
+ShowFilteredRaw_materials.propTypes = {
   addRaw_material: PropTypes.func.isRequired,
-  editRaw_material: PropTypes.func.isRequired
+  clearFilter_raw_material : PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => ({
-  raw_materials: state.raw_material.raw_materials
+  filtered_raw_materials: state.raw_material.filtered_raw_materials
 });
 
 export default connect(
   mapStateToProps,
-  { getRaw_materials, addRaw_material, editRaw_material }
-)(Raw_material);
+  { addRaw_material, clearFilter_raw_material }
+)(ShowFilteredRaw_materials);

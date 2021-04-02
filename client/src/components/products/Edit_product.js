@@ -14,12 +14,12 @@ const Edit_product = ({
 
 }) => {
 
-  useEffect(() => {
+  // useEffect(() => {
 
-    getProducts();
+  //   getProducts();
     
 
-  }, [getProducts]);
+  // }, [getProducts]);
 
 
   const [formData, setFormData] = useState({
