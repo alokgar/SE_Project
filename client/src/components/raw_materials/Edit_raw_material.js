@@ -16,12 +16,12 @@ const Edit_raw_material = ({
     raw_materials
 }) => {
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        getRaw_materials();
+    //     getRaw_materials();
 
 
-    }, [getRaw_materials]);
+    // }, [getRaw_materials]);
 
 
     const [formData, setFormData] = useState({

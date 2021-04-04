@@ -8,7 +8,7 @@ import Edit_product from './Edit_product'
 import Form from 'react-bootstrap/Form'
 import {Button ,Row,Col} from "react-bootstrap";
 
-
+import FilterProducts from './filterProducts';
 
 const Product = ({ 
   getProducts ,
@@ -62,8 +62,8 @@ return products.length===0?(
   <div></div>):( 
     showTable===true ?
     <Fragment>
+    <FilterProducts/>
      All products are shown here
-
      <Table striped bordered hover>
                 <thead>
                     <tr>

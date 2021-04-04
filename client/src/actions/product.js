@@ -1,19 +1,23 @@
 import axios from 'axios';
 import { setAlert } from './alert';
+import { Link, Redirect } from 'react-router-dom';
+import dateFormat from 'dateformat';
 
 import {
   GET_PRODUCTS,
   PRODUCTS_SUCCESS,
-  PRODUCTS_ERROR
+  PRODUCTS_ERROR,
+  FILTER_PRODUCT,
+  CLEAR_FILTER
 } from './types';
 
 
 // Get all products data
 export const getProducts = () => async dispatch => {
   try {
-   
+
     const res = await axios.get('/api/products');
-    
+
     dispatch({
       type: GET_PRODUCTS,
       payload: res.data
@@ -47,13 +51,13 @@ export const addProduct = ({ name, description, category_name }) => async dispat
       type: PRODUCTS_SUCCESS,
       payload: res.data
     });
-    
-   dispatch(getProducts());
+
+    dispatch(getProducts());
 
   } catch (err) {
 
     dispatch({
-      type:  PRODUCTS_ERROR
+      type: PRODUCTS_ERROR
     });
 
   }
@@ -61,8 +65,8 @@ export const addProduct = ({ name, description, category_name }) => async dispat
 
 //EDIT Product
 //change status
-export const editProduct =({ id,name, description, category_name }) => async dispatch => {
- 
+export const editProduct = ({ id, name, description, category_name }) => async dispatch => {
+
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -85,12 +89,12 @@ export const editProduct =({ id,name, description, category_name }) => async dis
 
     });
 
-    
 
-    
+
+
   } catch (err) {
     dispatch({
-     type:  PRODUCTS_ERROR
+      type: PRODUCTS_ERROR
     });
   }
 };
@@ -98,8 +102,8 @@ export const editProduct =({ id,name, description, category_name }) => async dis
 
 //delete Product
 
-export const deleteProduct =( id ) => async dispatch => {
- 
+export const deleteProduct = (id) => async dispatch => {
+
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -121,12 +125,74 @@ export const deleteProduct =( id ) => async dispatch => {
 
     });
 
-    
 
-    
+
+
   } catch (err) {
     dispatch({
-     type:  PRODUCTS_ERROR
+      type: PRODUCTS_ERROR
     });
   }
 };
+
+
+// filter all Products in given date-range
+export const filterProduct = ({ from, to }) => async dispatch => {
+  try {
+    const res = await axios.get('/api/products');
+    const products = res.data;
+    var filtered = [];
+
+    products.map(function (product) {
+      var curr_date = dateFormat(product.date, "yyyy-mm-dd");
+      var product_date = (new Date(curr_date)).getTime();
+
+      var date = new Date(from);
+      var mnth = ("0" + (date.getMonth() + 1)).slice(-2);
+      var day = ("0" + date.getDate()).slice(-2);
+      var fr =  [date.getFullYear(), mnth, day].join("-");
+
+      date = new Date(to);
+      mnth = ("0" + (date.getMonth() + 1)).slice(-2);
+      day = ("0" + date.getDate()).slice(-2);
+      var tr =  [date.getFullYear(), mnth, day].join("-");
+
+
+      var f = (new Date(fr)).getTime();
+      var t = (new Date(tr)).getTime();
+      // console.log("product");
+      // console.log(product_date);
+      // console.log("from");
+      // console.log(f);
+      // console.log("to");
+      // console.log(t);
+
+      if (product_date >= f && product_date <= t) {
+        filtered.push(product);
+      }
+    });
+
+    dispatch({
+      type: FILTER_PRODUCT,
+      payload: filtered
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCTS_ERROR
+    });
+  }
+};
+
+// clears the filtered_products
+export const clearFilterProduct = () => async dispatch => {
+  try {
+    dispatch({
+      type: CLEAR_FILTER
+    });
+  } catch (err) {
+    dispatch({
+      type: PRODUCTS_ERROR
+    });
+  }
+};
+

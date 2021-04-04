@@ -8,6 +8,7 @@ import SupplierOptions from '../suppliers/supplierOptions';
 import Edit_raw_material from './Edit_raw_material';
 import { Button, Row, Col } from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
+import FilterRaw_materials from './filterRaw_materials';
 
 const Raw_material = ({
   getRaw_materials,
@@ -52,6 +53,7 @@ const Raw_material = ({
     <div></div>):( 
       showTable===true ?
       <Fragment>
+        <FilterRaw_materials />
        All raw-materials are shown here
   
        <Table striped bordered hover>
