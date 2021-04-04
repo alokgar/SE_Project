@@ -8,6 +8,7 @@ import Form from 'react-bootstrap/Form';
 import {Button ,Row,Col} from "react-bootstrap";
 import CustomerOptions from '../customers/customerOptions';
 import Spinner from '../layout/Spinner';
+import Sidebar1 from '../sidebar/sidebar';
 
 const Payment = ({ getPayments ,addPayment,editPayment,deletePayment,payments}) => {
 
@@ -78,83 +79,80 @@ return payments===null
     )
     :
     (   
-        showTable===true ?<div>
-             <Fragment>
-            
-            <div>
-
-                All payments are shown here
+        showTable===true ?
+        <div className="row" style={{height:'100%'}}>
+            <Sidebar1/>
+            <div className="col-md-10 mainContainer" >
+                <div className="tableDiv">
                 
-                <Table striped bordered hover>
-                <thead>
-                    <tr>
-                    <th>Customer Name</th>
-                    <th>Date</th>
-                    <th>#</th>
-                    <th>#</th>
-                    <th>#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    {payments.map(function(payment){
-
-                    return (
-                        <Fragment>
+                    <Table striped bordered hover>
+                    <thead>
                         <tr>
-                        <td>{payment.customer_id.first_name}{" "}{payment.customer_id.last_name}</td>
-                        <td>{payment.date.toString().slice(0, 10)}</td>
-                        <td>{payment.amount}</td>
-                         {/* <td><Button variant="success" onClick={() => onViewclick(payment._id)} >View</Button></td> */}
-                        <td><Button variant="success" onClick={() => onEditclick(payment)} >Edit</Button></td>
-                        <td><Button variant="danger" onClick={() => deletePayment(payment._id)} >Delete</Button></td> 
+                        <th>Customer Name</th>
+                        <th>Date</th>
+                        <th>#</th>
+                        <th>#</th>
+                        <th>#</th>
                         </tr>
-                        {/* {viewId === payment._id?<tr><td>Content</td><td colSpan="4"> {payment.content}</td></tr>:null} */}
-                        </Fragment>
-                    )                    
-                    })}
-                    
+                    </thead>
+                    <tbody>
+                        
+                        {payments.map(function(payment){
 
-                </tbody>
-                </Table>
-                <Button onClick={() => setTable(false)}>Add Payment</Button>
-                
+                        return (
+                            <Fragment>
+                            <tr>
+                            <td>{payment.customer_id.first_name}{" "}{payment.customer_id.last_name}</td>
+                            <td>{payment.date.toString().slice(0, 10)}</td>
+                            <td>{payment.amount}</td>
+                            {/* <td><Button variant="success" onClick={() => onViewclick(payment._id)} >View</Button></td> */}
+                            <td><Button variant="success" onClick={() => onEditclick(payment)} >Edit</Button></td>
+                            <td><Button variant="danger" onClick={() => deletePayment(payment._id)} >Delete</Button></td> 
+                            </tr>
+                            {/* {viewId === payment._id?<tr><td>Content</td><td colSpan="4"> {payment.content}</td></tr>:null} */}
+                            </Fragment>
+                        )                    
+                        })}
+                        
+
+                    </tbody>
+                    </Table>
+                </div>
+                <Button onClick={() => setTable(false)}>Add Payment</Button>   
             </div>
-        </Fragment>
         </div>
         :
-            <div>
-            <Form onSubmit={e => onSubmit(e)}>
+        <div className="row" style={{height:'100%'}}>
+            <Sidebar1/>
+            <div className="col-md-10 mainContainer ScrollDiv">
+                <Form onSubmit={e => onSubmit(e)}>
+                    <Form.Group >
+                    <Form.Label>Customer</Form.Label>
+                    <Form.Control as="select"  name="customer_id" value={customer_id} onChange={e => onChange(e)}>
+                            <option value="" disabled>Choose...</option>
+                            <CustomerOptions id={coptID} />
+                    </Form.Control>
+                    </Form.Group>
+                
+                    <Form.Group >
+                    <Form.Label>Date</Form.Label>
+                    <Form.Control type="date" name="date" placeholder={new Date().toISOString().slice(0, 10)} value={date} onChange={e => onChange(e)}/>
+                    </Form.Group>
 
-            <Form.Group >
-            <Form.Label>Customer</Form.Label>
-            <Form.Control as="select"  name="customer_id" value={customer_id} onChange={e => onChange(e)}>
-                    <option value="" disabled>Choose...</option>
-                    <CustomerOptions id={coptID} />
-            </Form.Control>
-            </Form.Group>
-        
-            <Form.Group >
-            <Form.Label>Date</Form.Label>
-            <Form.Control type="date" name="date" placeholder={new Date().toISOString().slice(0, 10)} value={date} onChange={e => onChange(e)}/>
-            </Form.Group>
-
-            <Form.Group controlId="formGridAddress2">
-            <Form.Label>Amount</Form.Label>
-            <Form.Control name="amount" placeholder="Enter Amount" value={amount} onChange={e => onChange(e)}/>
-            </Form.Group>
-        
-            <Button variant="primary" size="lg" type="submit" >
-            Submit
-            </Button>
-            <Button variant="outline-primary" size="lg" href = "/payments" style={{float:"right",marginRight:"20px"}}>
-            Cancel
-            </Button>
-        </Form>
-
+                    <Form.Group controlId="formGridAddress2">
+                    <Form.Label>Amount</Form.Label>
+                    <Form.Control name="amount" placeholder="Enter Amount" value={amount} onChange={e => onChange(e)}/>
+                    </Form.Group>
+                
+                    <Button variant="primary" size="lg" type="submit" >
+                    Submit
+                    </Button>
+                    <Button variant="outline-primary" size="lg" href = "/payments" style={{float:"right",marginRight:"20px"}}>
+                    Cancel
+                    </Button>
+                </Form>
+            </div>
         </div>
-        
-          
     );
 
 

@@ -133,12 +133,10 @@ return customers===null
             </div>
             </div>
         
-        
         :
         <div className="row" style={{height:'100%'}}>
         <Sidebar1/>
         <div className="col-md-10 mainContainer ScrollDiv">
-
             <h2>Add Customer</h2><br/>
             <Form onSubmit={e => onSubmit(e)}>
             <Form.Row>

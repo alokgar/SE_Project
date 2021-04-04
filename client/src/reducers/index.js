@@ -13,6 +13,7 @@ import stock from './stock';
 import feedback from './feedback';
 import payment from './payment';
 import order from './order';
+import category from './category';
 
 export default combineReducers({
   alert,
@@ -28,5 +29,6 @@ export default combineReducers({
   size,
   stock,
   feedback,
-  order
+  order,
+  category
 });

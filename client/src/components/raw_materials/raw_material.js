@@ -9,6 +9,7 @@ import Edit_raw_material from './Edit_raw_material';
 import { Button, Row, Col } from "react-bootstrap";
 import Form from 'react-bootstrap/Form'
 import FilterRaw_materials from './filterRaw_materials';
+import Sidebar1 from '../sidebar/sidebar';
 
 const Raw_material = ({
   getRaw_materials,
@@ -48,19 +49,25 @@ const Raw_material = ({
     });
     setTable(!showTable)
   }
+  const filterconnect = () =>
+  {
+    setTable(true)
+  }
 
   return raw_materials === null ? (
     <div></div>):( 
       showTable===true ?
-      <Fragment>
-        <FilterRaw_materials />
-       All raw-materials are shown here
-  
+      <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-8 mainContainer" >
+        <div className="tableDiv">
+
        <Table striped bordered hover>
                   <thead>
                       <tr>
                       <th>Name</th>
-                      
+                      <th>#</th>
+                      <th>#</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -72,13 +79,18 @@ const Raw_material = ({
                    } 
                   </tbody>
                   </Table>
+                  </div>
+                  
                   <br></br>
                   <Button type="submit" onClick={()=> setTable(!showTable)}>Add RawMaterial</Button>
-     
-       </Fragment>
+                  
+            </div>
+            <FilterRaw_materials />
+            </div>
     :
-    
-    <Fragment>
+    <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-10 mainContainer ScrollDiv">
       <br/><h2>Add Raw Material</h2><br/>
     <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
     <Form.Group>
@@ -132,7 +144,7 @@ const Raw_material = ({
 
 </Form>
   
-  </Fragment>
+</div></div>
     );
   };
   

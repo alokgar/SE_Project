@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table';
 import Edit_supplier from './Edit_supplier';
 import Form from 'react-bootstrap/Form'
 import {Button ,Row,Col} from "react-bootstrap";
+import Sidebar1 from '../sidebar/sidebar';
 
 const Supplier = ({
   getSuppliers,
@@ -57,12 +58,16 @@ const Supplier = ({
   return suppliers === null ? (
     <div></div>):(
       showTable===true ?  
-      <Fragment>
-       All Suppliers are shown here
+      <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-10 mainContainer" >
+        <div className="tableDiv">
        <Table striped bordered hover>
                   <thead>
                       <tr>
                       <th>Name</th>
+                      <th>#</th>
+                      <th>#</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -74,14 +79,16 @@ const Supplier = ({
                       
                   </tbody>
                   </Table>
+              </div><br></br>
                   <Button onClick={() => setTable(false)}>Add Supplier</Button>  
-        </Fragment>
+            </div>
+        </div>
      :
-      
-     <Fragment>
+     <div className="row" style={{height:'100%'}}>
+     <Sidebar1/>
+     <div className="col-md-10 mainContainer ScrollDiv">
       <br/><h2>Add Supplier</h2><br/>
-     
-       
+      
       <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
       <Form.Group>
         <Form.Label>Supplier Name</Form.Label>
@@ -176,8 +183,7 @@ const Supplier = ({
             Cancel
      </Button>
           </Form>
-  
-  </Fragment>
+  </div></div>
     );
   };
   

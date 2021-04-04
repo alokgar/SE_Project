@@ -63,7 +63,7 @@ const Edit_stock = ({
                     <td>{stock.last_update.slice(0,10)}</td>
                 </tr>
                 <tr>
-                    <td colSpan='3'>
+                    <td colSpan='7'>
                    
                     <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
           

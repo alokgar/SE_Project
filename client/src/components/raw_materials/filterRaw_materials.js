@@ -2,9 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { filterRaw_material } from '../../actions/raw_material';
+import { filterRaw_material,getRaw_materials } from '../../actions/raw_material';
+import Form from 'react-bootstrap/Form';
+import { Button, Row, Col } from "react-bootstrap";
 
-const FilterRaw_materials = ({ filterRaw_material }) => {
+
+const FilterRaw_materials = ({ filterRaw_material,getRaw_materials}) => {
     const [formData, setFormData] = useState({
         from: new Date(),
         to: new Date()
@@ -22,49 +25,60 @@ const FilterRaw_materials = ({ filterRaw_material }) => {
 const onSubmit = async e => {
     e.preventDefault();
     filterRaw_material({ from, to });
+    // setFormData({
+    //     from: new Date(),
+    //     to: new Date()
+    // });
+    setFlag(true);
+   // table();
+}
+
+const onreset = ()=> {
+    getRaw_materials()
     setFormData({
         from: new Date(),
         to: new Date()
     });
-    setFlag(true);
 }
-
-if(flag){
-    return <Redirect to='/show_filtered_raw_materials' />
-}
+// if(flag){
+//     return <Redirect to='/show_filtered_raw_materials' />
+// }
 
 return (
-    <form className='form' onSubmit={e => onSubmit(e)}>
+     <Form onSubmit={e => onSubmit(e)} className='col-md-2' style={{left:'-30px', paddingTop:'20px'}} >       
+     <Form.Group>
+     <Form.Label>Raw Material Name</Form.Label>
+     <Form.Control
+         required
+         type='date'
+         placeholder='from'
+         name='from'
+         value={from}
+         onChange={e => onChange(e)}
+     />
+     </Form.Group>
         
-        <div className='form-group'>
-        <label for="from">From
-            <input
-                type='date'
-                placeholder='from'
-                name='from'
-                value={from}
-                onChange={e => onChange(e)}
-            />
-            </label>
-        <label 
-       style={{ float: "right", marginRight: "20px" }} for="from">To
-            <input
-                type='date'
-                placeholder='to'
-                name='to'
-                value={to}
-                onChange={e => onChange(e)}
-            />
-            </label>
-        </div>
-
-        <input style={{ float: "right", marginRight: "20px" }} type='submit' className='btn btn-primary' value='Search Raw_materials' />
-    </form>
+     <Form.Group>
+     <Form.Label>Raw Material Name</Form.Label>
+     <Form.Control
+        required
+        type='date'
+        placeholder='to'
+        name='to'
+        value={to}
+        onChange={e => onChange(e)}
+     />
+     </Form.Group>
+    
+    <Button type="submit">Search</Button>
+    <Button variant="outline-primary" onClick={()=>onreset()}>Reset</Button>
+    </Form>
 )
 }
 
 FilterRaw_materials.propTypes = {
-    filterRaw_material: PropTypes.func.isRequired
+    filterRaw_material: PropTypes.func.isRequired,
+    getRaw_materials: PropTypes.func.isRequired
 }
 
-export default connect(null, { filterRaw_material })(FilterRaw_materials);
+export default connect(null, { filterRaw_material,getRaw_materials })(FilterRaw_materials);

@@ -14,6 +14,7 @@ import ProductOptionsbyID from '../products/productOptionsbyID'
 import SizeOptionsbyID from '../sizes/sizeOptionbyID'
 import {addOrders} from '../../actions/order'
 import { setAlert } from '../../actions/alert';
+import Sidebar1 from '../sidebar/sidebar';
 
 const AddOrder= ({ 
   setAlert,
@@ -117,92 +118,81 @@ const onSubmitOrder = async e => {
 
 
 return ( 
-<Fragment>
-<br/>
-      <div style={{alignItems:'center'}}>
+  <div className="row" style={{height:'100%'}}>
+    <Sidebar1/>
+    <div className="col-md-10 mainContainer ScrollDiv">
       <h2 >Create Order</h2><br/>
-      </div>
-      
-    {showproducts.length!== 0 && 
-              <Table striped bordered hover>
-              <thead>
-                  <tr>
-                  <th>Product</th> 
-                  <th>Packing</th>
-                  <th>Quantity</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  {showproducts.map(detail=>
-                      <tr>
-                          <td>{detail.product_name}</td>
-                          <td>{detail.size_name}</td>
-                          <td>{detail.quantity}</td>
-                      </tr>
-                  )}
-              </tbody>
-      </Table>        
-    }
+      {showproducts.length!== 0 && 
+        <Table striped bordered hover>
+          <thead>
+              <tr>
+              <th>Product</th> 
+              <th>Packing</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {showproducts.map(detail=>
+              <tr>
+                <td>{detail.product_name}</td>
+                <td>{detail.size_name}</td>
+                <td>{detail.quantity}</td>
+              </tr>
+            )}
+          </tbody>
+        </Table>        
+      }
    
-         <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>          
-          <Form.Group >
+      <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>          
+        <Form.Group >
           <Form.Label>Product</Form.Label>
           <Form.Control as="select" name="product_id" value = {product_id} onChange={e => onChange(e)}>
-                  <option value="" disabled>Choose...</option>
-                  <ProductOptionsbyID />
+            <option value="" disabled>Choose...</option>
+            <ProductOptionsbyID />
           </Form.Control>
-          </Form.Group>
+        </Form.Group>
 
-          <Form.Group >
+        <Form.Group >
           <Form.Label>Packing</Form.Label>
           <Form.Control as="select" name="size_id" value = {size_id} onChange={e => onChange(e)}>
-                  <option value="" disabled>Choose...</option>
-                  <SizeOptionsbyID />
+            <option value="" disabled>Choose...</option>
+            <SizeOptionsbyID />
           </Form.Control>
-          </Form.Group>
+        </Form.Group>
 
-          <Form.Group>
-          <Form.Label>Quantity</Form.Label>
-          <Form.Control
-            required
-            type='text'
-            placeholder='quantity'
-            name='quantity'
-            value={quantity}
-            onChange={e => onChange(e)}
-          />
-          </Form.Group>
-          
-          <Button type="submit">Add Item</Button>
-          
-          
-    </Form>
-    <br/>
+        <Form.Group>
+        <Form.Label>Quantity</Form.Label>
+        <Form.Control
+          required
+          type='text'
+          placeholder='quantity'
+          name='quantity'
+          value={quantity}
+          onChange={e => onChange(e)}
+        />
+        </Form.Group>
 
-    <Form onSubmit={e => onSubmitOrder(e)} style={{width:'80%'}}>
-      <Form.Group >
-      <Form.Label>Select Customer</Form.Label>
-      <Form.Control as="select" name="customer_id" value = {customer_id} onChange={e => onChangeOrder(e)}>
-              <option value="" disabled>Choose...</option>
-              <CustomerOptions/>
-      </Form.Control>
-      </Form.Group> 
-      <br></br>
-    <Button type="submit"  >Add order</Button>
-    <Button variant="outline-primary" size="lg" href = "/orders" style={{float:"right",marginRight:"20px"}}>
-            Cancel
-     </Button>
-     
-    </Form>
+        <Button type="submit">Add Item</Button>  
+      </Form>
+      <br/>
 
-
-
-
-
-
-
-
-</Fragment>
+      <Form onSubmit={e => onSubmitOrder(e)} style={{width:'90%'}}>
+        <Form.Group >
+        <Form.Label>Select Customer</Form.Label>
+        <Form.Control as="select" name="customer_id" value = {customer_id} onChange={e => onChangeOrder(e)}>
+                <option value="" disabled>Choose...</option>
+                <CustomerOptions/>
+        </Form.Control>
+        </Form.Group> 
+        <br></br>
+      <Button type="submit"  >Add order</Button>
+      <Button variant="outline-primary" size="lg" href = "/orders" style={{float:"right",marginRight:"20px"}}>
+              Cancel
+      </Button>
+      
+      </Form>
+    </div>
+  </div>
   );
 };
 

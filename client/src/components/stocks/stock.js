@@ -9,6 +9,7 @@ import SizeOptions from '../sizes/sizeOptions';
 import Edit_stock from './Edit_stock';
 import Form from 'react-bootstrap/Form'
 import {Button ,Row,Col} from "react-bootstrap";
+import Sidebar1 from '../sidebar/sidebar';
 
 const Stock = ({
     getStocks,
@@ -50,9 +51,10 @@ const Stock = ({
   return stocks === null ? (
     <div></div>):(
       showTable===true ? 
-      <Fragment>
-       All stocks are shown here
-  
+      <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-10 mainContainer" >
+        <div className="tableDiv">
        <Table striped bordered hover>
             <thead>
                 <tr>
@@ -73,12 +75,15 @@ const Stock = ({
                     }     
                   </tbody>
         </Table>
+        </div><br/>
         <Button onClick={() => setTable(false)}>Add Stock</Button>  
-        </Fragment>
+        </div>
+        </div>
      :
-      
-     <Fragment>
-      <br/><h2>Add Stock</h2><br/>
+     <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-10 mainContainer ScrollDiv">
+        <h2>Add Stock</h2><br/>
   
       <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
           
@@ -126,8 +131,7 @@ const Stock = ({
             Cancel
      </Button>
           </Form>
-  
-  </Fragment>
+  </div></div>
     );
   };
   

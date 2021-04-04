@@ -6,6 +6,7 @@ import { getFeedbacks ,addFeedback,editFeedback,deleteFeedback} from '../../acti
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import {Button ,Row,Col} from "react-bootstrap";
+import Sidebar1 from '../sidebar/sidebar';
 
 
 const Feedback = ({ getFeedbacks ,addFeedback,editFeedback,deleteFeedback,feedbacks}) => {
@@ -73,78 +74,73 @@ return feedbacks===null
     )
     :
     (   
-        showTable===true ?<div>
-             <Fragment>
-            
-            <div>
-
-                All feedbacks are shown here
-                
-                <Table striped bordered hover>
-                <thead>
-                    <tr>
-                    <th>Employee Name</th>
-                    <th>Subject</th>
-                    <th>#</th>
-                    <th>#</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                    {feedbacks.map(function(feedback){
-
-                    return (
-                        <Fragment>
+        showTable===true ?
+        <div className="row" style={{height:'100%'}}>
+            <Sidebar1/>
+            <div className="col-md-10 mainContainer" >
+                <div className="tableDiv">
+                    <Table striped bordered hover>
+                    <thead>
                         <tr>
-                        <td>{feedback.employee_id.first_name}{" "}{feedback.employee_id.last_name}</td>
-                        <td>{feedback.subject}</td>
-                         <td><Button variant="success" onClick={() => onViewclick(feedback._id)} >View</Button></td>
-                        <td><Button variant="success" onClick={() => onEditclick(feedback)} >Edit</Button></td>
-                        <td><Button variant="danger" onClick={() => deleteFeedback(feedback._id)} >Delete</Button></td> 
+                        <th>Employee Name</th>
+                        <th>Subject</th>
+                        <th>#</th>
+                        <th>#</th>
+                        <th>#</th>
                         </tr>
-                        {viewId === feedback._id?<tr><td>Content</td><td colSpan="4"> {feedback.content}</td></tr>:null}
-                        </Fragment>
-                    )                    
-                    })}
-                    
+                    </thead>
+                    <tbody>
+                        
+                        {feedbacks.map(function(feedback){
 
-                </tbody>
-                </Table>
+                        return (
+                            <Fragment>
+                            <tr>
+                            <td>{feedback.employee_id.first_name}{" "}{feedback.employee_id.last_name}</td>
+                            <td>{feedback.subject}</td>
+                            <td><Button variant="success" onClick={() => onViewclick(feedback._id)} >View</Button></td>
+                            <td><Button variant="success" onClick={() => onEditclick(feedback)} >Edit</Button></td>
+                            <td><Button variant="danger" onClick={() => deleteFeedback(feedback._id)} >Delete</Button></td> 
+                            </tr>
+                            {viewId === feedback._id?<tr><td>Content</td><td colSpan="4"> {feedback.content}</td></tr>:null}
+                            </Fragment>
+                        )                    
+                        })}
+                        
+
+                    </tbody>
+                    </Table>
+                </div>
                 <Button onClick={() => setTable(false)}>Add Feedback</Button>
-                
-            </div>
-        </Fragment>
+            </div>    
         </div>
         :
-            <div>
-            <Form onSubmit={e => onSubmit(e)}>
+        <div className="row" style={{height:'100%'}}>
+            <Sidebar1/>
+            <div className="col-md-10 mainContainer ScrollDiv">
+                <Form onSubmit={e => onSubmit(e)}>
 
-            <Form.Group controlId="formGridAddress1">
-            <Form.Label>Subject</Form.Label>
-            <Form.Control name="subject" placeholder="Subject" value={subject} onChange={e => onChange(e)} />
-            </Form.Group>
-        
-            <Form.Group controlId="formGridAddress2">
-            <Form.Label>Feedback</Form.Label>
-            <Form.Control name="content" placeholder="Enter your feedback" value={content} onChange={e => onChange(e)}/>
-            </Form.Group>
-        
-            <Button variant="primary" size="lg" type="submit" >
-            Submit
-            </Button>
-            <Button variant="outline-primary" size="lg" href = "/feedbacks" style={{float:"right",marginRight:"20px"}}>
-            Cancel
-            </Button>
-        </Form>
-
-        </div>
-        
-          
+                    <Form.Group controlId="formGridAddress1">
+                    <Form.Label>Subject</Form.Label>
+                    <Form.Control name="subject" placeholder="Subject" value={subject} onChange={e => onChange(e)} />
+                    </Form.Group>
+                
+                    <Form.Group controlId="formGridAddress2">
+                    <Form.Label>Feedback</Form.Label>
+                    <Form.Control name="content" placeholder="Enter your feedback" value={content} onChange={e => onChange(e)}/>
+                    </Form.Group>
+                
+                    <Button variant="primary" size="lg" type="submit" >
+                        Submit
+                    </Button>
+                    <Button variant="outline-primary" size="lg" href = "/feedbacks" style={{float:"right",marginRight:"20px"}}>
+                        Cancel
+                    </Button>
+                </Form>
+            </div>
+        </div>    
     );
-
-
 };
-
 
 
 Feedback.propTypes = {

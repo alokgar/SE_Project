@@ -7,8 +7,9 @@ import Table from 'react-bootstrap/Table';
 import Edit_product from './Edit_product'
 import Form from 'react-bootstrap/Form'
 import {Button ,Row,Col} from "react-bootstrap";
-
+import Sidebar1 from '../sidebar/sidebar';
 import FilterProducts from './filterProducts';
+import CategoryOptions from '../category/categoryOptions';
 
 const Product = ({ 
   getProducts ,
@@ -57,37 +58,39 @@ const onSubmit = async e => {
        }
 
 
-return products.length===0?(
+return products.length==null?(
 
   <div></div>):( 
     showTable===true ?
-    <Fragment>
-    <FilterProducts/>
-     All products are shown here
-     <Table striped bordered hover>
-                <thead>
-                    <tr>
-                    <th>First Name</th>
-                    
-                    </tr>
-                </thead>
-                <tbody>
-                    
-                 {products.map(function(product){
-                   if(product===undefined){
-                     return (<div></div>)
-                    }
-                    return (<Edit_product   product={product} />)
-                 })} 
-                </tbody>
-                </Table><br/>
-                <Button onClick={() => setTable(false)}>Add Product</Button> 
-      </Fragment>
-      :
-      <Fragment>
-      <br/><h2>Add Product</h2><br/>
+    <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-8 mainContainer" >
+        <div className="tableDiv">
+          <Table striped bordered hover>
+                  <thead>
+                      <tr>
+                      <th>First Name</th>
+                      <th>#</th>
+                      <th>#</th>
+                      </tr>
+                  </thead>
+                  <tbody>    
+                  {products.map(function(product){
+                      return (<Edit_product   product={product} />)
+                  })} 
+                  </tbody>
+                  </Table><br/>
+        </div><br></br>
+        <Button onClick={() => setTable(false)}>Add Product</Button> 
+      </div>
+      <FilterProducts/>
+    </div>
+    :
+    <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-10 mainContainer ScrollDiv">
+      <h2>Add Product</h2><br/>
       <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
-    
         <Form.Group>
           <Form.Label>Product Name</Form.Label>
           <Form.Control
@@ -113,11 +116,10 @@ return products.length===0?(
         
         
         <Form.Group >
-          <Form.Label>Packing</Form.Label>
+          <Form.Label>Category</Form.Label>
           <Form.Control as="select"name="category_name" onChange={e => onChange(e)}>
                   <option value="" disabled>Choose...</option>
-                  <option value="A" >A</option>
-                  <option value="B" >B</option>
+                  <CategoryOptions/>
           </Form.Control>
           </Form.Group>
       
@@ -125,9 +127,10 @@ return products.length===0?(
           <Button type="submit">Add Product</Button>
           <Button variant="outline-primary" size="lg" href = "/products" style={{float:"right",marginRight:"20px"}}>
             Cancel
-     </Button>
-          </Form>
-          </Fragment>
+           </Button>
+      </Form>
+    </div>
+  </div>
   );
 };
 

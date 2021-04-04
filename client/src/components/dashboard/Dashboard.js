@@ -31,7 +31,9 @@ const Dashboard = ({
     <div className="row" style={{height:'100%'}}>
       <Sidebar1/>
       <div className="col-md-10 mainContainer ScrollDiv" >
-      <Row>
+      <h1 className='large text-primary'>Dashboard</h1>
+      {/* <Link to="/sizes"> Sizes Page </Link> */}
+      <Row style={{justifyContent:'space-evenly'}}>
         <Col xs={3}>
           <Card >
             <Card.Body>
@@ -75,54 +77,48 @@ const Dashboard = ({
           </Card>
         </Col>
       </Row>
-      <h1 className='large text-primary'>Dashboard</h1>
-      <p className='lead'>
-        <i className='fas fa-user' /> Welcome {user && user.first_name}
-      </p>
-      <Link to="/products">Products</Link>
-      <br/>
-      <Link to="/customers">Customers</Link>
-      <br/>
-      <Link to="/raw_materials"> Raw-Materials Page </Link>
-      <br/>
-      <Link to="/suppliers"> Suppliers Page </Link>
-      <br/>
-      <Link to="/stocks"> Stocks Page </Link>
-      <br/>
-      <Link to="/sizes"> Sizes Page </Link>
-      <Link to="/feedbacks"> Feedback Page </Link>
-      <br/>
-      <Link to="/payments"> Payment Page </Link>
-      <Link to="/orders"> Orders </Link>
-      
-      {profile !== null ? (
-        <Fragment>
-          {/* <DashboardActions /> */}
-          {/* <Experience experience={profile.experience} />
-          <Education education={profile.education} /> */}
-
-          <div className='my-2'>
-            <button className='btn btn-danger' onClick={() => deleteAccount()}>
-              <i className='fas fa-user-minus' /> Delete My Account
-            </button>
-          </div>
-        </Fragment>
-      ) : (
-        <div>
+      <Row>
+        <Col>
+          {profile !== null ? (
+            <Fragment>
+              <div className='my-2'>
+                <button className='btn btn-danger' onClick={() => deleteAccount()}>
+                  <i className='fas fa-user-minus' /> Delete My Account
+                </button>
+              </div>
+            </Fragment>
+          ) 
+          : 
+          (
+            <div>
+              <Card style={{
+                height: '300px',
+                boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+                border:'solid ipx var(--dark-color)' }}
+              >
+                <Card.Header className="bg-dark">
+                  <b>Pending Queries</b>
+                  <Button variant="primary" size="sm" style={{float:'right',fontSize:'12px'}}>See All</Button>
+                </Card.Header>
+                <Approve_status/>
+              </Card>
+            </div>
+          )}
+        </Col>
+        <Col>
           <Card style={{
-            width: '50%',
-            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}
-          >
-            <Card.Header>
-              Pending Queries
-              <Button variant="primary" size="sm" style={{float:'right'}}>See All</Button>
-            </Card.Header>
-            
-            <Approve_status/>
-          </Card>
-        </div>
-        
-      )}
+                  height: '300px',
+                  boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px',
+                  border:'solid ipx var(--dark-color)' }}
+                >
+                  <Card.Header className="bg-dark">
+                    <b>Pending Queries</b>
+                    <Button variant="primary" size="sm" style={{float:'right',fontSize:'12px'}}>See All</Button>
+                  </Card.Header>
+                  
+                </Card>
+          </Col>
+      </Row>
       
           
     </div>

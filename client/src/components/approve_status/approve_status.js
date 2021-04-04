@@ -26,6 +26,7 @@ const Approve_status = ({
         <thead>
           <tr>
             <th>Name</th>
+            <th>Position</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -36,7 +37,10 @@ const Approve_status = ({
               user.status=="Pending" ?
               <tr>
                 <td>{user.first_name}{" "}{user.last_name}</td>
-                <td><Button variant="success" onClick={()=>{changeStatus({id})}}  >Approve for {user.type}</Button></td>
+                <td>user.type</td>
+                <td style={{textAlign:'center'}}><Button variant="success" onClick={()=>{changeStatus({id})}}  >✓</Button>
+                    <Button variant="danger" onClick={()=>{changeStatus({id})}}  >✗</Button>
+                </td>
               </tr>
               :null
             )         

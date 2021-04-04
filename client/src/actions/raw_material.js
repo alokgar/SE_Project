@@ -133,7 +133,7 @@ export const filterRaw_material = ({ from, to }) => async dispatch => {
     });
 
     dispatch({
-      type: FILTER_RAW_MATERIALS,
+      type: GET_RAW_MATERIALS,
       payload: filtered
     });
   } catch (err) {

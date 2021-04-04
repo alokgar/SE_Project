@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { filterProduct } from '../../actions/product';
+import { filterProduct,getProducts } from '../../actions/product';
+import Form from 'react-bootstrap/Form'
+import {Button ,Row,Col} from "react-bootstrap";
 
-const FilterProducts = ({ filterProduct }) => {
+
+const FilterProducts = ({ filterProduct,getProducts }) => {
     const [formData, setFormData] = useState({
         from: new Date(),
         to: new Date()
@@ -23,49 +26,62 @@ const FilterProducts = ({ filterProduct }) => {
         e.preventDefault();
         console.log("onSubmit Clicked");
         filterProduct({ from, to });
+        // setFormData({
+        //     from: new Date(),
+        //     to: new Date()
+        // });
+        setFlag(true);
+    }
+
+    // if (flag) {
+    //     return <Redirect to='/show_filtered_products' />
+    // }
+    const onreset = ()=> {
+        getProducts()
         setFormData({
             from: new Date(),
             to: new Date()
         });
-        setFlag(true);
-    }
-
-    if (flag) {
-        return <Redirect to='/show_filtered_products' />
     }
 
     return (
-        <form className='form' onSubmit={e => onSubmit(e)}>
-
-            <div className='form-group'>
-                <label for="from">From
-            <input
-                        type='date'
-                        placeholder='from'
-                        name='from'
-                        value={from}
-                        onChange={e => onChange(e)}
-                    />
-                </label>
-                <label
-                    style={{ float: "right", marginRight: "20px" }} for="from">To
-            <input
-                        type='date'
-                        placeholder='to'
-                        name='to'
-                        value={to}
-                        onChange={e => onChange(e)}
-                    />
-                </label>
-            </div>
-
-            <input style={{ float: "right", marginRight: "20px" }} type='submit' className='btn btn-primary' value='Search Products' />
-        </form>
+        
+        <Form onSubmit={e => onSubmit(e)} className='col-md-2' style={{left:'-30px', paddingTop:'20px'}} >       
+        <Form.Group>
+        <Form.Label>From</Form.Label>
+        <Form.Control
+            required
+            type='date'
+            placeholder='from'
+            name='from'
+            value={from}
+            onChange={e => onChange(e)}
+        />
+        </Form.Group>
+           
+        <Form.Group>
+        <Form.Label>To</Form.Label>
+        <Form.Control
+           required
+           type='date'
+           placeholder='to'
+           name='to'
+           value={to}
+           onChange={e => onChange(e)}
+        />
+        </Form.Group>
+       
+       <Button type="submit">Search</Button>
+       <Button variant="outline-primary" onClick={()=>onreset()}>Reset</Button>
+       </Form>
+       
+    
     )
 }
 
 FilterProducts.propTypes = {
-    filterProduct: PropTypes.func.isRequired
+    filterProduct: PropTypes.func.isRequired,
+    getProducts:PropTypes.func.isRequired
 }
 
-export default connect(null, { filterProduct })(FilterProducts);
+export default connect(null, { filterProduct, getProducts})(FilterProducts);

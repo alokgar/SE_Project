@@ -6,7 +6,7 @@ import { getProducts ,editProduct,deleteProduct} from '../../actions/product';
 import {Button ,Row,Col} from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form'
-
+import CategoryOptions from '../category/categoryOptions';
 
 const Edit_product = ({ 
     product,
@@ -97,11 +97,10 @@ return(
         
         
         <Form.Group >
-          <Form.Label>Packing</Form.Label>
-          <Form.Control as="select" name="category_name" onChange={e => onChange(e)}>
+          <Form.Label>Category</Form.Label>
+          <Form.Control as="select"  disabled name="category_name"value = {category_name} onChange={e => onChange(e)}>
                   <option value="" disabled>Choose...</option>
-                  <option value="A" >A</option>
-                  <option value="B" >B</option>
+                  <CategoryOptions/>
           </Form.Control>
           </Form.Group>
       

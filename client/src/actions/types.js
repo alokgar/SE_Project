@@ -69,3 +69,7 @@ export const GET_PAYMENTS = 'GET_PAYMENTS';
 
 export const GET_ORDERS ='GET_ORDERS'
 export const ORDER_ERROR = 'ORDER_ERROR'
+
+export const GET_CATEGORY = 'GET_CATEGORY'
+export const CATEGORY_ERROR = 'CATEGORY_ERROR'
+export const ADD_CATEGORY = 'ADD_CATEGORY'

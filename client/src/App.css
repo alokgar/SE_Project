@@ -354,13 +354,14 @@ button {
 
 .mainContainer{
   height: 100%;
-  padding: 20px 50px
+  padding: 20px 50px;
+  overflow:auto;
 }
 
 .tableDiv{
   overflow-Y:auto;
-  height: 85%;
-  max-Width:90%;
+  max-height: 85%;
+  max-Width:100%;
 }
 
 .ScrollDiv{
@@ -370,10 +371,8 @@ button {
 
 .table th {
   background: var(--dark-color);
-  opacity: 0.8;
+  opacity: 0.7;
   color: #fff;
-  position: sticky;
-  top: 0;
 }
 
 /*Sidebar*/

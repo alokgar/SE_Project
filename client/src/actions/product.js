@@ -173,7 +173,7 @@ export const filterProduct = ({ from, to }) => async dispatch => {
     });
 
     dispatch({
-      type: FILTER_PRODUCT,
+      type: GET_PRODUCTS,
       payload: filtered
     });
   } catch (err) {

@@ -1,78 +1,68 @@
 import React, { Fragment, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import ListGroup from 'react-bootstrap/ListGroup'
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 
-const Sidebar1 = () => {
+const Sidebar1 = ({auth: { user }}) => {
 
   return (
     <Fragment>
-      <div className="sidebar bg-dark col-md-2" style={{opacity:'0.9',height:"100%",width:'200px',height:'100%'}}>
-         {/* <ul style={{display:'flex',flexDirection:'column',justifyItems:'center',alignItems:'center'}}>
-             <li style={{padding:'20px'}}><h2>Menu</h2></li>
-             <li style={{padding:'10px'}}>Home</li>
-             <li style={{padding:'10px'}}>Customer</li>
-             <li style={{padding:'10px'}}>Products</li>
-         </ul> */}
-  
-  <ListGroup style={{margin:'100px 0px'}}>
+      <div className="sidebar bg-dark col-md-2" style={{opacity:'0.9',height:"100%",width:'200px',height:'100%',overflow:'auto'}}>
+  <ul style={{margin:'30px 0px'}}>
+    <li>
+       <h5 style={{textAlign:'center'}}>Welcome {user && user.first_name}</h5>
+    </li>
+  </ul>
+  <ListGroup style={{margin:'20px 0px 50px 0px'}}>
   <ListGroup.Item className="sidebar-item"  action href="/products">
   Products
   </ListGroup.Item>
-  <ListGroup.Item className="sidebar-item" action >
-    Success
+  <ListGroup.Item className="sidebar-item" action href="/customers" >
+    Customers
   </ListGroup.Item>
-  <ListGroup.Item className="sidebar-item"action >
-    Danger
+  <ListGroup.Item className="sidebar-item"action href='/stocks'>
+    Stocks
   </ListGroup.Item>
-  <ListGroup.Item  className="sidebar-item" action >
-    Warning
+  <ListGroup.Item className="sidebar-item"action href="/orders">
+    Orders
   </ListGroup.Item>
-  <ListGroup.Item className="sidebar-item" action >
-    Info
+  <ListGroup.Item  className="sidebar-item" action href="/suppliers">
+    Suppliers
   </ListGroup.Item>
-  <ListGroup.Item className="sidebar-item"action >
-    Light
+  <ListGroup.Item className="sidebar-item" action href="/raw_materials">
+    Raw Materials
   </ListGroup.Item>
-  <ListGroup.Item className="sidebar-item"action >
-    Dark
+  <ListGroup.Item className="sidebar-item"action  href="/sizes">
+    Sizes
   </ListGroup.Item>
+  <ListGroup.Item className="sidebar-item"action  href="/category">
+    Category
+  </ListGroup.Item>
+  <ListGroup.Item className="sidebar-item"action  href="/payments">
+    Payments
+  </ListGroup.Item>
+  <ListGroup.Item className="sidebar-item"action href='/feedbacks'>
+    Feedbacks
+  </ListGroup.Item>
+  
 </ListGroup>
       </div>
     </Fragment>
-    // <div>
-    //   <Sidebar  isCollapsed={false} classes = "bg-dark sidebar">
-        
-    //     <DropdownItem
-    //       values={['First', 'Second', 'Third']}
-    //       bgColor={'black'}>
-    //       Menu
-    //     </DropdownItem>
-
-        // <Item bgColor='black'>
-        //   <Icon><i className="fas fa-home"/></Icon>
-        //   Home
-        // </Item>
-    //     <Item bgColor='black'>
-    //       <Icon><i className="fas fa-info"/></Icon>
-    //       About
-    //     </Item>
-    //     <Item bgColor='black'>
-    //       <Icon><i className="fas fa-sitemap"/></Icon>
-    //       My Website
-    //     </Item>
-    //     <Item bgColor='black'>
-    //       <Icon><i className="far fa-address-book"/></Icon>
-    //       Contacts
-    //     </Item>
-    //     <Item bgColor='black'>
-    //       <Icon><i className="fas fa-rss-square"/></Icon>
-    //       Blog
-    //     </Item>
-    //     <InputItem type='text' placeholder={'Search...'}/>
-    //   </Sidebar>
-    // </div>
+     
   );
 };
 
-export default Sidebar1;
+
+Sidebar1.propTypes = {
+  auth: PropTypes.object.isRequired,
+};
+
+const mapStateToProps = state => ({
+  auth: state.auth,
+});
+
+export default connect(
+  mapStateToProps,
+)(Sidebar1);
