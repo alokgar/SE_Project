@@ -1,0 +1,7 @@
+{
+ "mongoURI": "mongodb+srv://ashu:ashu1234@cluster0.ojrom.mongodb.net/test?retryWrites=true&w=majority",
+ "jwtSecret": "secret",
+ "githubClientId": "",
+ "githubSecret": ""
+   
+  }
