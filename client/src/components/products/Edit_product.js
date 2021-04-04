@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { getProducts ,editProduct,deleteProduct} from '../../actions/product';
 import {Button ,Row,Col} from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form'
+
+
 const Edit_product = ({ 
     product,
   getProducts ,
@@ -13,13 +16,6 @@ const Edit_product = ({
   products
 
 }) => {
-
-  useEffect(() => {
-
-    getProducts();
-    
-
-  }, [getProducts]);
 
 
   const [formData, setFormData] = useState({
@@ -64,69 +60,71 @@ const onSubmit = async e => {
 
 
 return(
-
+    isEdit===true?
     <Fragment>
-        <Row style={{marginTop:"5px"}}>
-
-        <Col> <b>{product.name}</b>
-        </Col>
-        <Col>
-        <Button variant="success" onClick={()=>{setIsEdit(!isEdit)}}  >Edit</Button>
-        </Col>
-        <Col>
-        <Button variant="danger" onClick={()=>{deleteProduct(id)} }  >Delete</Button>
-        </Col>
-
-        </Row>
-
-   
-   
-
-    {isEdit===true?<div>
-
-
-
-        <form className='form' onSubmit={e => onSubmit(e)}>
-        <div className='form-group'>
-          <input
+        <tr>
+        <td>{product.name}</td>
+        <td><Button variant="success" onClick={()=>{setIsEdit(!isEdit)}} >Edit</Button></td>
+        <td><Button variant="danger" onClick={()=>{deleteProduct(id)} }>Delete</Button></td> 
+        </tr>
+        <tr>
+        <td colSpan='3'>
+        <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+    
+        <Form.Group>
+          <Form.Label>Product Name</Form.Label>
+          <Form.Control
+            required
             type='text'
             placeholder='name'
             name='name'
             value={name}
             onChange={e => onChange(e)}
           />
-        </div>
-
-        <div className='form-group'>
-          <input
+        </Form.Group>
+        <Form.Group>
+          <Form.Label>Product Description</Form.Label>
+          <Form.Control
+            required
             type='text'
             placeholder='description'
             name='description'
             value={description}
             onChange={e => onChange(e)}
           />
-        </div>
+        </Form.Group>
         
-        <div className='form-group'>
-
-        <select defaultValue={"DEFAULT"} name="category_name" onChange={e => onChange(e)}>
-        <option value="DEFAULT" disabled>Choose a salutation ...</option>
-        <option value="A" >A</option>
-        <option value="B" >B</option>
+        
+        <Form.Group >
+          <Form.Label>Packing</Form.Label>
+          <Form.Control as="select" name="category_name" onChange={e => onChange(e)}>
+                  <option value="" disabled>Choose...</option>
+                  <option value="A" >A</option>
+                  <option value="B" >B</option>
+          </Form.Control>
+          </Form.Group>
+      
        
-      </select>
-      </div>
-       
-      <input type='submit' className='btn btn-primary' value='Edit Product' />
-    </form>
-
-    </div>:null}
+          <Button type="submit">Edit Product</Button>
+          
+          </Form>
+    
+    </td>
+    </tr>
+    </Fragment>
+    :
+    <Fragment>
+      <tr>
+        <td>{product.name}</td>
+        <td><Button variant="success" onClick={()=>{setIsEdit(!isEdit)}} >Edit</Button></td>
+        <td><Button variant="danger" onClick={()=>{deleteProduct(id)} }>Delete</Button></td> 
+        </tr>
+    </Fragment>
     
 
-</Fragment>
   );
-};
 
+  };
 
 
 Edit_product.propTypes = {

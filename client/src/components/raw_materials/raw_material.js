@@ -6,6 +6,8 @@ import { getRaw_materials, addRaw_material, editRaw_material } from '../../actio
 import Table from 'react-bootstrap/Table';
 import SupplierOptions from '../suppliers/supplierOptions';
 import Edit_raw_material from './Edit_raw_material';
+import { Button, Row, Col } from "react-bootstrap";
+import Form from 'react-bootstrap/Form'
 
 const Raw_material = ({
   getRaw_materials,
@@ -15,6 +17,7 @@ const Raw_material = ({
 
 }) => {
 
+  const [ showTable, setTable] = useState(true);
   useEffect(() => {
     getRaw_materials();
   }, [getRaw_materials]);
@@ -42,10 +45,12 @@ const Raw_material = ({
       unit: '',
       supplier_name: ''
     });
+    setTable(!showTable)
   }
 
   return raw_materials === null ? (
     <div></div>):( 
+      showTable===true ?
       <Fragment>
        All raw-materials are shown here
   
@@ -58,63 +63,72 @@ const Raw_material = ({
                   </thead>
                   <tbody>
                       
-                   {raw_materials.map(function(raw_material){
-  
-                return (
-                  <div >
-                <Edit_raw_material   raw_material = {raw_material} />
-                  
-                </div>
-                )
-  
-                })}
-                      
+                   {
+                    raw_materials.map(function(raw_material){
+                      return (<Edit_raw_material   raw_material = {raw_material} />)
+                      })
+                   } 
                   </tbody>
                   </Table>
+                  <br></br>
+                  <Button type="submit" onClick={()=> setTable(!showTable)}>Add RawMaterial</Button>
      
-       
-  
-  <form className='form' onSubmit={e => onSubmit(e)}>
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='name'
-              name='name'
-              value={name}
-              onChange={e => onChange(e)}
-            />
-          </div>
-  
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='quantity'
-              name='quantity'
-              value={quantity}
-              onChange={e => onChange(e)}
-            />
-          </div>
+       </Fragment>
+    :
+    
+    <Fragment>
+      <br/><h2>Add Raw Material</h2><br/>
+    <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+    <Form.Group>
+    <Form.Label>Raw Material Name</Form.Label>
+    <Form.Control
+        required
+        type='text'
+        placeholder='name'
+        name='name'
+        value={name}
+        onChange={e => onChange(e)}
+    />
+    </Form.Group>
 
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='unit'
-              name='unit'
-              value={unit}
-              onChange={e => onChange(e)}
-            />
-          </div>
- 
-          <div className='form-group'>
-  
-          <select name="supplier_name" value = {supplier_name} onChange={e => onChange(e)}>
-          <option value="" disabled>Choose a supplier</option>
-          <SupplierOptions />
-        </select>
-        </div>
-         
-        <input type='submit' className='btn btn-primary' value='Add Raw_material' />
-  </form>
+    <Form.Group>
+    <Form.Label>Quantity</Form.Label>
+    <Form.Control
+        required
+        type='text'
+        placeholder='quantity'
+        name='quantity'
+        value={quantity}
+        onChange={e => onChange(e)}
+    />
+    </Form.Group>
+
+    <Form.Group>
+    <Form.Label>Unit</Form.Label>
+    <Form.Control
+        required
+        type='text'
+        placeholder='unit'
+        name='unit'
+        value={unit}
+        onChange={e => onChange(e)}
+    />
+    </Form.Group>
+    <Form.Group >
+    <Form.Label>Supplier Name</Form.Label>
+    <Form.Control as="select" name="supplier_name" value={supplier_name} onChange={e => onChange(e)}>
+            <option value="" disabled>Choose...</option>
+            <SupplierOptions />
+    </Form.Control>
+    </Form.Group>
+
+
+    <Button type="submit">Add Raw Material</Button>
+          <Button variant="outline-primary" size="lg" href = "/raw_materials" style={{float:"right",marginRight:"20px"}}>
+            Cancel
+     </Button>
+
+</Form>
   
   </Fragment>
     );

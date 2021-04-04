@@ -11,7 +11,7 @@ const ProductOptionsbyID = ({ getProducts, products }) => {
     return (
         products !== null && products.map(product =>
             <option key={product._id}
-                value={product._id}>
+                value={product._id+"$"+product.name}>
                 {product.name}
             </option>
         )

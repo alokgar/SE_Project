@@ -6,59 +6,45 @@ import { getOrders,confirmOrder,dispatchOrder} from '../../actions/order';
 import Table from 'react-bootstrap/Table';
 import OrderList from './order_list'
 import product from '../products/product';
+import Form from 'react-bootstrap/Form'
+import {Button ,Row,Col} from "react-bootstrap";
 
 import CustomerOptions from '../customers/customerOptions'
 import ProductOptionsbyID from '../products/productOptionsbyID'
 import SizeOptionsbyID from '../sizes/sizeOptionbyID'
 import {addOrders} from '../../actions/order'
+import { setAlert } from '../../actions/alert';
 
 const AddOrder= ({ 
+  setAlert,
   auth: { user },
   addOrders,
-  orders
-}) => {
+  orders,
+  table
+  }) => {
 
   useEffect(() => {
-
   }, []);
 
-
-//   const [formData, setFormData] = useState({
-  
-//     name:'',
-
-//     description:'',
-
-//     category_name:'DEFAULT'
-    
-//   });
-
   const [product, setproduct] = useState({
-    
     customer_id:'',
-    
     employee_id : user._id,
-    
     details : []
-
-    
-    
   });
   
   const [detail,setdetail] = useState({
     product_id:'',
-        quantity:0,
-        size_id:''
+    quantity:0,
+    size_id:''
 
   });
 
-
-
-  
+  const [showproducts,setproducts] = useState([])
 
   const { customer_id,employee_id,details } = product;
   const { product_id,quantity,size_id } = detail;
-
+  
+  
   const onChange = e =>
     setdetail({ ...detail, [e.target.name]: e.target.value });
 
@@ -67,121 +53,147 @@ const AddOrder= ({
 
 const onSubmit = async e => {
       e.preventDefault();
-
-      details.push(detail)
+      let temp = {
+        product_name: product_id.split("$")[1],
+        quantity:quantity,
+        size_name :size_id.split("$")[1]
+      }      
+      setproducts(showproducts => [...showproducts,temp])
+      
+      let d = {
+        product_id: product_id.split("$")[0],
+        quantity:quantity,
+        size_id :size_id.split("$")[0]
+      }      
+      details.push(d)
       setproduct({
         ...product,
         details
       });
-     
-
       setdetail(
         {
           product_id:'',
-              quantity:0,
-              size_id:''
-      
-        }
-     
+          quantity:0,
+          size_id:''
+        }  
      );
+}
 
-       }
-
- const onSubmitOrder = async e => {
-        e.preventDefault();
+const onSubmitOrder = async e => {
   
-       
+        e.preventDefault();     
         setproduct({
           ...product,
           details
         });
-        console.log(product)
-      
+        if(details.length >0)
         addOrders(product);
+        else{
+          setAlert('Please select product to order!','danger')
+        }
 
         setproduct(
           {
-    
-            customer_id:'',
-            
+            customer_id:'', 
             employee_id : user._id,
-            
             details : []
-        
-            
-            
           }
         );
-
-  
         setdetail(
           {
             product_id:'',
-                quantity:0,
-                size_id:''
-        
-          }
-       
+            quantity:0,
+            size_id:''       
+          }      
        );
-  
-         }
+       
+       setproduct([])
+      
+       if(details.length >0)
+       table();
+ }
 
 
 
 
 return ( 
 <Fragment>
-
-    {details !== null && details.map(detail=> 
-              <div>
-                {detail.quantity}
-                </div>
-            
-            )
+<br/>
+      <div style={{alignItems:'center'}}>
+      <h2 >Create Order</h2><br/>
+      </div>
+      
+    {showproducts.length!== 0 && 
+              <Table striped bordered hover>
+              <thead>
+                  <tr>
+                  <th>Product</th> 
+                  <th>Packing</th>
+                  <th>Quantity</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  {showproducts.map(detail=>
+                      <tr>
+                          <td>{detail.product_name}</td>
+                          <td>{detail.size_name}</td>
+                          <td>{detail.quantity}</td>
+                      </tr>
+                  )}
+              </tbody>
+      </Table>        
     }
+   
+         <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>          
+          <Form.Group >
+          <Form.Label>Product</Form.Label>
+          <Form.Control as="select" name="product_id" value = {product_id} onChange={e => onChange(e)}>
+                  <option value="" disabled>Choose...</option>
+                  <ProductOptionsbyID />
+          </Form.Control>
+          </Form.Group>
 
-<form className='form' onSubmit={e => onSubmit(e)}>
+          <Form.Group >
+          <Form.Label>Packing</Form.Label>
+          <Form.Control as="select" name="size_id" value = {size_id} onChange={e => onChange(e)}>
+                  <option value="" disabled>Choose...</option>
+                  <SizeOptionsbyID />
+          </Form.Control>
+          </Form.Group>
+
+          <Form.Group>
+          <Form.Label>Quantity</Form.Label>
+          <Form.Control
+            required
+            type='text'
+            placeholder='quantity'
+            name='quantity'
+            value={quantity}
+            onChange={e => onChange(e)}
+          />
+          </Form.Group>
           
-  
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='quantity'
-              name='quantity'
-              value={quantity}
-              onChange={e => onChange(e)}
-            />
-          </div>
- 
-          <div className='form-group'>
-            <select name="product_id" value = {product_id} onChange={e => onChange(e)}>
-                <option value="" disabled>Choose a Product</option>
-                <ProductOptionsbyID />
-            </select>
-          </div>
+          <Button type="submit">Add Item</Button>
+          
+          
+    </Form>
+    <br/>
 
-          <div className='form-group'>
-            <select name="size_id" value = {size_id} onChange={e => onChange(e)}>
-                <option value="" disabled>Choose Packing-type</option>
-                <SizeOptionsbyID />
-            </select>
-          </div>
-         
-        <input type='submit' className='btn btn-primary' value='Add Stock' />
-  </form>
-
-
-
-     <form className='form' onSubmit={e => onSubmitOrder(e)}>
-           <div className='form-group'>
-            <select name="customer_id" value = {customer_id} onChange={e => onChangeOrder(e)}>
-                <option value="" disabled>Choose Packing-type</option>
-                <CustomerOptions/>
-            </select>
-          </div>
-         
-        <input type='submit' className='btn btn-primary' value='Confirm Order' />
-  </form>
+    <Form onSubmit={e => onSubmitOrder(e)} style={{width:'80%'}}>
+      <Form.Group >
+      <Form.Label>Select Customer</Form.Label>
+      <Form.Control as="select" name="customer_id" value = {customer_id} onChange={e => onChangeOrder(e)}>
+              <option value="" disabled>Choose...</option>
+              <CustomerOptions/>
+      </Form.Control>
+      </Form.Group> 
+      <br></br>
+    <Button type="submit"  >Add order</Button>
+    <Button variant="outline-primary" size="lg" href = "/orders" style={{float:"right",marginRight:"20px"}}>
+            Cancel
+     </Button>
+     
+    </Form>
 
 
 
@@ -201,7 +213,8 @@ AddOrder.propTypes = {
     addOrders:PropTypes.func.isRequired,
     confirmOrder:PropTypes.func.isRequired,
     dispatchOrder:PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired
+    auth: PropTypes.object.isRequired,
+    setAlert: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -211,5 +224,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getOrders,confirmOrder,dispatchOrder,addOrders}
+  { setAlert,getOrders,confirmOrder,dispatchOrder,addOrders}
 )(AddOrder);

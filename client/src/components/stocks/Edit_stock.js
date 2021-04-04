@@ -7,6 +7,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 import ProductOptions from '../products/productOptions';
 import SizeOptions from '../sizes/sizeOptions';
+import Form from 'react-bootstrap/Form'
 
 const Edit_stock = ({
     stock,
@@ -50,60 +51,79 @@ const Edit_stock = ({
     }
 
     return (
-        <Fragment>
-            <Row style={{ marginTop: "5px" }}>
+            isEdit === true ? 
+            <Fragment>
+                <tr>
+                    <td>{stock.product_id.name}</td>
+                    <td>{stock.size_id.packing_type+" "+stock.size_id.unit}</td>
+                    <td>{stock.quantity}</td>
+                    <td>{stock.price}</td>
+                    <td><Button variant="success" onClick={() => { setIsEdit(!isEdit) }} >Edit</Button></td>
+                    <td><Button variant="danger" onClick={() => { deleteStock(id) }}  >Delete</Button></td> 
+                    <td>{stock.last_update.slice(0,10)}</td>
+                </tr>
+                <tr>
+                    <td colSpan='3'>
+                   
+                    <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+          
+                        <Form.Group >
+                        <Form.Label>Select Product</Form.Label>
+                        <Form.Control as="select" disabled name="product_name" value = {product_name} onChange={e => onChange(e)}>
+                                <option value="" disabled>Choose...</option>
+                                <ProductOptions />
+                        </Form.Control>
+                        </Form.Group>
 
-                <Col> <b>{stock.product_id.name}</b>
-                </Col>
-                <Col>
-                    <Button variant="success" onClick={() => { setIsEdit(!isEdit) }}  >Edit</Button>
-                </Col>
-                <Col>
-                    <Button variant="danger" onClick={() => { deleteStock(id) }}  >Delete</Button>
-                </Col>
+                        <Form.Group >
+                        <Form.Label>Select Packing</Form.Label>
+                        <Form.Control as="select" disabled name="size_packing_type" value = {size_packing_type} onChange={e => onChange(e)}>
+                                <option value="" disabled>Choose...</option>
+                                <SizeOptions />
+                        </Form.Control>
+                        </Form.Group>
 
-            </Row>
-            {isEdit === true ? <div>
-                <form className='form' onSubmit={e => onSubmit(e)}>
-                    <div className='form-group'>
-                        <input
-                            type='text'
-                            placeholder='price'
-                            name='price'
-                            value={price}
-                            onChange={e => onChange(e)}
-                        />
-                    </div>
-
-                    <div className='form-group'>
-                        <input
+                        <Form.Group>
+                        <Form.Label>Quantity</Form.Label>
+                        <Form.Control
                             type='text'
                             placeholder='quantity'
                             name='quantity'
                             value={quantity}
                             onChange={e => onChange(e)}
                         />
-                    </div>
+                        </Form.Group>
 
-                    <div className='form-group'>
-                        <select name="product_name" value={product_name} onChange={e => onChange(e)}>
-                            <option value="" disabled>Choose a Product</option>
-                            <ProductOptions />
-                        </select>
-                    </div>
-
-                    <div className='form-group'>
-                        <select name="size_packing_type" value={size_packing_type} onChange={e => onChange(e)}>
-                            <option value="" disabled>Choose a Size</option>
-                            <SizeOptions />
-                        </select>
-                    </div>
-
-                    <input type='submit' className='btn btn-primary' value='Edit Stock' />
-                </form>
-
-            </div> : null}
-        </Fragment>
+                        <Form.Group>
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control
+                            required
+                            type='text'
+                            placeholder='price'
+                            name='price'
+                            value={price}
+                            onChange={e => onChange(e)}
+                        />
+                        </Form.Group>
+                        
+                        <Button type="submit">Edit Stock</Button>
+                    </Form>
+                    </td>
+                </tr>
+            </Fragment>
+            :
+            <Fragment>
+                <tr>
+                    <td>{stock.product_id.name}</td>
+                    <td>{stock.size_id.packing_type+" "+stock.size_id.unit}</td>
+                    <td>{stock.quantity}</td>
+                    <td>{stock.price}</td>
+                    <td><Button variant="success" onClick={() => { setIsEdit(!isEdit) }} >Edit</Button></td>
+                    <td><Button variant="danger" onClick={() => { deleteStock(id) }}  >Delete</Button></td> 
+                    <td>{stock.last_update.slice(0,10)}</td>
+                </tr> 
+            </Fragment>
+        
     );
 };
 

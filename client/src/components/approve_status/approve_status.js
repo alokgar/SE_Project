@@ -7,6 +7,7 @@ import Spinner from '../layout/Spinner';
 import {changeStatus }from '../../actions/status';
 import { getUsers } from '../../actions/status';
 
+import Table from 'react-bootstrap/Table';
 import {Button ,Row,Col} from "react-bootstrap";
 const Approve_status = ({
  
@@ -19,43 +20,31 @@ const Approve_status = ({
   }, [getUsers]);
 
   return (
-    <Fragment>
-
-    Following are the list of USERS with there status
-    <div style = {{height:"150px" , width:"500px" , overflow:"scroll",overflowX:"hidden",margin:"10px"}}>
-
-    {users.map(function(user){
-
-      var id=user.email;
-
-
-
-      return (
-         <div style = {{margin:"5px"}}>
-           
-        {user.status=="Pending" ?
-        <Row>
-        <Col>
-        {user.first_name}{" "}{user.last_name}
-        </Col>
-        <Col>
-        <Button variant="success" onClick={()=>{changeStatus({id})}}  >Approve for {user.type}</Button>
-
-        </Col>
-        </Row>
-        :null}
-        
-         </div>
-)
-
-
-})}
+  <Fragment>
+    <div  style={{width:'100%',overflow:'auto'}}>           
+      <Table striped bordered hover responsive >
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody >
+        {users.map(function(user){
+            var id=user.email;
+            return (
+              user.status=="Pending" ?
+              <tr>
+                <td>{user.first_name}{" "}{user.last_name}</td>
+                <td><Button variant="success" onClick={()=>{changeStatus({id})}}  >Approve for {user.type}</Button></td>
+              </tr>
+              :null
+            )         
+            })}
+        </tbody>
+      </Table>
     </div>
-      
-
-      
-     
-    </Fragment>
+  </Fragment>
   );
 };
 

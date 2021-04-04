@@ -7,6 +7,8 @@ import Table from 'react-bootstrap/Table';
 import ProductOptions from '../products/productOptions';
 import SizeOptions from '../sizes/sizeOptions';
 import Edit_stock from './Edit_stock';
+import Form from 'react-bootstrap/Form'
+import {Button ,Row,Col} from "react-bootstrap";
 
 const Stock = ({
     getStocks,
@@ -14,6 +16,7 @@ const Stock = ({
     editStock,
     stocks
 }) => {
+  const [ showTable, setTable] = useState(true);
 
   useEffect(() => {
     getStocks();
@@ -41,70 +44,88 @@ const Stock = ({
         product_name: '',
         size_packing_type: ''
     });
+    setTable(!showTable)
   }
 
   return stocks === null ? (
-    <div></div>):( 
+    <div></div>):(
+      showTable===true ? 
       <Fragment>
        All stocks are shown here
   
        <Table striped bordered hover>
             <thead>
                 <tr>
-                    <th>Product Name</th>  
+                    <th>Product Name</th> 
+                    <th>Packing</th> 
+                    <th>Quantity</th>
+                    <th>Price</th> 
+                    <th>#</th>
+                    <th>#</th>
+                    <th>Last Update</th>
                  </tr>
             </thead>
                   <tbody> 
-                   {stocks.map(function(stock){
-                        return (
-                            <div >
-                                <Edit_stock  stock = {stock} />
-                            </div>
-                        )
+                   {
+                    stocks.map(function(stock){
+                        return ( <Edit_stock  stock = {stock} />)
                     })
                     }     
                   </tbody>
         </Table>
-     
-       
+        <Button onClick={() => setTable(false)}>Add Stock</Button>  
+        </Fragment>
+     :
+      
+     <Fragment>
+      <br/><h2>Add Stock</h2><br/>
   
-  <form className='form' onSubmit={e => onSubmit(e)}>
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='price'
-              name='price'
-              value={price}
-              onChange={e => onChange(e)}
-            />
-          </div>
-  
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='quantity'
-              name='quantity'
-              value={quantity}
-              onChange={e => onChange(e)}
-            />
-          </div>
- 
-          <div className='form-group'>
-            <select name="product_name" value = {product_name} onChange={e => onChange(e)}>
-                <option value="" disabled>Choose a Product</option>
-                <ProductOptions />
-            </select>
-          </div>
+      <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+          
+          <Form.Group >
+          <Form.Label>Select Product</Form.Label>
+          <Form.Control as="select"name="product_name" value = {product_name} onChange={e => onChange(e)}>
+                  <option value="" disabled>Choose...</option>
+                  <ProductOptions />
+          </Form.Control>
+          </Form.Group>
 
-          <div className='form-group'>
-            <select name="size_packing_type" value = {size_packing_type} onChange={e => onChange(e)}>
-                <option value="" disabled>Choose Packing-type</option>
-                <SizeOptions />
-            </select>
-          </div>
+          <Form.Group >
+          <Form.Label>Select Packing</Form.Label>
+          <Form.Control as="select" name="size_packing_type" value = {size_packing_type} onChange={e => onChange(e)}>
+                  <option value="" disabled>Choose...</option>
+                  <SizeOptions />
+          </Form.Control>
+          </Form.Group>
+
+        <Form.Group>
+        <Form.Label>Quantity</Form.Label>
+          <Form.Control
+            type='text'
+            placeholder='quantity'
+            name='quantity'
+            value={quantity}
+            onChange={e => onChange(e)}
+          />
+        </Form.Group>
+
+        <Form.Group>
+          <Form.Label>Price</Form.Label>
+          <Form.Control
+            required
+            type='text'
+            placeholder='price'
+            name='price'
+            value={price}
+            onChange={e => onChange(e)}
+          />
+        </Form.Group>
          
-        <input type='submit' className='btn btn-primary' value='Add Stock' />
-  </form>
+        <Button type="submit">Add Stock</Button>
+          <Button variant="outline-primary" size="lg" href = "/stocks" style={{float:"right",marginRight:"20px"}}>
+            Cancel
+     </Button>
+          </Form>
   
   </Fragment>
     );
@@ -121,7 +142,7 @@ const Stock = ({
   const mapStateToProps = state => ({
     stocks: state.stock.stocks
   });
-  
+                  
   export default connect(
     mapStateToProps,
     { getStocks, addStock, editStock}

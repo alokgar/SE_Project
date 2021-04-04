@@ -6,6 +6,7 @@ import { getRaw_materials, deleteRaw_material, editRaw_material } from '../../ac
 import { Button, Row, Col } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 import SupplierOptions from '../suppliers/supplierOptions';
+import Form from 'react-bootstrap/Form'
 
 const Edit_raw_material = ({
     raw_material,
@@ -53,67 +54,78 @@ const Edit_raw_material = ({
     }
 
     return (
-
-        <Fragment>
-            <Row style={{ marginTop: "5px" }}>
-
-                <Col> <b>{raw_material.name}</b>
-                </Col>
-                <Col>
-                    <Button variant="success" onClick={() => { setIsEdit(!isEdit) }}  >Edit</Button>
-                </Col>
-                <Col>
-                    <Button variant="danger" onClick={() => { deleteRaw_material(id) }}  >Delete</Button>
-                </Col>
-
-            </Row>
-            {isEdit === true ? <div>
-                <form className='form' onSubmit={e => onSubmit(e)}>
-                    <div className='form-group'>
-                        <input
+            isEdit === true ?  
+            <Fragment>
+                <tr>
+                    <td>{raw_material.name}</td>
+                    <td><Button variant="success" onClick={() => { setIsEdit(!isEdit) }} >Edit</Button></td>
+                    <td><Button variant="danger" onClick={() => { deleteRaw_material(id) }}  >Delete</Button></td> 
+                </tr>
+                <tr>
+                    <td colSpan='3'>
+                    <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+                        <Form.Group>
+                        <Form.Label>Raw Material Name</Form.Label>
+                        <Form.Control
+                            required
                             type='text'
                             placeholder='name'
                             name='name'
                             value={name}
                             onChange={e => onChange(e)}
                         />
-                    </div>
+                        </Form.Group>
 
-                    <div className='form-group'>
-                        <input
+                        <Form.Group>
+                        <Form.Label>Quantity</Form.Label>
+                        <Form.Control
+                            required
                             type='text'
                             placeholder='quantity'
                             name='quantity'
                             value={quantity}
                             onChange={e => onChange(e)}
                         />
-                    </div>
+                        </Form.Group>
 
-                    <div className='form-group'>
-                        <input
+                        <Form.Group>
+                        <Form.Label>Unit</Form.Label>
+                        <Form.Control
+                            required
                             type='text'
                             placeholder='unit'
                             name='unit'
                             value={unit}
                             onChange={e => onChange(e)}
                         />
-                    </div>
+                        </Form.Group>
+                        <Form.Group >
+                        <Form.Label>Supplier Name</Form.Label>
+                        <Form.Control as="select" name="supplier_name" value={supplier_name} onChange={e => onChange(e)}>
+                                <option value="" disabled>Choose...</option>
+                                <SupplierOptions />
+                        </Form.Control>
+                        </Form.Group>
 
 
-                    <div className='form-group'>
-                        <select name="supplier_name" value={supplier_name} onChange={e => onChange(e)}>
-                            <option value="" disabled>Choose a supplier</option>
-                            <SupplierOptions />
-                        </select>
-                    </div>
+                        <Button type="submit">Edit Raw Material</Button>
+          
+                   </Form>
+                    </td>
+                </tr>
 
-                    <input type='submit' className='btn btn-primary' value='Edit Raw_material' />
-                </form>
+            </Fragment>
+            : 
+            <Fragment>
+                <tr>
+                    <td>{raw_material.name}</td>
+                    <td><Button variant="success" onClick={() => { setIsEdit(!isEdit) }} >Edit</Button></td>
+                    <td><Button variant="danger" onClick={() => { deleteRaw_material(id) }}  >Delete</Button></td> 
+                </tr>
+            </Fragment>
 
-            </div> : null}
 
-
-        </Fragment>
+       
     );
 };
 

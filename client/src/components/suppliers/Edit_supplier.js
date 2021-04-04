@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { getSuppliers, deleteSupplier, editSupplier } from '../../actions/supplier';
 import { Button, Row, Col } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form'
 
 const Edit_supplier = ({
     supplier,
@@ -54,96 +55,118 @@ const Edit_supplier = ({
     }
 
     return (
+            isEdit === true ? 
+            <Fragment>
+            <tr>
+                    <td>{supplier.name}</td>
+                    <td><Button variant="success" onClick={() => { setIsEdit(!isEdit) }} >Edit</Button></td>
+                    <td><Button variant="danger" onClick={() => { deleteSupplier(id) }}  >Delete</Button></td> 
+            </tr> 
+            <tr>
+              <td colSpan='3'>
+              <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+      <Form.Group>
+        <Form.Label>Supplier Name</Form.Label>
+          <Form.Control
+            required
+            type='text'
+            placeholder='name'
+            name='name'
+            value={name}
+            onChange={e => onChange(e)}
+          />
+        </Form.Group>
 
-        <Fragment>
-            <Row style={{ marginTop: "5px" }}>
-                <Col> <b>{supplier.name}</b> </Col>
-                <Col>
-                    <Button variant="success" onClick={() => { setIsEdit(!isEdit) }} > Edit </Button>
-                </Col>
-                <Col>
-                    <Button variant="danger" onClick={() => { deleteSupplier(id) }} > Delete </Button>
-                </Col>
-            </Row>
-            {isEdit === true ? <div>
-                <form className='form' onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
-            <input
-              type='text'
-              placeholder='name'
-              name='name'
-              value={name}
-              onChange={e => onChange(e)}
-            />
-          </div>
-  
-          <div className='form-group'>
-            <input
-              type='text'
+        <Form.Row>
+        <Form.Group as={Col}>
+        <Form.Label>Email</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='email'
               name='email'
               value={email}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+                    
+        <Form.Group as={Col}>
+        <Form.Label>Mobile No.</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='mobile_no'
               name='mobile_no'
               value={mobile_no}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+        </Form.Row>
+          
+        <Form.Group>
+        <Form.Label>Address</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='line1'
               name='line1'
               value={line1}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+          
+        <Form.Group>
+        <Form.Label>Landmark</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='landmark'
               name='landmark'
               value={landmark}
               onChange={e => onChange(e)}
-            />
-          </div>
+          />
+        </Form.Group>
 
-          <div className='form-group'>
-            <input
-              type='text'
+        <Form.Row>
+        <Form.Group as={Col}>
+        <Form.Label>Pincode</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='pincode'
               name='pincode'
               value={pincode}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+          
+        <Form.Group as={Col}>
+        <Form.Label>City</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='city_name'
               name='city_name'
               value={city_name}
               onChange={e => onChange(e)}
-            />
-          </div>
+          />
+        </Form.Group>
+        </Form.Row>
 
-                    <input type='submit' className='btn btn-primary' value='Edit Supplier' />
-                </form>
-
-            </div> : null}
-
-
-        </Fragment>
+        <Button type="submit">Edit Supplier</Button>
+          
+          </Form>
+              </td>
+            </tr>
+          </Fragment>
+          :
+          <Fragment>
+            <tr>
+                    <td>{supplier.name}</td>
+                    <td><Button variant="success" onClick={() => { setIsEdit(!isEdit) }} >Edit</Button></td>
+                    <td><Button variant="danger" onClick={() => { deleteSupplier(id) }}  >Delete</Button></td> 
+            </tr> 
+          </Fragment>
     );
 };
 

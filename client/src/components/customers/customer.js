@@ -6,7 +6,7 @@ import { getCustomers ,addCustomer,editCustomer,deleteCustomer} from '../../acti
 import Table from 'react-bootstrap/Table';
 import Form from 'react-bootstrap/Form';
 import {Button ,Row,Col} from "react-bootstrap";
-import Sidebar from '../sidebar/sidebar';
+import Sidebar1 from '../sidebar/sidebar';
 
 
 
@@ -95,14 +95,17 @@ return customers===null
     )
     :
     (   
-        showTable===true ?<div>
-            <Fragment>
-            <Sidebar/>
-            <div >
+        showTable===true ?
+            
+            <div className="row" style={{height:'100%'}}>
+            <Sidebar1/>
+            <div className="col-md-10 mainContainer" >
 
                 All Cusomers are shown here
                 
-                <Table striped bordered hover>
+                <div className="tableDiv">
+                
+                <Table striped bordered hover responsive >
                 <thead>
                     <tr>
                     <th>First Name</th>
@@ -110,14 +113,13 @@ return customers===null
                     <th>#</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody >
                     
                     {customers.map(function(customer){
 
                     return (
                         <tr>
-                        <td>{customer.first_name}</td>
-                        <td>{customer.last_name}</td>
+                        <td><a href={`/customer/${customer._id}`} style={{color:'black'}}>{customer.first_name+" "+customer.last_name}</a></td>
                         <td><Button variant="success" onClick={() => onEditclick(customer)} >Edit</Button></td>
                         <td><Button variant="danger" onClick={() => deleteCustomer(customer._id)} >Delete</Button></td> 
                         </tr>
@@ -125,14 +127,19 @@ return customers===null
                     
                 </tbody>
                 </Table>
+                </div><br/>
                 <Button onClick={() => setTable(false)}>Add Customer</Button>
                 
             </div>
-        </Fragment>
-        </div>
+            </div>
+        
+        
         :
-            <div>
-            <Sidebar/>
+        <div className="row" style={{height:'100%'}}>
+        <Sidebar1/>
+        <div className="col-md-10 mainContainer ScrollDiv">
+
+            <h2>Add Customer</h2><br/>
             <Form onSubmit={e => onSubmit(e)}>
             <Form.Row>
             <Form.Group as={Col} controlId="formGridEmail">
@@ -183,6 +190,7 @@ return customers===null
             </Button>
         </Form>
 
+        </div>
         </div>
         
         

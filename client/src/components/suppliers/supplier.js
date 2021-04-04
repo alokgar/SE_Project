@@ -5,6 +5,8 @@ import PropTypes from 'prop-types';
 import { getSuppliers, addSupplier, editSupplier } from '../../actions/supplier';
 import Table from 'react-bootstrap/Table';
 import Edit_supplier from './Edit_supplier';
+import Form from 'react-bootstrap/Form'
+import {Button ,Row,Col} from "react-bootstrap";
 
 const Supplier = ({
   getSuppliers,
@@ -13,6 +15,8 @@ const Supplier = ({
   suppliers
 
 }) => {
+
+  const [ showTable, setTable] = useState(true);
 
   useEffect(() => {
     getSuppliers();
@@ -47,10 +51,12 @@ const Supplier = ({
       pincode: '',
       city_name: ''
     });
+    setTable(!showTable)
   }
 
   return suppliers === null ? (
-    <div></div>):( 
+    <div></div>):(
+      showTable===true ?  
       <Fragment>
        All Suppliers are shown here
        <Table striped bordered hover>
@@ -60,92 +66,116 @@ const Supplier = ({
                       </tr>
                   </thead>
                   <tbody>
-                   {suppliers.map(function(supplier){
-                return (
-                  <div >
-                <Edit_supplier  supplier = {supplier} />
-                </div>
-                )
-
-                })}
+                   {
+                    suppliers.map(function(supplier){
+                    return (<Edit_supplier  supplier = {supplier} />)
+                    })
+                   }
                       
                   </tbody>
                   </Table>
+                  <Button onClick={() => setTable(false)}>Add Supplier</Button>  
+        </Fragment>
+     :
+      
+     <Fragment>
+      <br/><h2>Add Supplier</h2><br/>
      
        
-  
-  <form className='form' onSubmit={e => onSubmit(e)}>
-          <div className='form-group'>
-            <input
-              type='text'
-              placeholder='name'
-              name='name'
-              value={name}
-              onChange={e => onChange(e)}
-            />
-          </div>
-  
-          <div className='form-group'>
-            <input
-              type='text'
+      <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+      <Form.Group>
+        <Form.Label>Supplier Name</Form.Label>
+          <Form.Control
+            required
+            type='text'
+            placeholder='name'
+            name='name'
+            value={name}
+            onChange={e => onChange(e)}
+          />
+        </Form.Group>
+
+        <Form.Row>
+        <Form.Group as={Col}>
+        <Form.Label >Email</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='email'
               name='email'
               value={email}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+                    
+        <Form.Group as={Col}>
+        <Form.Label>Mobile No.</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='mobile_no'
               name='mobile_no'
               value={mobile_no}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+        </Form.Row>
+          
+        <Form.Group>
+        <Form.Label>Address</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='line1'
               name='line1'
               value={line1}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+          
+        <Form.Group>
+        <Form.Label>Landmark</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='landmark'
               name='landmark'
               value={landmark}
               onChange={e => onChange(e)}
-            />
-          </div>
+          />
+        </Form.Group>
 
-          <div className='form-group'>
-            <input
-              type='text'
+        <Form.Row>
+        <Form.Group as={Col} >
+        <Form.Label>Pincode</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='pincode'
               name='pincode'
               value={pincode}
               onChange={e => onChange(e)}
-            />
-          </div>
-
-          <div className='form-group'>
-            <input
-              type='text'
+          />
+        </Form.Group>
+          
+        <Form.Group as={Col}>
+        <Form.Label>City</Form.Label>
+          <Form.Control
+            required
+            type='text'
               placeholder='city_name'
               name='city_name'
               value={city_name}
               onChange={e => onChange(e)}
-            />
-          </div>
-        <input type='submit' className='btn btn-primary' value='Add Supplier' />
-  </form>
+          />
+        </Form.Group>
+        </Form.Row>
+         
+        <Button type="submit">Add Supplier</Button>
+          <Button variant="outline-primary" size="lg" href = "/suppliers" style={{float:"right",marginRight:"20px"}}>
+            Cancel
+     </Button>
+          </Form>
   
   </Fragment>
     );

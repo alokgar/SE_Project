@@ -7,6 +7,8 @@ import Table from 'react-bootstrap/Table';
 import OrderList from './order_list'
 import product from '../products/product';
 import AddOrder from './add_order'; 
+import { Button, Row, Col } from "react-bootstrap";
+import Badge from 'react-bootstrap/Badge'
 
 const Order = ({ 
     getOrders,
@@ -14,60 +16,33 @@ const Order = ({
     dispatchOrder,
   orders
 }) => {
+  const [ showTable, setTable] = useState(true);
+  const [ viewId, setviewId] = useState(null);
+
+  const setonChange = () =>{
+    setTable(!showTable)
+  }
 
   useEffect(() => {
-
     getOrders();
-    
 
   }, [getOrders]);
 
+return orders==null?(
 
-//   const [formData, setFormData] = useState({
-  
-//     name:'',
-
-//     description:'',
-
-//     category_name:'DEFAULT'
-    
-//   });
-
-  
-
-//   const { name,description,category_name } = formData;
-
-//   const onChange = e =>
-//     setFormData({ ...formData, [e.target.name]: e.target.value });
-
-
-// const onSubmit = async e => {
-//       e.preventDefault();
-//       console.log(category_name);
-//      addOrder({ name,description,category_name });
-
-//      setFormData({ name:'',
-
-//      description:'',
- 
-//      category_name:'DEFAULT' });
-
-//        }
-
-
-
-
-return orders.length===0?(
-
-  <div>no orders</div>):( 
+  <div></div>):( 
+    showTable===true ?
     <Fragment>
      All Orders are shown here
 
      <Table striped bordered hover>
                 <thead>
                     <tr>
-                    <th>First Name</th>
-                    
+                    <th>Name</th> 
+                    <th>Order Date</th>
+                    <th>Dispatch Date</th>
+                    <th>Status</th>
+                    <th>#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -80,69 +55,53 @@ return orders.length===0?(
                      )
                    }
                    var id = order._id;
+                   return (
+                     <Fragment>
+                      <tr>
+                          <td>{order.customer_id.first_name+" "+order.customer_id.last_name}</td>
+                          <td>{order.order_date.slice(0,10)}</td>
+                          <td>{order.dispatched_date ===undefined?"Not Dispatched":order.dispatched_date.slice(0,10)}</td>
+                          
+                          <td>{order.status==="Pending"?
+                                  <Badge variant="danger" style={{padding:'8px'}}>Pending</Badge>
+                                  :
+                                  order.status==="Confirmed"?
+                                  <Badge variant="dark" style={{padding:'8px'}}>Confirmed</Badge>
+                                        :
+                                        <Badge variant="success" style={{padding:'8px'}}>Dispatched</Badge> 
+                              }
+                            </td>
+                          <td>{order.status==="Pending"?
+                                  <Button variant="success" onClick={()=>{confirmOrder(id)} }  > Confirm</Button>
+                                  :
+                                  order.status==="Confirmed"?
+                                        <Button variant="danger" onClick={()=>{dispatchOrder(id,order.details)} }> Disptach</Button>
+                                        :
+                                        order.dispatch_num  
+                              }
+                            </td>
+                            <td><Button variant="success" 
+                                        onClick={()=>{ viewId===null?setviewId(id):viewId===id?setviewId(null):setviewId(id) }}  
+                                > View</Button>
+                            </td>
+                      </tr>
+                      {viewId === order._id?< OrderList orderslist={order.details}/>:null}
+                      
+                      
+                      </Fragment>
+                     )
 
-              return (
-                  <div>
-                    <b>New Order</b>
-                    <b>{order.status}</b>
-                    <br></br>
-                 <div>
-                  {order.employee_id.first_name} 
-
-                  <button onClick={()=>{confirmOrder(id)} }  > confirm</button>
-                  <button onClick={()=>{dispatchOrder(id)} }  > confirm</button>
-                  </div>
-                  < OrderList orderslist={order.details} />
-                  
-                  </div>
-                
-              
-              )
-
-              })}
-                    
+                 })}    
                 </tbody>
                 </Table>
-   
-     
-
-{/* <form className='form' onSubmit={e => onSubmit(e)}>
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='name'
-            name='name'
-            value={name}
-            onChange={e => onChange(e)}
-          />
-        </div>
-
-        <div className='form-group'>
-          <input
-            type='text'
-            placeholder='description'
-            name='description'
-            value={description}
-            onChange={e => onChange(e)}
-          />
-        </div>
-        
-        <div className='form-group'>
-
-        <select defaultValue={"DEFAULT"} name="category_name" onChange={e => onChange(e)}>
-        <option value="DEFAULT" disabled>Choose a salutation ...</option>
-        <option value="A" >A</option>
-        <option value="B" >B</option>
-       
-      </select>
-      </div>
-       
-      <input type='submit' className='btn btn-primary' value='Add Order' />
-</form> */}
-
-<AddOrder />
+                <br/>
+               <Button onClick={() => setTable(false)}>Create Order</Button> 
+                
 
 </Fragment>
+:
+<AddOrder table = {setonChange}/>
+
   );
 };
 

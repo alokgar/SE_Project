@@ -11,7 +11,7 @@ const SizeOptionsbyID = ({getSizes,sizes}) => {
     return (
        sizes !== null && sizes.map(size => 
             <option key= {size._id} 
-             value = {size._id}>
+             value = {size._id+"$"+size.packing_type}>
                 {size.packing_type}
             </option>
             ) 

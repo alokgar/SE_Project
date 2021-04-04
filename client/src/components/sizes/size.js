@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getSizes, addSize, editSize } from '../../actions/size';
 import Table from 'react-bootstrap/Table';
+import Form from 'react-bootstrap/Form'
+import { Button, Row, Col } from "react-bootstrap";
 // import Edit_size from './Edit_size';
 
 const Size = ({
@@ -18,7 +20,7 @@ const Size = ({
         getSizes();
     }, [getSizes]);
 
-
+    const [ showTable, setTable] = useState(true);
     const [formData, setFormData] = useState({
         packing_type: '',
         unit: ''
@@ -36,6 +38,7 @@ const Size = ({
             packing_type: '',
             unit: ''
         });
+        setTable(!showTable)
     }
 
     return sizes === null ? (
@@ -46,45 +49,65 @@ const Size = ({
                 <thead>
                     <tr>
                         <th>Packing_type</th>
+                        <th>Unit</th>
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>   
                     {sizes.map(function (size) {
                         return (
-                            <div >
+                            <tr>
                                <td>{size.packing_type}</td>
-                            </div>
+                               <td>{size.unit}</td>
+                            </tr>
                         )
 
                     })}
                 </tbody>
             </Table>
+            <Button variant="primary" onClick={()=> setTable(!showTable)}>
+                 Add Size
+            </Button>
+            <br></br>
+      {
+      showTable === false?
+      <Fragment>
+      <br/><h2>Add Size</h2><br/>
+           
+      <Form onSubmit={e => onSubmit(e)} style={{width:'60%'}}>
+      <Form.Group>
+        <Form.Label>Packing_type</Form.Label>
+          <Form.Control
+            required
+            type='text'
+            placeholder='packing_type'
+            name='packing_type'
+            value={packing_type}
+            onChange={e => onChange(e)}
+          />
+        </Form.Group>
+        
+        <Form.Group >
+        <Form.Label >Unit</Form.Label>
+          <Form.Control
+            required
+            type='text'
+            placeholder='unit'
+            name='unit'
+            value={unit}
+            onChange={e => onChange(e)}
+          />
+          </Form.Group>
 
+        <Button type="submit">Add Size</Button>
+            <Button variant="outline-primary" onClick={()=> setTable(!showTable)}>
+                 Cancel
+            </Button>
+          </Form>
+        </Fragment>:null}
 
-            <form className='form' onSubmit={e => onSubmit(e)}>
-                <div className='form-group'>
-                    <input
-                        type='text'
-                        placeholder='packing_type'
-                        name='packing_type'
-                        value={packing_type}
-                        onChange={e => onChange(e)}
-                    />
-                </div>
-
-                <div className='form-group'>
-                    <input
-                        type='text'
-                        placeholder='unit'
-                        name='unit'
-                        value={unit}
-                        onChange={e => onChange(e)}
-                    />
-                </div>
-
-                <input type='submit' className='btn btn-primary' value='Add Size' />
-            </form>
         </Fragment>
+                
+      
     );
 };
 

@@ -5,8 +5,10 @@ import { connect } from 'react-redux';
 import Spinner from '../layout/Spinner';
 import Approve_status from '../approve_status/approve_status'
 import { getCurrentProfile, deleteAccount } from '../../actions/profile';
+import Sidebar1 from '../sidebar/sidebar';
+import { Row , Button, Col , Container } from 'react-bootstrap'
+import Card from 'react-bootstrap/Card'
 
-import {Container} from 'react-bootstrap';
 
 
 const Dashboard = ({
@@ -26,8 +28,53 @@ const Dashboard = ({
     <Spinner />
   ) : (
     
-    <Fragment>
-       
+    <div className="row" style={{height:'100%'}}>
+      <Sidebar1/>
+      <div className="col-md-10 mainContainer ScrollDiv" >
+      <Row>
+        <Col xs={3}>
+          <Card >
+            <Card.Body>
+              <Card.Title>Sale</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={3}>
+          <Card >
+            <Card.Body>
+              <Card.Title>Sale</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+        <Col xs={3}>
+          <Card >
+            <Card.Body>
+              <Card.Title>Sale</Card.Title>
+                <Card.Subtitle className="mb-2 text-muted">Card Subtitle</Card.Subtitle>
+              <Card.Text>
+                Some quick example text to build on the card title and make up the bulk of
+                the card's content.
+              </Card.Text>
+              <Card.Link href="#">Card Link</Card.Link>
+              <Card.Link href="#">Another Link</Card.Link>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
       <h1 className='large text-primary'>Dashboard</h1>
       <p className='lead'>
         <i className='fas fa-user' /> Welcome {user && user.first_name}
@@ -47,7 +94,7 @@ const Dashboard = ({
       <br/>
       <Link to="/payments"> Payment Page </Link>
       <Link to="/orders"> Orders </Link>
-
+      
       {profile !== null ? (
         <Fragment>
           {/* <DashboardActions /> */}
@@ -61,20 +108,25 @@ const Dashboard = ({
           </div>
         </Fragment>
       ) : (
-        <Fragment >
+        <div>
+          <Card style={{
+            width: '50%',
+            boxShadow: 'rgba(0, 0, 0, 0.35) 0px 5px 15px' }}
+          >
+            <Card.Header>
+              Pending Queries
+              <Button variant="primary" size="sm" style={{float:'right'}}>See All</Button>
+            </Card.Header>
+            
+            <Approve_status/>
+          </Card>
+        </div>
         
-          <div >
-          
-          <Container > <Approve_status /></Container>
-         
-          </div>
-  
-          
-        </Fragment>
       )}
       
           
-    </Fragment>
+    </div>
+    </div>
   );
 };
 

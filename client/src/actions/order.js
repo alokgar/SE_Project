@@ -53,7 +53,7 @@ export const confirmOrder = (id) => async dispatch => {
   }
 };
 //dispatch order
-export const dispatchOrder = (id) => async dispatch => {
+export const dispatchOrder = (id,details) => async dispatch => {
   const config = {
     headers: {
       'Content-Type': 'application/json'
@@ -62,8 +62,9 @@ export const dispatchOrder = (id) => async dispatch => {
 
   try {
     
-   
-    const res = await axios.post(`/api/order/${id}/dispatch`,config);
+    const body = JSON.stringify({ details });
+    console.log(details)
+    const res = await axios.post(`/api/order/${id}/dispatch`,body,config);
 
     
 
@@ -99,7 +100,7 @@ export const addOrders = ({ customer_id, employee_id, details }) => async dispat
   try {
 
     const res = await axios.post('/api/order', body, config);
-
+    console.log(res.data)
     dispatch({
       type: GET_ORDERS,
       payload: res.data

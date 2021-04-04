@@ -6,6 +6,7 @@ const Order = require('../../models/Order');
 const Product = require('../../models/Product');
 const Size = require('../../models/Size');
 const auth = require('../../middleware/auth');
+const Stock = require('../../models/Stock');
 
 
 async function getOrderByid(id){
@@ -198,12 +199,28 @@ router.post('/:id/dispatch', async (req, res) => {
       if (!order || order.length ===0) {
         return res.status(400).json({ msg: 'No Order found !' });
       }
-    
+      let d = Date.now()
       let up_order = await Order.findByIdAndUpdate(
         req.params.id,
-        {status : "Dispatched", dispatch_num : req.body.dispatch_num},
+        {status : "Dispatched", dispatch_num : req.body.dispatch_num,dispatched_date: d},
         {new:true}
       );
+     
+      req.body.details.forEach(async (element) => {
+        let stock = await Stock.findOne({product_id : element.product_id._id,size_id: element.size_id._id});
+        console.log(stock)
+        if(stock)
+        {
+        let newQ = stock.quantity-element.quantity  
+        let s = await Stock.findByIdAndUpdate(
+          stock._id,
+          {$set: {quantity:newQ}},
+          {new: true},
+        );
+        console.log(s)
+        }
+      });
+      
       const allorder = await Order.find().populate({path : 'employee_id customer_id details.product_id details.size_id',
       populate: 'category_id'});
 
