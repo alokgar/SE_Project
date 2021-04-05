@@ -39,7 +39,7 @@ const Approve_status = ({
                 <td>{user.first_name}{" "}{user.last_name}</td>
                 <td>{user.type}</td>
                 <td style={{textAlign:'center'}}><Button variant="success" onClick={()=>{changeStatus({id})}}  >✓</Button>
-                    <Button variant="danger" onClick={()=>{changeStatus({id})}}  >✗</Button>
+                    <Button variant="danger" onClick={()=>{changeStatus({id})}}  >✗<i class="fa fa-trash"></i></Button>
                 </td>
               </tr>
               :null
