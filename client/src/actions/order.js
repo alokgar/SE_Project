@@ -27,8 +27,8 @@ export const confirmOrder = (id) => async (dispatch) => {
   };
 
   try {
-    const res = await axios.post(`/api/order/${id}/confirm`, config);
-
+    const res1 = await axios.post(`/api/order/${id}/confirm`, config);
+    const res = await axios.get("/api/order");
     dispatch({
       type: GET_ORDERS,
       payload: res.data,
@@ -50,8 +50,8 @@ export const dispatchOrder = (id, details) => async (dispatch) => {
   try {
     const body = JSON.stringify({ details });
     console.log(details);
-    const res = await axios.post(`/api/order/${id}/dispatch`, body, config);
-
+    const res1 = await axios.post(`/api/order/${id}/dispatch`, body, config);
+    const res = await axios.get("/api/order");
     dispatch({
       type: GET_ORDERS,
       payload: res.data,
@@ -77,8 +77,8 @@ export const addOrders = ({ customer_id, employee_id, details }) => async (
   const body = JSON.stringify({ customer_id, employee_id, details });
 
   try {
-    const res = await axios.post("/api/order", body, config);
-    console.log(res.data);
+    const res1 = await axios.post("/api/order", body, config);
+    const res = await axios.get("/api/order");
     dispatch({
       type: GET_ORDERS,
       payload: res.data,
