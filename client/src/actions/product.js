@@ -44,12 +44,11 @@ export const addProduct = ({ name, description, category_name }) => async (
   try {
     const res = await axios.post("/api/products", body, config);
 
+    const res1 = await axios.get("/api/products");
     dispatch({
-      type: PRODUCTS_SUCCESS,
-      payload: res.data,
+      type: GET_PRODUCTS,
+      payload: res1.data,
     });
-
-    dispatch(getProducts());
   } catch (err) {
     dispatch({
       type: PRODUCTS_ERROR,
@@ -74,11 +73,11 @@ export const editProduct = ({ id, name, description, category_name }) => async (
     console.log(id);
 
     const res = await axios.put(`/api/products/${id}`, body, config);
-
+    const res1 = await axios.get("/api/products");
     dispatch({
       type: GET_PRODUCTS,
 
-      payload: res.data,
+      payload: res1.data,
     });
   } catch (err) {
     dispatch({
@@ -98,11 +97,11 @@ export const deleteProduct = (id) => async (dispatch) => {
 
   try {
     const res = await axios.delete(`/api/products/${id}`, config);
-
+    const res1 = await axios.get("/api/products");
     dispatch({
       type: GET_PRODUCTS,
 
-      payload: res.data,
+      payload: res1.data,
     });
   } catch (err) {
     dispatch({
