@@ -90,8 +90,8 @@ router.put('/:id', async (req, res) => {
     if (email) supplierFields.email = email;
     if (mobile_no) supplierFields.mobile_no = mobile_no;
 
-    var up_add = updateAddress(supp.address, line1, landmark, pincode, city_name);
-    console.log(up_add);
+    var up_add = await updateAddress(supp.address, line1, landmark, pincode, city_name);
+    //console.log(up_add);
 
     supplier = await Supplier.findByIdAndUpdate(
       req.params.id,
