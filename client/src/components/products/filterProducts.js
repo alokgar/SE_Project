@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import { Link, Redirect } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { filterProduct,getProducts } from '../../actions/product';
+import { getProduction_details } from '../../actions/production_detail';
+
+
 import Form from 'react-bootstrap/Form'
 import {Button ,Row,Col} from "react-bootstrap";
 
 
-const FilterProducts = ({ filterProduct,getProducts }) => {
+const FilterProducts = ({ getProduction_details }) => {
     const [formData, setFormData] = useState({
         from: new Date(),
         to: new Date()
@@ -25,24 +28,24 @@ const FilterProducts = ({ filterProduct,getProducts }) => {
     const onSubmit = async e => {
         e.preventDefault();
         console.log("onSubmit Clicked");
-        filterProduct({ from, to });
-        // setFormData({
-        //     from: new Date(),
-        //     to: new Date()
-        // });
-        setFlag(true);
-    }
-
-    // if (flag) {
-    //     return <Redirect to='/show_filtered_products' />
-    // }
-    const onreset = ()=> {
-        getProducts()
+        getProduction_details({ from, to });
         setFormData({
             from: new Date(),
             to: new Date()
         });
+        setFlag(true);
     }
+
+    if (flag) {
+        return <Redirect to='/show_filtered_production_details' />
+    }
+    // const onreset = ()=> {
+    //     getProducts()
+    //     setFormData({
+    //         from: new Date(),
+    //         to: new Date()
+    //     });
+    // }
 
     return (
         
@@ -71,8 +74,7 @@ const FilterProducts = ({ filterProduct,getProducts }) => {
         />
         </Form.Group>
        
-       <Button type="submit">Search</Button>
-       <Button variant="outline-primary" onClick={()=>onreset()}>Reset</Button>
+       <Button type="submit">Search Production-Details</Button>
        </Form>
        
     
@@ -80,8 +82,7 @@ const FilterProducts = ({ filterProduct,getProducts }) => {
 }
 
 FilterProducts.propTypes = {
-    filterProduct: PropTypes.func.isRequired,
-    getProducts:PropTypes.func.isRequired
+    getProduction_details: PropTypes.func.isRequired
 }
 
-export default connect(null, { filterProduct, getProducts})(FilterProducts);
+export default connect(null, { getProduction_details })(FilterProducts);
