@@ -67,3 +67,9 @@ export const ORDER_ERROR = "ORDER_ERROR";
 export const GET_CATEGORY = "GET_CATEGORY";
 export const CATEGORY_ERROR = "CATEGORY_ERROR";
 export const ADD_CATEGORY = "ADD_CATEGORY";
+
+export const GET_SALES = "GET_SALES";
+export const SALES_ERROR = "SALES_ERROR";
+
+export const GET_USER = "GET_USER";
+export const USERS_ERROR = "USERS_ERROR";

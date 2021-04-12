@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+var ObjectID = require("mongodb").ObjectID;
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const Order = require("../../models/Order");
@@ -19,8 +20,9 @@ async function getOrderByid(id) {
 // @route     GET api/orders
 // @desc      Get all orders
 // @access    Private
-router.get("/", async (req, res) => {
+router.get("/", auth, async (req, res) => {
   try {
+    console.log(req.user);
     const order = await Order.find().sort({ order_date: -1 }).populate({
       path: "employee_id customer_id details.product_id details.size_id",
       populate: "category_id",
@@ -61,10 +63,46 @@ router.get("/:id/customer", async (req, res) => {
       path: "employee_id customer_id details.product_id details.size_id",
       populate: "category_id",
     });
+
+    var c_id = new ObjectID(req.params.id);
+
+    const prod_wise_order = await Order.aggregate([
+      { $match: { customer_id: c_id } },
+      { $unwind: "$details" },
+      {
+        $lookup: {
+          from: "sizes",
+          localField: "details.size_id",
+          foreignField: "_id",
+          as: "details.size_type",
+        },
+      },
+      {
+        $lookup: {
+          from: "products",
+          localField: "details.product_id",
+          foreignField: "_id",
+          as: "details.product_name",
+        },
+      },
+      { $unwind: "$details.size_type" },
+      { $unwind: "$details.product_name" },
+      {
+        $group: {
+          _id: {
+            product_id: "$details.product_id",
+            size_id: "$details.size_id",
+          },
+          quantity: { $sum: "$details.quantity" },
+          packing_type: { $last: "$details.size_type.packing_type" },
+          product_name: { $last: "$details.product_name.name" },
+        },
+      },
+    ]);
     if (!order) {
       return res.status(400).json({ msg: "No Orders found !" });
     }
-    res.json(order);
+    res.json({ order: order, prod_wise_order: prod_wise_order });
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");

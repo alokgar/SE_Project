@@ -33,7 +33,10 @@ async function AddCustomer(
 // @access    Private
 router.get("/", async (req, res) => {
   try {
-    const cust = await Customer.find().populate("address employee_id");
+    const cust = await Customer.find().populate({
+      path: "employee_id address",
+      populate: "city",
+    });
 
     if (!cust) {
       return res.status(400).json({ msg: "There are no Customers !" });
