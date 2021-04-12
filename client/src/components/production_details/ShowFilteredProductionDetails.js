@@ -23,7 +23,6 @@ const ShowFilteredProductionDetails = ({
                     </tr>
                 </thead>
                 <tbody>
-
                     {
                         production_details.map(function (detail) {
                             if (detail === undefined) {
@@ -32,14 +31,12 @@ const ShowFilteredProductionDetails = ({
                                 )
                             }
                             return (
-                                <div>
                                     <tr>
                                         <td>{detail.product_id.name}</td>
                                         <td>{detail.size_id.packing_type}</td>
                                         <td>{detail.new_quantity - detail.prev_quantity}</td>
                                         <td>{Date(detail.date)}</td>
                                     </tr>
-                                </div>
                             )
 
                         })
