@@ -20,6 +20,22 @@ export const getPayments = () => async (dispatch) => {
   }
 };
 
+// Get all payments by employee id
+export const getEmpPayments = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/api/payment/emp");
+    dispatch({
+      type: GET_PAYMENTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: PAYMENTS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
 //Add Payment
 
 export const addPayment = ({ amount, date, customer_id }) => async (

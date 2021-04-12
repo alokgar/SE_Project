@@ -5,25 +5,35 @@ import Register from "../auth/Register";
 
 import Login from "../auth/Login";
 import Alert from "../layout/Alert";
-import Dashboard from "../dashboard/Dashboard";
-import Product from "../products/product";
-import Customer from "../customers/customer";
-import Raw_material from "../raw_materials/raw_material";
-import Supplier from "../suppliers/supplier";
-import Stock from "../stocks/stock";
-import Size from "../sizes/size";
-import Feedback from "../feedbacks/feedback";
-import Payment from "../payments/payment";
-import Cust_profile from "../customers/customerProfile";
-import Order from "../orders/orders";
-import ShowFilteredProducts from "../products/ShowFilteredProducts";
-import ShowFilteredRaw_materials from "../raw_materials/ShowFilteredRaw_materials";
-import Category from "../category/category";
-import Sales from "../sales/sales";
-import Profile from "../profile/Profile";
-import Employees from "../users/users";
 
-import PrivateRoute from "../routing/PrivateRoute";
+import Dashboard from "../admin/dashboard/Dashboard";
+import Product from "../admin/products/product";
+import Customer from "../admin/customers/customer";
+import Raw_material from "../admin/raw_materials/raw_material";
+import Supplier from "../admin/suppliers/supplier";
+import Stock from "../admin/stocks/stock";
+import Size from "../admin/sizes/size";
+import Feedback from "../admin/feedbacks/feedback";
+import Payment from "../admin/payments/payment";
+import Cust_profile from "../admin/customers/customerProfile";
+import Order from "../admin/orders/orders";
+import Category from "../admin/category/category";
+import Sales from "../admin/sales/sales";
+import Profile from "../admin/profile/Profile";
+import Employees from "../admin/users/users";
+
+import EmpDashboard from "../employee/dashboard/Dashboard";
+import EmpProduct from "../employee/products/product";
+import EmpCustomer from "../employee/customers/customer";
+import EmpStock from "../employee/stocks/stock";
+import EmpFeedback from "../employee/feedbacks/feedback";
+import EmpPayment from "../employee/payments/payment";
+import EmpCust_profile from "../employee/customers/customerProfile";
+import EmpOrder from "../employee/orders/orders";
+import EmpProfile from "../employee/profile/Profile";
+
+import AdminRoute from "./AdminRoute";
+import EmployeeRoute from "./EmployeeRoute";
 
 const Routes = () => {
   return (
@@ -33,31 +43,35 @@ const Routes = () => {
         <Route exact path="/register" component={Register} />
         <Route exact path="/login" component={Login} />
 
-        <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/products" component={Product} />
-        <PrivateRoute exact path="/customers" component={Customer} />
-        <PrivateRoute exact path="/feedbacks" component={Feedback} />
-        <PrivateRoute exact path="/raw_materials" component={Raw_material} />
-        <PrivateRoute exact path="/suppliers" component={Supplier} />
-        <PrivateRoute exact path="/payments" component={Payment} />
-        <PrivateRoute exact path="/customer/:id" component={Cust_profile} />
-        <PrivateRoute exact path="/stocks" component={Stock} />
-        <PrivateRoute exact path="/sizes" component={Size} />
-        <PrivateRoute exact path="/orders" component={Order} />
-        <PrivateRoute exact path="/category" component={Category} />
-        <PrivateRoute exact path="/profile/:id" component={Profile} />
-        <PrivateRoute exact path="/employees" component={Employees} />
-        <PrivateRoute
+        <AdminRoute exact path="/dashboard" component={Dashboard} />
+        <AdminRoute exact path="/products" component={Product} />
+        <AdminRoute exact path="/customers" component={Customer} />
+        <AdminRoute exact path="/feedbacks" component={Feedback} />
+        <AdminRoute exact path="/raw_materials" component={Raw_material} />
+        <AdminRoute exact path="/suppliers" component={Supplier} />
+        <AdminRoute exact path="/payments" component={Payment} />
+        <AdminRoute exact path="/customer/:id" component={Cust_profile} />
+        <AdminRoute exact path="/stocks" component={Stock} />
+        <AdminRoute exact path="/sizes" component={Size} />
+        <AdminRoute exact path="/orders" component={Order} />
+        <AdminRoute exact path="/category" component={Category} />
+        <AdminRoute exact path="/profile/:id" component={Profile} />
+        <AdminRoute exact path="/employees" component={Employees} />
+        <AdminRoute exact path="/sales" component={Sales} />
+
+        <EmployeeRoute exact path="/emp/dashboard" component={EmpDashboard} />
+        <EmployeeRoute exact path="/emp/products" component={EmpProduct} />
+        <EmployeeRoute exact path="/emp/customers" component={EmpCustomer} />
+        <EmployeeRoute exact path="/emp/feedbacks" component={EmpFeedback} />
+        <EmployeeRoute exact path="/emp/payments" component={EmpPayment} />
+        <EmployeeRoute exact path="/emp/stocks" component={EmpStock} />
+        <EmployeeRoute exact path="/emp/orders" component={EmpOrder} />
+        <EmployeeRoute exact path="/emp/profile/:id" component={EmpProfile} />
+        <EmployeeRoute
           exact
-          path="/show_filtered_products"
-          component={ShowFilteredProducts}
+          path="/emp/customer/:id"
+          component={EmpCust_profile}
         />
-        <PrivateRoute
-          exact
-          path="/show_filtered_raw_materials"
-          component={ShowFilteredRaw_materials}
-        />
-        <PrivateRoute exact path="/sales" component={Sales} />
       </Switch>
     </section>
   );

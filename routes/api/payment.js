@@ -1,5 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
+var ObjectID = require("mongodb").ObjectID;
 const router = express.Router();
 const { check, validationResult } = require("express-validator");
 const Payment = require("../../models/Payment");
@@ -31,6 +32,24 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route     GET api/payments/emp
+// @desc      Get payment by employee
+// @access    Private
+router.get("/emp", auth, async (req, res) => {
+  try {
+    console.log(req.user.id);
+    const payment = await Payment.find({ employee_id: req.user.id })
+      .sort({ date: -1 })
+      .populate({ path: "employee_id customer_id" });
+    if (!payment) {
+      return res.status(400).json({ msg: "No Payment found !" });
+    }
+    res.json(payment);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 // @route     GET api/payments/:id
 // @desc      Get payment by id
 // @access    Private
