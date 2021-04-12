@@ -2,10 +2,11 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 
 import Register from "../auth/Register";
-
 import Login from "../auth/Login";
+
 import Alert from "../layout/Alert";
 
+import ShowFilteredProductionDetails from "../admin/production_details/ShowFilteredProductionDetails";
 import Dashboard from "../admin/dashboard/Dashboard";
 import Product from "../admin/products/product";
 import Customer from "../admin/customers/customer";
@@ -58,6 +59,11 @@ const Routes = () => {
         <AdminRoute exact path="/profile/:id" component={Profile} />
         <AdminRoute exact path="/employees" component={Employees} />
         <AdminRoute exact path="/sales" component={Sales} />
+        <AdminRoute
+          exact
+          path="/show_filtered_production_details"
+          component={ShowFilteredProductionDetails}
+        />
 
         <EmployeeRoute exact path="/emp/dashboard" component={EmpDashboard} />
         <EmployeeRoute exact path="/emp/products" component={EmpProduct} />
