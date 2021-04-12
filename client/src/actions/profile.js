@@ -12,10 +12,10 @@ import {
 } from "./types";
 
 // Get current users profile
-export const getCurrentProfile = () => async (dispatch) => {
+export const getCurrentProfile = (id) => async (dispatch) => {
   try {
-    const res = await axios.get("/api/profile/me");
-
+    const res = await axios.get(`/api/profile/${id}`);
+    console.log(res.data);
     dispatch({
       type: GET_PROFILE,
       payload: res.data,

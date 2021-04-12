@@ -39,7 +39,7 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
     <div></div>
   ) : (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 />
+      <Sidebar1 link="/category" />
       <div className="col-md-10 mainContainer">
         <div className="tableDiv">
           <Table striped bordered hover>

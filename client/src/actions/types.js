@@ -75,3 +75,8 @@ export const PRODUCTION_DETAILS_ERROR = "PRODUCTION_DETAILS_ERROR";
 
 
 
+export const GET_SALES = "GET_SALES";
+export const SALES_ERROR = "SALES_ERROR";
+
+export const GET_USER = "GET_USER";
+export const USERS_ERROR = "USERS_ERROR";

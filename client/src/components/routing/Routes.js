@@ -1,7 +1,7 @@
-import React from 'react';
-import { Route, Switch } from 'react-router-dom';
+import React from "react";
+import { Route, Switch } from "react-router-dom";
 
-import Register from '../auth/Register';
+import Register from "../auth/Register";
 
 import Login from '../auth/Login';
 import Alert from '../layout/Alert';
@@ -19,12 +19,15 @@ import Order from '../orders/orders';
 import ShowFilteredProductionDetails from '../production_details/ShowFilteredProductionDetails';
 import ShowFilteredRaw_materials from '../raw_materials/ShowFilteredRaw_materials';
 import Category from '../category/category';
+import Sales from "../sales/sales";
+import Profile from "../profile/Profile";
+import Employees from "../users/users";
 
-import PrivateRoute from '../routing/PrivateRoute';
+import PrivateRoute from "../routing/PrivateRoute";
 
 const Routes = () => {
   return (
-    <section className='container'>
+    <section className="container">
       <Alert />
       <Switch>
         <Route exact path='/register' component={Register} />
@@ -44,7 +47,16 @@ const Routes = () => {
         <PrivateRoute exact path='/category' component={Category} />
         <PrivateRoute exact path='/show_filtered_production_details' component={ShowFilteredProductionDetails} />
         <PrivateRoute exact path='/show_filtered_raw_materials' component={ShowFilteredRaw_materials} />
-
+        <Route exact path="/register" component={Register} />
+        <Route exact path="/login" component={Login} />
+        <PrivateRoute exact path="/profile/:id" component={Profile} />
+        <PrivateRoute exact path="/employees" component={Employees} />
+        <PrivateRoute
+          exact
+          path="/show_filtered_raw_materials"
+          component={ShowFilteredRaw_materials}
+        />
+        <PrivateRoute exact path="/sales" component={Sales} />
       </Switch>
     </section>
   );

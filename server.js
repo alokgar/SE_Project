@@ -42,6 +42,7 @@ app.use("/api/order", require("./routes/api/order"));
 app.use("/api/feedback", require("./routes/api/feedback"));
 app.use("/api/payment", require("./routes/api/payment"));
 app.use("/api/production_details", require("./routes/api/production_details"));
+app.use("/api/sales", require("./routes/api/sales"));
 
 app.listen(port);
 console.log("Listening on port " + port);
