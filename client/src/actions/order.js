@@ -4,9 +4,13 @@ import { setAlert } from "./alert";
 import { GET_ORDERS, ORDER_ERROR } from "./types";
 
 // Get all orders data
-export const getOrders = () => async (dispatch) => {
+export const getOrders = (userType) => async (dispatch) => {
   try {
-    const res = await axios.get("/api/order");
+    const res =
+      userType === 1
+        ? await axios.get("/api/order/emp")
+        : await axios.get("/api/order");
+
     console.log(res.data);
     dispatch({
       type: GET_ORDERS,
@@ -65,9 +69,10 @@ export const dispatchOrder = (id, details) => async (dispatch) => {
 
 //Add order
 
-export const addOrders = ({ customer_id, employee_id, details }) => async (
-  dispatch
-) => {
+export const addOrders = (
+  { customer_id, employee_id, details },
+  userType
+) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -78,7 +83,10 @@ export const addOrders = ({ customer_id, employee_id, details }) => async (
 
   try {
     const res1 = await axios.post("/api/order", body, config);
-    const res = await axios.get("/api/order");
+    const res =
+      userType === 1
+        ? await axios.get("/api/order/emp")
+        : await axios.get("/api/order");
     dispatch({
       type: GET_ORDERS,
       payload: res.data,

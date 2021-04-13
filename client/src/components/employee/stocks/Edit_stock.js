@@ -9,7 +9,14 @@ import ProductOptions from "../products/productOptions";
 import SizeOptions from "../sizes/sizeOptions";
 import Form from "react-bootstrap/Form";
 
-const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
+const Edit_stock = ({
+  stock,
+  getStocks,
+  deleteStock,
+  editStock,
+  stocks,
+  idx,
+}) => {
   // useEffect(() => {
   //     getStocks();
   // }, [getStocks]);
@@ -43,125 +50,14 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
     setIsEdit(!isEdit);
   };
 
-  return isEdit === true ? (
+  return (
     <Fragment>
       <tr>
+        <td>{idx + 1}</td>
         <td>{stock.product_id.name}</td>
         <td>{stock.size_id.packing_type + " " + stock.size_id.unit}</td>
         <td>{stock.quantity}</td>
         <td>{stock.price}</td>
-        <td>
-          <Button
-            variant="success"
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-          >
-            Edit
-          </Button>
-        </td>
-        <td>
-          <Button
-            variant="danger"
-            onClick={() => {
-              deleteStock(id);
-            }}
-          >
-            Delete
-          </Button>
-        </td>
-        <td>{stock.last_update.slice(0, 10)}</td>
-      </tr>
-      <tr>
-        <td colSpan="7">
-          <Form onSubmit={(e) => onSubmit(e)} style={{ width: "60%" }}>
-            <Form.Group>
-              <Form.Label>Select Product</Form.Label>
-              <Form.Control
-                as="select"
-                disabled
-                name="product_name"
-                value={product_name}
-                onChange={(e) => onChange(e)}
-              >
-                <option value="" disabled>
-                  Choose...
-                </option>
-                <ProductOptions />
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Select Packing</Form.Label>
-              <Form.Control
-                as="select"
-                disabled
-                name="size_packing_type"
-                value={size_packing_type}
-                onChange={(e) => onChange(e)}
-              >
-                <option value="" disabled>
-                  Choose...
-                </option>
-                <SizeOptions />
-              </Form.Control>
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Quantity</Form.Label>
-              <Form.Control
-                type="text"
-                placeholder="quantity"
-                name="quantity"
-                value={quantity}
-                onChange={(e) => onChange(e)}
-              />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Price</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="price"
-                name="price"
-                value={price}
-                onChange={(e) => onChange(e)}
-              />
-            </Form.Group>
-
-            <Button type="submit">Edit Stock</Button>
-          </Form>
-        </td>
-      </tr>
-    </Fragment>
-  ) : (
-    <Fragment>
-      <tr>
-        <td>{stock.product_id.name}</td>
-        <td>{stock.size_id.packing_type + " " + stock.size_id.unit}</td>
-        <td>{stock.quantity}</td>
-        <td>{stock.price}</td>
-        <td>
-          <Button
-            variant="success"
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-          >
-            Edit
-          </Button>
-        </td>
-        <td>
-          <Button
-            variant="danger"
-            onClick={() => {
-              deleteStock(id);
-            }}
-          >
-            Delete
-          </Button>
-        </td>
         <td>{stock.last_update.slice(0, 10)}</td>
       </tr>
     </Fragment>

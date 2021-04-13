@@ -38,7 +38,7 @@ export const getEmpPayments = () => async (dispatch) => {
 
 //Add Payment
 
-export const addPayment = ({ amount, date, customer_id }) => async (
+export const addPayment = ({ amount, date, customer_id }, userType) => async (
   dispatch
 ) => {
   const config = {
@@ -52,13 +52,14 @@ export const addPayment = ({ amount, date, customer_id }) => async (
   try {
     console.log(body);
     const res = await axios.post("/api/payment", body, config);
-    const res1 = await axios.get("/api/payment");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/payment/emp")
+        : await axios.get("/api/payment");
     dispatch({
       type: PAYMENTS_SUCCESS,
       payload: res1.data,
     });
-
-    dispatch(getPayments());
   } catch (err) {
     dispatch({
       type: PAYMENTS_ERROR,
@@ -68,9 +69,10 @@ export const addPayment = ({ amount, date, customer_id }) => async (
 
 //EDIT Payment
 //change status
-export const editPayment = ({ id, amount, date, customer_id }) => async (
-  dispatch
-) => {
+export const editPayment = (
+  { id, amount, date, customer_id },
+  userType
+) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -83,7 +85,10 @@ export const editPayment = ({ id, amount, date, customer_id }) => async (
     console.log(body);
 
     const res = await axios.put(`/api/payment/${id}`, body, config);
-    const res1 = await axios.get("/api/payment");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/payment/emp")
+        : await axios.get("/api/payment");
     dispatch({
       type: GET_PAYMENTS,
 
@@ -98,7 +103,7 @@ export const editPayment = ({ id, amount, date, customer_id }) => async (
 
 //delete Payment
 
-export const deletePayment = (id) => async (dispatch) => {
+export const deletePayment = (id, userType) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -107,7 +112,10 @@ export const deletePayment = (id) => async (dispatch) => {
 
   try {
     const res = await axios.delete(`/api/payment/${id}`, config);
-    const res1 = await axios.get("/api/payment");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/payment/emp")
+        : await axios.get("/api/payment");
     dispatch({
       type: GET_PAYMENTS,
 

@@ -18,6 +18,7 @@ const Edit_product = ({
   editProduct,
   deleteProduct,
   products,
+  idx,
 }) => {
   const [formData, setFormData] = useState({
     id: product._id,
@@ -56,98 +57,17 @@ const Edit_product = ({
     <Fragment>
       <tr>
         <td>{product.name}</td>
-        <td>
-          <Button
-            variant="success"
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-          >
-            Edit
-          </Button>
-        </td>
-        <td>
-          <Button
-            variant="danger"
-            onClick={() => {
-              deleteProduct(id);
-            }}
-          >
-            Delete
-          </Button>
-        </td>
-      </tr>
-      <tr>
-        <td colSpan="3">
-          <Form onSubmit={(e) => onSubmit(e)} style={{ width: "60%" }}>
-            <Form.Group>
-              <Form.Label>Product Name</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="name"
-                name="name"
-                value={name}
-                onChange={(e) => onChange(e)}
-              />
-            </Form.Group>
-            <Form.Group>
-              <Form.Label>Product Description</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                placeholder="description"
-                name="description"
-                value={description}
-                onChange={(e) => onChange(e)}
-              />
-            </Form.Group>
-
-            <Form.Group>
-              <Form.Label>Category</Form.Label>
-              <Form.Control
-                as="select"
-                disabled
-                name="category_name"
-                value={category_name}
-                onChange={(e) => onChange(e)}
-              >
-                <option value="" disabled>
-                  Choose...
-                </option>
-                <CategoryOptions />
-              </Form.Control>
-            </Form.Group>
-
-            <Button type="submit">Edit Product</Button>
-          </Form>
-        </td>
+        <td>{product.description}</td>
+        <td>{product.category_id.name}</td>
       </tr>
     </Fragment>
   ) : (
     <Fragment>
       <tr>
+        <td>{idx + 1}</td>
         <td>{product.name}</td>
-        <td>
-          <Button
-            variant="success"
-            onClick={() => {
-              setIsEdit(!isEdit);
-            }}
-          >
-            Edit
-          </Button>
-        </td>
-        <td>
-          <Button
-            variant="danger"
-            onClick={() => {
-              deleteProduct(id);
-            }}
-          >
-            Delete
-          </Button>
-        </td>
+        <td>{product.description}</td>
+        <td>{product.category_id.name}</td>
       </tr>
     </Fragment>
   );

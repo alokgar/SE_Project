@@ -52,100 +52,25 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
           <Table striped bordered hover>
             <thead>
               <tr>
+                <th>#</th>
                 <th>Product Name</th>
                 <th>Packing</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>#</th>
-                <th>#</th>
                 <th>Last Update</th>
               </tr>
             </thead>
             <tbody>
-              {stocks.map(function (stock) {
-                return <Edit_stock stock={stock} />;
+              {stocks.map(function (stock, idx) {
+                return <Edit_stock stock={stock} idx={idx} />;
               })}
             </tbody>
           </Table>
         </div>
         <br />
-        <Button onClick={() => setTable(false)}>Add Stock</Button>
       </div>
     </div>
-  ) : (
-    <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/stocks" />
-      <div className="col-md-10 mainContainer ScrollDiv">
-        <h2>Add Stock</h2>
-        <br />
-
-        <Form onSubmit={(e) => onSubmit(e)} style={{ width: "60%" }}>
-          <Form.Group>
-            <Form.Label>Select Product</Form.Label>
-            <Form.Control
-              as="select"
-              name="product_name"
-              value={product_name}
-              onChange={(e) => onChange(e)}
-            >
-              <option value="" disabled>
-                Choose...
-              </option>
-              <ProductOptions />
-            </Form.Control>
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>Select Packing</Form.Label>
-            <Form.Control
-              as="select"
-              name="size_packing_type"
-              value={size_packing_type}
-              onChange={(e) => onChange(e)}
-            >
-              <option value="" disabled>
-                Choose...
-              </option>
-              <SizeOptions />
-            </Form.Control>
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>Quantity</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="quantity"
-              name="quantity"
-              value={quantity}
-              onChange={(e) => onChange(e)}
-            />
-          </Form.Group>
-
-          <Form.Group>
-            <Form.Label>Price</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              placeholder="price"
-              name="price"
-              value={price}
-              onChange={(e) => onChange(e)}
-            />
-          </Form.Group>
-
-          <Button type="submit">Add Stock</Button>
-          <Button
-            variant="outline-primary"
-            size="lg"
-            href="/stocks"
-            style={{ float: "right", marginRight: "20px" }}
-          >
-            Cancel
-          </Button>
-        </Form>
-      </div>
-    </div>
-  );
+  ) : null;
 };
 
 Stock.propTypes = {

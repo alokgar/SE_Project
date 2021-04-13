@@ -56,21 +56,29 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>First Name</th>
                 <th>#</th>
-                <th>#</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Category</th>
               </tr>
             </thead>
             <tbody>
-              {products.map(function (product) {
-                return <Edit_product product={product} />;
-              })}
+              {products.length != 0 ? (
+                products.map(function (product, idx) {
+                  return <Edit_product product={product} idx={idx} />;
+                })
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: "center" }}>
+                    No products{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
           <br />
         </div>
         <br></br>
-        <Button onClick={() => setTable(false)}>Add Product</Button>
       </div>
       <FilterProducts />
     </div>

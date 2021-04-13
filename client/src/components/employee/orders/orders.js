@@ -22,7 +22,7 @@ const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
   };
 
   useEffect(() => {
-    getOrders();
+    getOrders(1);
   }, [getOrders]);
 
   return orders == null ? (

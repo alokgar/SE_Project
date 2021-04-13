@@ -74,7 +74,7 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
       ...product,
       details,
     });
-    if (details.length > 0) addOrders(product);
+    if (details.length > 0) addOrders(product, 1);
     else {
       setAlert("Please select product to order!", "danger");
     }
@@ -189,7 +189,7 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
           <Button
             variant="outline-primary"
             size="lg"
-            href="/orders"
+            href="/emp/orders"
             style={{ float: "right", marginRight: "20px" }}
           >
             Cancel

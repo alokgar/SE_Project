@@ -46,9 +46,9 @@ const Payment = ({
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (showEdit === false) addPayment({ amount, date, customer_id });
+    if (showEdit === false) addPayment({ amount, date, customer_id }, 1);
     else {
-      editPayment({ id, amount, date, customer_id });
+      editPayment({ id, amount, date, customer_id }, 1);
       setEdit(!showEdit);
       custoptID("");
     }
@@ -122,7 +122,7 @@ const Payment = ({
                       <td>
                         <Button
                           variant="danger"
-                          onClick={() => deletePayment(payment._id)}
+                          onClick={() => deletePayment(payment._id, 1)}
                         >
                           Delete
                         </Button>
@@ -185,7 +185,7 @@ const Payment = ({
           <Button
             variant="outline-primary"
             size="lg"
-            href="/payments"
+            href="/emp/payments"
             style={{ float: "right", marginRight: "20px" }}
           >
             Cancel

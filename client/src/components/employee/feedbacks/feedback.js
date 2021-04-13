@@ -35,15 +35,15 @@ const Feedback = ({
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   useEffect(() => {
-    getFeedbacks();
+    getFeedbacks(1);
   }, [getFeedbacks]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
 
-    if (showEdit === false) addFeedback({ id, subject, content });
+    if (showEdit === false) addFeedback({ id, subject, content }, 1);
     else {
-      editFeedback({ id, subject, content });
+      editFeedback({ id, subject, content }, 1);
       setEdit(!showEdit);
     }
 
@@ -118,7 +118,7 @@ const Feedback = ({
                       <td>
                         <Button
                           variant="danger"
-                          onClick={() => deleteFeedback(feedback._id)}
+                          onClick={() => deleteFeedback(feedback._id, 1)}
                         >
                           Delete
                         </Button>
@@ -170,7 +170,7 @@ const Feedback = ({
           <Button
             variant="outline-primary"
             size="lg"
-            href="/feedbacks"
+            href="/emp/feedbacks"
             style={{ float: "right", marginRight: "20px" }}
           >
             Cancel

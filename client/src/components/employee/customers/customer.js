@@ -3,7 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import {
-  getCustomers,
+  getEmpCustomers,
   addCustomer,
   editCustomer,
   deleteCustomer,
@@ -14,7 +14,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
 
 const Customer = ({
-  getCustomers,
+  getEmpCustomers,
   addCustomer,
   editCustomer,
   deleteCustomer,
@@ -49,8 +49,8 @@ const Customer = ({
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
   useEffect(() => {
-    getCustomers();
-  }, [getCustomers]);
+    getEmpCustomers();
+  }, [getEmpCustomers]);
 
   const onSubmit = async (e) => {
     e.preventDefault();
@@ -65,6 +65,7 @@ const Customer = ({
         landmark,
         name,
         pincode,
+        userType: 1,
       });
     else {
       editCustomer({
@@ -76,6 +77,7 @@ const Customer = ({
         landmark,
         name,
         pincode,
+        userType: 1,
       });
       setEdit(!showEdit);
     }
@@ -123,12 +125,13 @@ const Customer = ({
       <Sidebar1 link="/customers" />
       <div className="col-md-10 mainContainer">
         All Cusomers are shown here
-        <div className="tableDiv">
+        <div className="tableDiv" style={{ width: "80%" }}>
           <Table striped bordered hover responsive>
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>City</th>
                 <th>#</th>
               </tr>
             </thead>
@@ -138,24 +141,24 @@ const Customer = ({
                   <tr>
                     <td>
                       <a
-                        href={`/customer/${customer._id}`}
+                        href={`/emp/customer/${customer._id}`}
                         style={{ color: "black" }}
                       >
                         {customer.first_name + " " + customer.last_name}
                       </a>
                     </td>
-                    <td>
+                    <td>{customer.mobile_no}</td>
+                    <td>{customer.address.city.name}</td>
+                    <td style={{ width: "200px" }}>
                       <Button
                         variant="success"
                         onClick={() => onEditclick(customer)}
                       >
                         Edit
                       </Button>
-                    </td>
-                    <td>
                       <Button
                         variant="danger"
-                        onClick={() => deleteCustomer(customer._id)}
+                        onClick={() => deleteCustomer(customer._id, 1)}
                       >
                         Delete
                       </Button>
@@ -258,7 +261,7 @@ const Customer = ({
           <Button
             variant="outline-primary"
             size="lg"
-            href="/customers"
+            href="/emp/customers"
             style={{ float: "right", marginRight: "20px" }}
           >
             Cancel
@@ -270,7 +273,7 @@ const Customer = ({
 };
 
 Customer.propTypes = {
-  getCustomers: PropTypes.func.isRequired,
+  getEmpCustomers: PropTypes.func.isRequired,
   addCustomer: PropTypes.func.isRequired,
   editCustomer: PropTypes.func.isRequired,
   deleteCustomer: PropTypes.func.isRequired,
@@ -281,7 +284,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
-  getCustomers,
+  getEmpCustomers,
   addCustomer,
   editCustomer,
   deleteCustomer,
