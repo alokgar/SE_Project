@@ -36,11 +36,6 @@ const Dashboard = ({
     getRaw_materials();
   }, [getCurrentProfile]);
 
-  const click = (link) => {
-    console.log(link);
-    <Redirect to={link} />;
-  };
-
   if (rawMaterial) {
     console.log(rawMaterial);
   }
@@ -230,7 +225,7 @@ const Dashboard = ({
                   variant="primary"
                   size="sm"
                   style={{ float: "right", fontSize: "12px" }}
-                  onClick={() => click("/orders")}
+                  href="/orders"
                 >
                   See All
                 </Button>

@@ -4,8 +4,6 @@ import { Route, Switch } from "react-router-dom";
 import Register from "../auth/Register";
 import Login from "../auth/Login";
 
-import Alert from "../layout/Alert";
-
 import ProductionDetails from "../admin/production_details/ShowFilteredProductionDetails";
 import Dashboard from "../admin/dashboard/Dashboard";
 import Product from "../admin/products/product";

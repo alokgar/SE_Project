@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { login, loadUser } from "../../actions/auth";
+import Alert from "../layout/Alert";
 
 const Login = ({ login, isAuthenticated, user, loadUser }) => {
   const [formData, setFormData] = useState({
@@ -30,6 +31,7 @@ const Login = ({ login, isAuthenticated, user, loadUser }) => {
 
   return (
     <Fragment>
+      <Alert />
       <h1 className="large text-primary">Sign In</h1>
       <p className="lead">
         <i className="fas fa-user" /> Sign Into Your Account

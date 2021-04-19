@@ -43,9 +43,7 @@ export const Tablecard = ({ title, link, table }) => {
           variant="primary"
           size="sm"
           style={{ float: "right", fontSize: "12px" }}
-          onClick={() => {
-            <Redirect to={link} />;
-          }}
+          href={link}
         >
           See All
         </Button>

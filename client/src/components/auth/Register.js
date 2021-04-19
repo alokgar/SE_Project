@@ -4,6 +4,7 @@ import { Link, Redirect } from "react-router-dom";
 import { setAlert } from "../../actions/alert";
 import { register } from "../../actions/auth";
 import PropTypes from "prop-types";
+import Alert from "../layout/Alert";
 
 const Register = ({ setAlert, register, isAuthenticated }) => {
   const [formData, setFormData] = useState({
@@ -44,6 +45,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
 
   return (
     <Fragment>
+      <Alert />
       <h1 className="large text-primary">Sign Up</h1>
       <p className="lead">
         <i className="fas fa-user" /> Create Your Account
@@ -56,6 +58,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="first_name"
             value={first_name}
             onChange={(e) => onChange(e)}
+            required
           />
         </div>
 
@@ -66,19 +69,23 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="last_name"
             value={last_name}
             onChange={(e) => onChange(e)}
+            required
           />
         </div>
         <div className="form-group">
           <input
             type="text"
+            pattern="[1-9]{1}[0-9]{9}"
+            title="Provide 10 digit mobile number"
             placeholder="mobile_no"
             name="mobile_no"
             value={mobile_no}
             onChange={(e) => onChange(e)}
+            required
           />
         </div>
         <div className="form-group">
-          <select name="type" onChange={(e) => onChange(e)}>
+          <select name="type" onChange={(e) => onChange(e)} required>
             <option value="Employee">Employee</option>
             <option value="Admin" selected>
               Admin
@@ -101,6 +108,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="email"
             value={email}
             onChange={(e) => onChange(e)}
+            required
           />
         </div>
         <div className="form-group">
@@ -110,6 +118,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="password"
             value={password}
             onChange={(e) => onChange(e)}
+            required
           />
         </div>
         <div className="form-group">
@@ -119,6 +128,7 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
             name="password2"
             value={password2}
             onChange={(e) => onChange(e)}
+            required
           />
         </div>
         <input type="submit" className="btn btn-primary" value="Register" />

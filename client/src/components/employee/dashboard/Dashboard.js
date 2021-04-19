@@ -125,7 +125,7 @@ const Dashboard = ({
                   variant="primary"
                   size="sm"
                   style={{ float: "right", fontSize: "12px" }}
-                  onClick={() => click("/orders")}
+                  href="/emp/payments"
                 >
                   See All
                 </Button>
@@ -193,7 +193,7 @@ const Dashboard = ({
                   variant="primary"
                   size="sm"
                   style={{ float: "right", fontSize: "12px" }}
-                  onClick={() => click("/orders")}
+                  href="/emp/orders"
                 >
                   See All
                 </Button>
@@ -287,7 +287,7 @@ const Dashboard = ({
                   variant="primary"
                   size="sm"
                   style={{ float: "right", fontSize: "12px" }}
-                  onClick={() => click("/orders")}
+                  href="/emp/orders"
                 >
                   See All
                 </Button>
