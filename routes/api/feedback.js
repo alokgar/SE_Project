@@ -17,7 +17,7 @@ router.get("/", async (req, res) => {
   try {
     const feeds = await Feedback.find().populate("employee_id");
 
-    if (!feeds || feeds.length === 0) {
+    if (!feeds) {
       return res.status(400).json({ msg: "No Feedbacks found !" });
     }
     res.json(feeds);

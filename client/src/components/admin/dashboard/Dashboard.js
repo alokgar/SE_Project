@@ -37,9 +37,6 @@ const Dashboard = ({
     getRaw_materials();
   }, [getCurrentProfile]);
 
-  if (rawMaterial) {
-    console.log(rawMaterial);
-  }
   return loading && profile === null ? (
     <Spinner />
   ) : (

@@ -9,7 +9,6 @@ import { Button, Row, Col } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 import Sidebar1 from "../sidebar/sidebar";
 import { Datacard, Tablecard } from "../helper/card";
-import FilterProducts from "./filterSales";
 
 const Sales = ({
   getSales,
@@ -39,7 +38,6 @@ const Sales = ({
           >
             Sales
           </span>
-          <FilterProducts />
         </p>
 
         <Row style={{ justifyContent: "space-evenly" }}>
@@ -72,32 +70,7 @@ const Sales = ({
             />
           </Col>
         </Row>
-        {/* <Card
-          style={{
-            maxHeight: "100%",
-            boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
-            border: "solid ipx var(--dark-color)",
-            overflow: "auto",
-          }}
-        >
-          <Card.Header as="h5" className="bg-dark" style={{ opacity: "0.9" }}>
-            {curr_customer.first_name} {curr_customer.last_name}
-            <a href={"/customers"}>
-              <Badge
-                variant="danger"
-                style={{ padding: "5px", borderRadius: "50%", float: "right" }}
-              >
-                X
-              </Badge>
-            </a>
-          </Card.Header>
-          <Card.Body>
-            <Card.Title>
-              {curr_customer.first_name} {curr_customer.last_name}
-            </Card.Title>
-            <Card.Text></Card.Text>
-          </Card.Body>
-        </Card> */}
+
         <br></br>
         <Row>
           <Col>
@@ -123,16 +96,11 @@ const Sales = ({
                   </thead>
                   <tbody>
                     {prod_wise_order.length === 0 ? (
-                      <div
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          textAlign: "center",
-                          padding: "100px 0px",
-                        }}
-                      >
-                        <b>No Entry Found!</b>
-                      </div>
+                      <tr>
+                        <td colSpan="4" style={{ textAlign: "center" }}>
+                          No Entry Found!
+                        </td>
+                      </tr>
                     ) : (
                       prod_wise_order.map(function (prod) {
                         if (prod._id.status === "Dispatched") {
@@ -186,16 +154,11 @@ const Sales = ({
                   </thead>
                   <tbody>
                     {prod_wise_order.length === 0 ? (
-                      <div
-                        style={{
-                          height: "100%",
-                          width: "100%",
-                          textAlign: "center",
-                          padding: "100px 0px",
-                        }}
-                      >
-                        <b>No Entry Found!</b>
-                      </div>
+                      <tr>
+                        <td colSpan="4" style={{ textAlign: "center" }}>
+                          No Entry Found!
+                        </td>
+                      </tr>
                     ) : (
                       prod_wise_order.map(function (prod) {
                         if (prod._id.status === "Confirmed") {
