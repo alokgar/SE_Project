@@ -7,6 +7,7 @@ import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
+import Alert from "../../layout/Alert";
 // import Edit_size from './Edit_size';
 
 const Size = ({ getSizes, addSize, editSize, sizes }) => {
@@ -49,6 +50,7 @@ const Size = ({ getSizes, addSize, editSize, sizes }) => {
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Size
         </p>
         <div className="tableDiv">
@@ -87,10 +89,13 @@ const Size = ({ getSizes, addSize, editSize, sizes }) => {
                 <Form.Control
                   required
                   type="text"
+                  pattern="^0*[1-9]\d*"
+                  title="Provide greater than 0"
                   placeholder="packing_type"
                   name="packing_type"
                   value={packing_type}
                   onChange={(e) => onChange(e)}
+                  required
                 />
               </Form.Group>
 
@@ -103,6 +108,7 @@ const Size = ({ getSizes, addSize, editSize, sizes }) => {
                   name="unit"
                   value={unit}
                   onChange={(e) => onChange(e)}
+                  required
                 />
               </Form.Group>
 

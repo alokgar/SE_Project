@@ -14,6 +14,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import Form from "react-bootstrap/Form";
 import FilterRaw_materials from "./filterRaw_materials";
 import Sidebar1 from "../sidebar/sidebar";
+import Alert from "../../layout/Alert";
 
 const Raw_material = ({
   getRaw_materials,
@@ -68,6 +69,7 @@ const Raw_material = ({
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Raw Materials
         </p>
         <div className="tableDiv">
@@ -121,6 +123,7 @@ const Raw_material = ({
               name="name"
               value={name}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -129,10 +132,13 @@ const Raw_material = ({
             <Form.Control
               required
               type="text"
+              pattern="^0*[1-9]\d*"
+              title="Provide greater than 0"
               placeholder="quantity"
               name="quantity"
               value={quantity}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -145,6 +151,7 @@ const Raw_material = ({
               name="unit"
               value={unit}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -154,6 +161,7 @@ const Raw_material = ({
               name="supplier_name"
               value={supplier_name}
               onChange={(e) => onChange(e)}
+              required
             >
               <option value="" disabled>
                 Choose...

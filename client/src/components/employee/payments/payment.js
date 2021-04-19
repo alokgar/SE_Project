@@ -14,6 +14,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import CustomerOptions from "../customers/customerOptions";
 import Spinner from "../../layout/Spinner";
 import Sidebar1 from "../sidebar/sidebar";
+import Alert from "../../layout/Alert";
 
 const Payment = ({
   getEmpPayments,
@@ -96,6 +97,7 @@ const Payment = ({
             color: "#17a2b8",
           }}
         >
+          <Alert></Alert>
           Payments
         </p>
         <div className="tableDiv">
@@ -166,6 +168,7 @@ const Payment = ({
               name="customer_id"
               value={customer_id}
               onChange={(e) => onChange(e)}
+              required
             >
               <option value="" disabled>
                 Choose...
@@ -182,6 +185,7 @@ const Payment = ({
               placeholder={new Date().toISOString().slice(0, 10)}
               value={date}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -190,6 +194,8 @@ const Payment = ({
             <Form.Control
               name="amount"
               placeholder="Enter Amount"
+              pattern="^0*[1-9]\d*"
+              title="Provide greater than 0"
               value={amount}
               onChange={(e) => onChange(e)}
             />

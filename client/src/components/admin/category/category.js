@@ -2,6 +2,7 @@ import React, { Fragment, useEffect, useState } from "react";
 import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
+import Alert from "../../layout/Alert";
 import {
   getCategory,
   addCategory,
@@ -53,6 +54,7 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Category
         </p>
         <div className="tableDiv">
@@ -103,6 +105,7 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
                   name="name"
                   value={name}
                   onChange={(e) => onChange(e)}
+                  required
                 />
               </Form.Group>
 
@@ -115,6 +118,7 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
                   name="description"
                   value={description}
                   onChange={(e) => onChange(e)}
+                  required
                 />
               </Form.Group>
 

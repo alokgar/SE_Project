@@ -13,6 +13,7 @@ import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
 import Spinner from "../../layout/Spinner";
+import Alert from "../../layout/Alert";
 
 const Feedback = ({
   getFeedbacks,
@@ -89,6 +90,7 @@ const Feedback = ({
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Feedbacks
         </p>
         <div className="tableDiv">
@@ -170,6 +172,7 @@ const Feedback = ({
               placeholder="Subject"
               value={subject}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -180,6 +183,7 @@ const Feedback = ({
               placeholder="Enter your feedback"
               value={content}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 

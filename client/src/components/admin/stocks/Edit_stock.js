@@ -82,6 +82,7 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
                 name="product_name"
                 value={product_name}
                 onChange={(e) => onChange(e)}
+                required
               >
                 <option value="" disabled>
                   Choose...
@@ -98,6 +99,7 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
                 name="size_packing_type"
                 value={size_packing_type}
                 onChange={(e) => onChange(e)}
+                required
               >
                 <option value="" disabled>
                   Choose...
@@ -112,8 +114,11 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
                 type="text"
                 placeholder="quantity"
                 name="quantity"
+                pattern="^0*[1-9]\d*"
+                title="Provide greater than 0"
                 value={quantity}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -123,9 +128,12 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
                 required
                 type="text"
                 placeholder="price"
+                pattern="^0*[1-9]\d*"
+                title="Provide greater than 0"
                 name="price"
                 value={price}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 

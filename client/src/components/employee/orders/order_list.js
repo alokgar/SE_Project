@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import { getOrders } from "../../../actions/product";
 import Table from "react-bootstrap/Table";
-
+import Alert from "../../layout/Alert";
 const OrderList = ({ orderslist }) => {
   useEffect(() => {}, []);
   return (

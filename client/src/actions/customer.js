@@ -80,6 +80,8 @@ export const addCustomer = ({
       type: CUSTOMERS_SUCCESS,
       payload: res1.data,
     });
+
+    dispatch(setAlert("New Customer added", "danger"));
   } catch (err) {
     dispatch({
       type: CUSTOMERS_ERROR,
@@ -130,6 +132,8 @@ export const editCustomer = ({
 
       payload: res1.data,
     });
+
+    dispatch(setAlert("Customer profile edited successfully", "danger"));
   } catch (err) {
     dispatch({
       type: CUSTOMERS_ERROR,

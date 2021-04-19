@@ -12,6 +12,7 @@ import Table from "react-bootstrap/Table";
 import Badge from "react-bootstrap/Badge";
 import { getOrders } from "../../../actions/order";
 import { getEmpPayments } from "../../../actions/payment";
+import Alert from "../../layout/Alert";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -48,6 +49,7 @@ const Dashboard = ({
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Dashboard
         </p>
         <Row style={{ marginTop: "20px" }}>

@@ -97,6 +97,7 @@ export const addOrders = (
       type: GET_ORDERS,
       payload: res.data,
     });
+    dispatch(setAlert(`Order added successfully`, "danger"));
   } catch (err) {
     dispatch({
       type: ORDER_ERROR,

@@ -12,7 +12,7 @@ import Edit_supplier from "./Edit_supplier";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
-
+import Alert from "../../layout/Alert";
 const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
   const [showTable, setTable] = useState(true);
 
@@ -81,6 +81,7 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Suppliers
         </p>
         <div className="tableDiv">
@@ -131,6 +132,7 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
               name="name"
               value={name}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -144,6 +146,7 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
                 name="email"
                 value={email}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -152,10 +155,13 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
               <Form.Control
                 required
                 type="text"
+                pattern="[1-9]{1}[0-9]{9}"
+                title="Provide 10 digit mobile number"
                 placeholder="mobile_no"
                 name="mobile_no"
                 value={mobile_no}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
           </Form.Row>
@@ -169,6 +175,7 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
               name="line1"
               value={line1}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -181,6 +188,7 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
               name="landmark"
               value={landmark}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -190,6 +198,8 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
               <Form.Control
                 required
                 type="text"
+                pattern="[0-9]{6}"
+                title="Provide 6 digit Pincode"
                 placeholder="pincode"
                 name="pincode"
                 value={pincode}

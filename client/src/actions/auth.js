@@ -25,6 +25,7 @@ export const loadUser = () => async (dispatch) => {
       type: USER_LOADED,
       payload: res.data,
     });
+    dispatch(setAlert("welcome " + res.data.first_name + "!", "success"));
   } catch (err) {
     dispatch({
       type: AUTH_ERROR,
@@ -64,7 +65,9 @@ export const register = ({
       payload: res.data,
     });
 
-    dispatch(loadUser());
+    dispatch(
+      setAlert("Waiting for Admin Response,then you can login", "danger")
+    );
   } catch (err) {
     const errors = err.response.data.errors;
 

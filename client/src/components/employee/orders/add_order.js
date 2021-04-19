@@ -14,6 +14,7 @@ import ProductOptionsbyID from "../products/productOptionsbyID";
 import SizeOptionsbyID from "../sizes/sizeOptionbyID";
 import { addOrders } from "../../../actions/order";
 import { setAlert } from "../../../actions/alert";
+import Alert from "../../layout/Alert";
 import Sidebar1 from "../sidebar/sidebar";
 
 const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
@@ -130,6 +131,7 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
               name="product_id"
               value={product_id}
               onChange={(e) => onChange(e)}
+              required
             >
               <option value="" disabled>
                 Choose...
@@ -145,6 +147,7 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
               name="size_id"
               value={size_id}
               onChange={(e) => onChange(e)}
+              required
             >
               <option value="" disabled>
                 Choose...
@@ -158,6 +161,8 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
             <Form.Control
               required
               type="text"
+              pattern="^0*[1-9]\d*"
+              title="Provide greater than 0"
               placeholder="quantity"
               name="quantity"
               value={quantity}
@@ -177,6 +182,7 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
               name="customer_id"
               value={customer_id}
               onChange={(e) => onChangeOrder(e)}
+              required
             >
               <option value="" disabled>
                 Choose...

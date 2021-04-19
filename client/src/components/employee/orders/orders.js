@@ -12,7 +12,7 @@ import Badge from "react-bootstrap/Badge";
 import Sidebar1 from "../sidebar/sidebar";
 import ListGroup from "react-bootstrap/ListGroup";
 import Spinner from "../../layout/Spinner";
-
+import Alert from "../../layout/Alert";
 const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
   const [showTable, setTable] = useState(true);
   const [viewId, setviewId] = useState(null);
@@ -42,6 +42,7 @@ const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Orders
         </p>
         <ListGroup horizontal style={{ marginBottom: "20px" }}>

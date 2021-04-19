@@ -114,6 +114,7 @@ const Edit_supplier = ({
                 name="name"
                 value={name}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -127,6 +128,7 @@ const Edit_supplier = ({
                   name="email"
                   value={email}
                   onChange={(e) => onChange(e)}
+                  required
                 />
               </Form.Group>
 
@@ -135,10 +137,13 @@ const Edit_supplier = ({
                 <Form.Control
                   required
                   type="text"
+                  pattern="[1-9]{1}[0-9]{9}"
+                  title="Provide 10 digit mobile number"
                   placeholder="mobile_no"
                   name="mobile_no"
                   value={mobile_no}
                   onChange={(e) => onChange(e)}
+                  required
                 />
               </Form.Group>
             </Form.Row>
@@ -152,6 +157,7 @@ const Edit_supplier = ({
                 name="line1"
                 value={line1}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -164,6 +170,7 @@ const Edit_supplier = ({
                 name="landmark"
                 value={landmark}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -173,6 +180,8 @@ const Edit_supplier = ({
                 <Form.Control
                   required
                   type="text"
+                  pattern="[0-9]{6}"
+                  title="Provide 6 digit Pincode"
                   placeholder="pincode"
                   name="pincode"
                   value={pincode}
@@ -193,7 +202,15 @@ const Edit_supplier = ({
               </Form.Group>
             </Form.Row>
 
-            <Button type="submit">Edit Supplier</Button>
+            <Button type="submit">Add Supplier</Button>
+            <Button
+              variant="outline-primary"
+              size="lg"
+              href="/suppliers"
+              style={{ float: "right", marginRight: "20px" }}
+            >
+              Cancel
+            </Button>
           </Form>
         </td>
       </tr>

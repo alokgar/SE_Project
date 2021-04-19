@@ -10,6 +10,7 @@ import Edit_stock from "./Edit_stock";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
+import Alert from "../../layout/Alert";
 
 const Stock = ({ getStocks, addStock, editStock, stocks }) => {
   const [showTable, setTable] = useState(true);
@@ -56,6 +57,7 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Stocks
         </p>
         <div className="tableDiv">
@@ -104,6 +106,7 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
               name="product_name"
               value={product_name}
               onChange={(e) => onChange(e)}
+              required
             >
               <option value="" disabled>
                 Choose...
@@ -119,6 +122,7 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
               name="size_packing_type"
               value={size_packing_type}
               onChange={(e) => onChange(e)}
+              required
             >
               <option value="" disabled>
                 Choose...
@@ -131,10 +135,13 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
             <Form.Label>Quantity</Form.Label>
             <Form.Control
               type="text"
+              pattern="^0*[1-9]\d*"
+              title="Provide greater than 0"
               placeholder="quantity"
               name="quantity"
               value={quantity}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -143,10 +150,13 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
             <Form.Control
               required
               type="text"
+              pattern="^0*[1-9]\d*"
+              title="Provide greater than 0"
               placeholder="price"
               name="price"
               value={price}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 

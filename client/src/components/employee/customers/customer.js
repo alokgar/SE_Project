@@ -13,7 +13,7 @@ import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
 import Spinner from "../../layout/Spinner";
-
+import Alert from "../../layout/Alert";
 const Customer = ({
   getEmpCustomers,
   addCustomer,
@@ -135,6 +135,7 @@ const Customer = ({
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Customers
         </p>
         <div className="tableDiv" style={{ width: "80%" }}>
@@ -209,6 +210,7 @@ const Customer = ({
                 placeholder="First Name"
                 value={first_name}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -220,6 +222,7 @@ const Customer = ({
                 placeholder="Last Name"
                 value={last_name}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
           </Form.Row>
@@ -229,9 +232,12 @@ const Customer = ({
             <Form.Control
               name="mobile_no"
               type="text"
+              pattern="[1-9]{1}[0-9]{9}"
+              title="Provide 10 digit mobile number"
               placeholder="10 digits Mobile No."
               value={mobile_no}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -242,6 +248,7 @@ const Customer = ({
               placeholder="Address"
               value={line1}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -252,6 +259,7 @@ const Customer = ({
               placeholder="Landmark"
               value={landmark}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -262,15 +270,20 @@ const Customer = ({
                 name="name"
                 value={name}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
             <Form.Group as={Col} controlId="formGridZip">
               <Form.Label>Pincode</Form.Label>
               <Form.Control
+                type="text"
                 name="pincode"
+                pattern="[0-9]{6}"
+                title="Provide 6 digit Pincode"
                 value={pincode}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
           </Form.Row>

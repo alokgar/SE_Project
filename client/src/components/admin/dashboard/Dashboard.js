@@ -14,6 +14,7 @@ import Badge from "react-bootstrap/Badge";
 import { getSales } from "../../../actions/sales";
 import { getStocks } from "../../../actions/stock";
 import { getRaw_materials } from "../../../actions/raw_material";
+import Alert from "../../layout/Alert";
 
 const Dashboard = ({
   getCurrentProfile,
@@ -53,6 +54,7 @@ const Dashboard = ({
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Dashboard
         </p>
         <Row style={{ marginTop: "20px" }}>

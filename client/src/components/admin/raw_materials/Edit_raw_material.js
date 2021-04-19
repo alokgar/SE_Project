@@ -92,6 +92,7 @@ const Edit_raw_material = ({
                 name="name"
                 value={name}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -100,10 +101,13 @@ const Edit_raw_material = ({
               <Form.Control
                 required
                 type="text"
+                pattern="^0*[1-9]\d*"
+                title="Provide greater than 0"
                 placeholder="quantity"
                 name="quantity"
                 value={quantity}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
 
@@ -116,6 +120,7 @@ const Edit_raw_material = ({
                 name="unit"
                 value={unit}
                 onChange={(e) => onChange(e)}
+                required
               />
             </Form.Group>
             <Form.Group>
@@ -125,6 +130,7 @@ const Edit_raw_material = ({
                 name="supplier_name"
                 value={supplier_name}
                 onChange={(e) => onChange(e)}
+                required
               >
                 <option value="" disabled>
                   Choose...
@@ -132,7 +138,6 @@ const Edit_raw_material = ({
                 <SupplierOptions />
               </Form.Control>
             </Form.Group>
-
             <Button type="submit">Edit Raw Material</Button>
           </Form>
         </td>

@@ -34,6 +34,7 @@ export const addSupplier = (supplier) => async (dispatch) => {
       type: ADD_SUPPLIER,
       payload: result.data,
     });
+    dispatch(setAlert("New supplier added", "danger"));
   } catch (err) {
     dispatch({
       type: SUPPLIERS_ERROR,
@@ -57,6 +58,7 @@ export const editSupplier = (supplier) => async (dispatch) => {
       type: GET_SUPPLIERS,
       payload: result.data,
     });
+    dispatch(setAlert("supplier edited successfully", "danger"));
   } catch (err) {
     dispatch({
       type: SUPPLIERS_ERROR,
@@ -79,6 +81,7 @@ export const deleteSupplier = (id) => async (dispatch) => {
       type: GET_SUPPLIERS,
       payload: result.data,
     });
+    dispatch(setAlert("supplier deleted successfully", "danger"));
   } catch (err) {
     dispatch({
       type: SUPPLIERS_ERROR,

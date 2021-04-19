@@ -46,6 +46,7 @@ export const addFeedback = ({ subject, content }, userType) => async (
       type: FEEDBACKS_SUCCESS,
       payload: res1.data,
     });
+    dispatch(setAlert(" Feedback added succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: FEEDBACKS_ERROR,
@@ -79,6 +80,7 @@ export const editFeedback = ({ id, subject, content }, userType) => async (
 
       payload: res1.data,
     });
+    dispatch(setAlert(" Feedback edited succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: FEEDBACKS_ERROR,
@@ -106,6 +108,7 @@ export const deleteFeedback = (id, userType) => async (dispatch) => {
 
       payload: res1.data,
     });
+    dispatch(setAlert(" Feedback deleted succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: FEEDBACKS_ERROR,

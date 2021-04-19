@@ -19,6 +19,10 @@ const Login = ({ login, isAuthenticated, user, loadUser }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     await login(email, password);
+    setFormData({
+      email: "",
+      password: "",
+    });
   };
 
   if (user) {

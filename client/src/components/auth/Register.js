@@ -36,6 +36,15 @@ const Register = ({ setAlert, register, isAuthenticated }) => {
       setAlert("Passwords do not match", "danger");
     } else {
       register({ first_name, last_name, mobile_no, type, email, password });
+      setFormData({
+        first_name: "",
+        last_name: "",
+        mobile_no: "",
+        type: "Admin",
+        email: "",
+        password: "",
+        password2: "",
+      });
     }
   };
 

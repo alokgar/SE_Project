@@ -10,7 +10,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
 import FilterProducts from "./filterProducts";
 import CategoryOptions from "../category/categoryOptions";
-
+import Alert from "../../layout/Alert";
 const Product = ({ getProducts, addProduct, editProduct, products }) => {
   const [showTable, setTable] = useState(true);
   useEffect(() => {
@@ -22,7 +22,7 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
 
     description: "",
 
-    category_name: "DEFAULT",
+    category_name: "",
   });
 
   const { name, description, category_name } = formData;
@@ -40,7 +40,7 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
 
       description: "",
 
-      category_name: "DEFAULT",
+      category_name: "",
     });
 
     setTable(!showTable);
@@ -60,6 +60,7 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
             color: "#17a2b8",
           }}
         >
+          <Alert />
           Products
         </p>
         <div className="tableDiv">
@@ -109,6 +110,7 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
               name="name"
               value={name}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
           <Form.Group>
@@ -120,6 +122,7 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
               name="description"
               value={description}
               onChange={(e) => onChange(e)}
+              required
             />
           </Form.Group>
 
@@ -129,8 +132,9 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
               as="select"
               name="category_name"
               onChange={(e) => onChange(e)}
+              required
             >
-              <option value="" disabled>
+              <option value={category_name} disabled selected>
                 Choose...
               </option>
               <CategoryOptions />

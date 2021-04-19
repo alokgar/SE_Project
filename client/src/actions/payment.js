@@ -60,6 +60,8 @@ export const addPayment = ({ amount, date, customer_id }, userType) => async (
       type: PAYMENTS_SUCCESS,
       payload: res1.data,
     });
+
+    dispatch(setAlert("Payment added", "danger"));
   } catch (err) {
     dispatch({
       type: PAYMENTS_ERROR,
@@ -94,6 +96,7 @@ export const editPayment = (
 
       payload: res1.data,
     });
+    dispatch(setAlert("Payment edited successfully", "danger"));
   } catch (err) {
     dispatch({
       type: PAYMENTS_ERROR,
@@ -121,6 +124,7 @@ export const deletePayment = (id, userType) => async (dispatch) => {
 
       payload: res1.data,
     });
+    dispatch(setAlert("Payment deleted successfully", "danger"));
   } catch (err) {
     dispatch({
       type: PAYMENTS_ERROR,
