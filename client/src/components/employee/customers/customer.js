@@ -12,6 +12,7 @@ import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
+import Spinner from "../../layout/Spinner";
 
 const Customer = ({
   getEmpCustomers,
@@ -119,12 +120,23 @@ const Customer = ({
   };
 
   return customers === null ? (
-    <div></div>
+    <div>
+      <Spinner />
+    </div>
   ) : showTable === true ? (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/customers" />
+      <Sidebar1 link="/emp/customers" />
       <div className="col-md-10 mainContainer">
-        All Cusomers are shown here
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Customers
+        </p>
         <div className="tableDiv" style={{ width: "80%" }}>
           <Table striped bordered hover responsive>
             <thead>
@@ -132,40 +144,48 @@ const Customer = ({
                 <th>Name</th>
                 <th>Contact</th>
                 <th>City</th>
-                <th>#</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {customers.map(function (customer) {
-                return (
-                  <tr>
-                    <td>
-                      <a
-                        href={`/emp/customer/${customer._id}`}
-                        style={{ color: "black" }}
-                      >
-                        {customer.first_name + " " + customer.last_name}
-                      </a>
-                    </td>
-                    <td>{customer.mobile_no}</td>
-                    <td>{customer.address.city.name}</td>
-                    <td style={{ width: "200px" }}>
-                      <Button
-                        variant="success"
-                        onClick={() => onEditclick(customer)}
-                      >
-                        Edit
-                      </Button>
-                      <Button
-                        variant="danger"
-                        onClick={() => deleteCustomer(customer._id, 1)}
-                      >
-                        Delete
-                      </Button>
-                    </td>
-                  </tr>
-                );
-              })}
+              {customers.length !== 0 ? (
+                customers.map(function (customer) {
+                  return (
+                    <tr>
+                      <td>
+                        <a
+                          href={`/emp/customer/${customer._id}`}
+                          style={{ color: "black" }}
+                        >
+                          {customer.first_name + " " + customer.last_name}
+                        </a>
+                      </td>
+                      <td>{customer.mobile_no}</td>
+                      <td>{customer.address.city.name}</td>
+                      <td style={{ width: "200px" }}>
+                        <Button
+                          variant="success"
+                          onClick={() => onEditclick(customer)}
+                        >
+                          Edit
+                        </Button>
+                        <Button
+                          variant="danger"
+                          onClick={() => deleteCustomer(customer._id, 1)}
+                        >
+                          Delete
+                        </Button>
+                      </td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>
@@ -175,7 +195,7 @@ const Customer = ({
     </div>
   ) : (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/customers" />
+      <Sidebar1 link="/emp/customers" />
       <div className="col-md-10 mainContainer ScrollDiv">
         <h2>Add Customer</h2>
         <br />

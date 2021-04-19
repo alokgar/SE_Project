@@ -60,19 +60,39 @@ const Raw_material = ({
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/raw_materials" />
       <div className="col-md-8 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Raw Materials
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
-                <th>#</th>
-                <th>#</th>
+                <th>Quantity</th>
+                <th>Recieving Date</th>
+                <th>Supplier</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {raw_materials.map(function (raw_material) {
-                return <Edit_raw_material raw_material={raw_material} />;
-              })}
+              {raw_materials.length !== 0 ? (
+                raw_materials.map(function (raw_material) {
+                  return <Edit_raw_material raw_material={raw_material} />;
+                })
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

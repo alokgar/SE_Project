@@ -11,7 +11,6 @@ export const getOrders = (userType) => async (dispatch) => {
         ? await axios.get("/api/order/emp")
         : await axios.get("/api/order");
 
-    console.log(res.data);
     dispatch({
       type: GET_ORDERS,
       payload: res.data,
@@ -22,6 +21,7 @@ export const getOrders = (userType) => async (dispatch) => {
     });
   }
 };
+
 //confirm order
 export const confirmOrder = (id) => async (dispatch) => {
   const config = {
@@ -33,10 +33,12 @@ export const confirmOrder = (id) => async (dispatch) => {
   try {
     const res1 = await axios.post(`/api/order/${id}/confirm`, config);
     const res = await axios.get("/api/order");
+
     dispatch({
       type: GET_ORDERS,
       payload: res.data,
     });
+    dispatch(setAlert("Order Confirmed !", "success"));
   } catch (err) {
     dispatch({
       type: ORDER_ERROR,
@@ -44,7 +46,7 @@ export const confirmOrder = (id) => async (dispatch) => {
   }
 };
 //dispatch order
-export const dispatchOrder = (id, details) => async (dispatch) => {
+export const dispatchOrder = (id, num, details) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -52,14 +54,18 @@ export const dispatchOrder = (id, details) => async (dispatch) => {
   };
 
   try {
-    const body = JSON.stringify({ details });
-    console.log(details);
+    const body = JSON.stringify({ details, dispatch_num: num });
+
     const res1 = await axios.post(`/api/order/${id}/dispatch`, body, config);
+    console.log(res1.data);
     const res = await axios.get("/api/order");
     dispatch({
       type: GET_ORDERS,
       payload: res.data,
     });
+    dispatch(
+      setAlert(`Order Dispatched with dispatch num: ${num} !`, "danger")
+    );
   } catch (err) {
     dispatch({
       type: ORDER_ERROR,

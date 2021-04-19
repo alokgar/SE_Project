@@ -9,6 +9,7 @@ import { Button, Row, Col } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 import Sidebar1 from "../sidebar/sidebar";
 import { Datacard, Tablecard } from "../helper/card";
+import FilterProducts from "./filterSales";
 
 const Sales = ({
   getSales,
@@ -30,8 +31,17 @@ const Sales = ({
     <div></div>
   ) : (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 />
+      <Sidebar1 link="/sales" />
       <div className="col-md-10 mainContainer">
+        <p style={{ borderBottom: "1px solid black " }}>
+          <span
+            style={{ fontWeight: "bold", color: "#17a2b8", fontSize: "25px" }}
+          >
+            Sales
+          </span>
+          <FilterProducts />
+        </p>
+
         <Row style={{ justifyContent: "space-evenly" }}>
           <Col xs={3}>
             <Datacard

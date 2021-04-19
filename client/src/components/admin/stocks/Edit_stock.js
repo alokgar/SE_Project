@@ -49,7 +49,8 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
         <td>{stock.product_id.name}</td>
         <td>{stock.size_id.packing_type + " " + stock.size_id.unit}</td>
         <td>{stock.quantity}</td>
-        <td>{stock.price}</td>
+        <td>{"Rs." + stock.price}</td>
+        <td>{stock.last_update.slice(0, 10)}</td>
         <td>
           <Button
             variant="success"
@@ -59,8 +60,7 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
           >
             Edit
           </Button>
-        </td>
-        <td>
+
           <Button
             variant="danger"
             onClick={() => {
@@ -70,10 +70,9 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
             Delete
           </Button>
         </td>
-        <td>{stock.last_update.slice(0, 10)}</td>
       </tr>
       <tr>
-        <td colSpan="7">
+        <td colSpan="6">
           <Form onSubmit={(e) => onSubmit(e)} style={{ width: "60%" }}>
             <Form.Group>
               <Form.Label>Select Product</Form.Label>
@@ -142,6 +141,7 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
         <td>{stock.size_id.packing_type + " " + stock.size_id.unit}</td>
         <td>{stock.quantity}</td>
         <td>{stock.price}</td>
+        <td>{stock.last_update.slice(0, 10)}</td>
         <td>
           <Button
             variant="success"
@@ -151,8 +151,7 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
           >
             Edit
           </Button>
-        </td>
-        <td>
+
           <Button
             variant="danger"
             onClick={() => {
@@ -162,7 +161,6 @@ const Edit_stock = ({ stock, getStocks, deleteStock, editStock, stocks }) => {
             Delete
           </Button>
         </td>
-        <td>{stock.last_update.slice(0, 10)}</td>
       </tr>
     </Fragment>
   );

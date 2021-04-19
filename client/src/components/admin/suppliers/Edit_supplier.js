@@ -79,6 +79,9 @@ const Edit_supplier = ({
     <Fragment>
       <tr>
         <td>{supplier.name}</td>
+        <td>{supplier.mobile_no}</td>
+        <td>{supplier.email}</td>
+        <td>{supplier.address.city.name}</td>
         <td>
           <Button
             variant="success"
@@ -88,8 +91,7 @@ const Edit_supplier = ({
           >
             Edit
           </Button>
-        </td>
-        <td>
+
           <Button
             variant="danger"
             onClick={() => {
@@ -101,7 +103,7 @@ const Edit_supplier = ({
         </td>
       </tr>
       <tr>
-        <td colSpan="3">
+        <td colSpan="5">
           <Form onSubmit={(e) => onSubmit(e)} style={{ width: "60%" }}>
             <Form.Group>
               <Form.Label>Supplier Name</Form.Label>
@@ -200,6 +202,9 @@ const Edit_supplier = ({
     <Fragment>
       <tr>
         <td>{supplier.name}</td>
+        <td>{supplier.mobile_no}</td>
+        <td>{supplier.email}</td>
+        <td>{supplier.address.city.name}</td>
         <td>
           <Button
             variant="success"
@@ -209,8 +214,7 @@ const Edit_supplier = ({
           >
             Edit
           </Button>
-        </td>
-        <td>
+
           <Button
             variant="danger"
             onClick={() => {

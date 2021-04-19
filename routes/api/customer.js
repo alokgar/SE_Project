@@ -69,9 +69,10 @@ router.get("/emp", auth, async (req, res) => {
 });
 router.get("/:id", async (req, res) => {
   try {
-    const cust = await Customer.findById(req.params.id).populate(
-      "address employee_id"
-    );
+    const cust = await Customer.findById(req.params.id).populate({
+      path: "employee_id address",
+      populate: "city",
+    });
 
     if (!cust) {
       return res.status(400).json({ msg: "There are no Customer !" });

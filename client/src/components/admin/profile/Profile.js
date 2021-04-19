@@ -10,6 +10,12 @@ import { Button, Row, Col } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 import Sidebar1 from "../sidebar/sidebar";
 import OrderList from "../orders/order_list";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEnvelope,
+  faUser,
+  faMobileAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const Profile = ({
   getCurrentProfile,
@@ -41,7 +47,7 @@ const Profile = ({
           }}
         >
           <Card.Header as="h5" className="bg-dark" style={{ opacity: "0.9" }}>
-            {user.first_name} {user.last_name}
+            <span style={{ fontSize: "25px" }}>Profile</span>
             <a href={"/employees"}>
               <Badge
                 variant="danger"
@@ -52,10 +58,28 @@ const Profile = ({
             </a>
           </Card.Header>
           <Card.Body>
-            <Card.Title>
-              {user.first_name} {user.last_name}
-            </Card.Title>
-            <Card.Text></Card.Text>
+            <Row>
+              <Col xs={1}>
+                <FontAwesomeIcon icon={faUser} size="6x" />
+              </Col>
+              <Col style={{ marginLeft: "15px" }}>
+                <b style={{ fontSize: "25px" }}>
+                  {user.first_name} {user.last_name}
+                  <br />
+                </b>
+                <span>
+                  <FontAwesomeIcon icon={faEnvelope} />
+                  {"  " + user.email}
+                </span>
+                <br />
+                <span>
+                  <FontAwesomeIcon icon={faMobileAlt} />
+                  {"   " + user.mobile_no}
+                </span>
+              </Col>
+
+              <Col></Col>
+            </Row>
           </Card.Body>
         </Card>
         <br></br>

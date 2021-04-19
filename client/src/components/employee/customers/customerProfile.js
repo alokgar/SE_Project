@@ -8,7 +8,14 @@ import Card from "react-bootstrap/Card";
 import { Button, Row, Col } from "react-bootstrap";
 import Badge from "react-bootstrap/Badge";
 import Sidebar1 from "../sidebar/sidebar";
+import Spinner from "../../layout/Spinner";
 import OrderList from "../orders/order_list";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faMapMarkerAlt,
+  faUser,
+  faMobileAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 const CustomerProfile = ({
   getCustomerProfile,
@@ -25,20 +32,13 @@ const CustomerProfile = ({
     getCustomerProfile(match.params.id);
   }, [getCustomerProfile, match.params.id]);
 
-  const onOrderclick = () => {
-    setO(!showO);
-    setP(false);
-  };
-
-  const onPayclick = () => {
-    setP(!showP);
-    setO(false);
-  };
   const click = () => {
     <Redirect to="/customers" />;
   };
   return curr_customer === null ? (
-    <div></div>
+    <div>
+      <Spinner />
+    </div>
   ) : (
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 />
@@ -63,17 +63,45 @@ const CustomerProfile = ({
             </a>
           </Card.Header>
           <Card.Body>
-            <Card.Title>
-              {curr_customer.first_name} {curr_customer.last_name}
-            </Card.Title>
-            <Card.Text>
-              <Button variant="primary" onClick={() => onOrderclick()}>
-                Orders
-              </Button>
-              <Button variant="primary" onClick={() => onPayclick()}>
-                Payment
-              </Button>
-            </Card.Text>
+            <Row>
+              <Col xs={1}>
+                <FontAwesomeIcon icon={faUser} size="6x" />
+              </Col>
+              <Col style={{ marginLeft: "15px" }}>
+                <b style={{ fontSize: "25px" }}>
+                  {curr_customer.first_name} {curr_customer.last_name}
+                  <br />
+                </b>
+                <span>
+                  <FontAwesomeIcon icon={faMobileAlt} />
+                  {"   " + curr_customer.mobile_no}
+                </span>
+                <br />
+                <span>
+                  <FontAwesomeIcon icon={faMapMarkerAlt} />
+                  {"   " + curr_customer.address.city.name}
+                </span>
+              </Col>
+
+              <Col style={{ float: "right" }}>
+                <span>
+                  <Badge
+                    pill
+                    variant="danger"
+                    style={{ padding: "8px", fontSize: "15px" }}
+                  >
+                    <a
+                      href={`/profile/${curr_customer.employee_id._id}`}
+                      style={{ color: "white" }}
+                    >
+                      {curr_customer.employee_id.first_name +
+                        " " +
+                        curr_customer.employee_id.last_name}
+                    </a>
+                  </Badge>{" "}
+                </span>
+              </Col>
+            </Row>
           </Card.Body>
         </Card>
         <br></br>

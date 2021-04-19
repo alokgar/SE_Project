@@ -58,6 +58,9 @@ const Edit_raw_material = ({
     <Fragment>
       <tr>
         <td>{raw_material.name}</td>
+        <td>{raw_material.quantity + " " + raw_material.unit}</td>
+        <td>{raw_material.date_of_receiving.toString().slice(0, 10)}</td>
+        <td>{raw_material.supplier_id.name}</td>
         <td>
           <Button
             variant="success"
@@ -67,8 +70,6 @@ const Edit_raw_material = ({
           >
             Edit
           </Button>
-        </td>
-        <td>
           <Button
             variant="danger"
             onClick={() => {
@@ -80,7 +81,7 @@ const Edit_raw_material = ({
         </td>
       </tr>
       <tr>
-        <td colSpan="3">
+        <td colSpan="5">
           <Form onSubmit={(e) => onSubmit(e)} style={{ width: "60%" }}>
             <Form.Group>
               <Form.Label>Raw Material Name</Form.Label>
@@ -141,6 +142,9 @@ const Edit_raw_material = ({
     <Fragment>
       <tr>
         <td>{raw_material.name}</td>
+        <td>{raw_material.quantity + " " + raw_material.unit}</td>
+        <td>{raw_material.date_of_receiving.toString().slice(0, 10)}</td>
+        <td>{raw_material.supplier_id.name}</td>
         <td>
           <Button
             variant="success"
@@ -150,8 +154,7 @@ const Edit_raw_material = ({
           >
             Edit
           </Button>
-        </td>
-        <td>
+
           <Button
             variant="danger"
             onClick={() => {

@@ -8,6 +8,7 @@ import OrderList from "./order_list";
 import product from "../products/product";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
+import Alert from "../../layout/Alert";
 
 import CustomerOptions from "../customers/customerOptions";
 import ProductOptionsbyID from "../products/productOptionsbyID";
@@ -33,7 +34,7 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
 
   const [showproducts, setproducts] = useState([]);
 
-  const { customer_id, employee_id, details } = product;
+  var { customer_id, employee_id, details } = product;
   const { product_id, quantity, size_id } = detail;
 
   const onChange = (e) =>
@@ -84,21 +85,24 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
       employee_id: user._id,
       details: [],
     });
+
     setdetail({
       product_id: "",
       quantity: 0,
       size_id: "",
     });
 
-    setproduct([]);
-
-    if (details.length > 0) table();
+    if (details.length > 0) {
+      setAlert("Order place successfully!", "success");
+      table();
+    }
   };
 
   return (
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/orders" />
       <div className="col-md-10 mainContainer ScrollDiv">
+        <Alert />
         <h2>Create Order</h2>
         <br />
         {showproducts.length !== 0 && (

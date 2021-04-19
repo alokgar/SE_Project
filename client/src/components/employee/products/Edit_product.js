@@ -56,6 +56,7 @@ const Edit_product = ({
   return isEdit === true ? (
     <Fragment>
       <tr>
+        <td>{idx + 1}</td>
         <td>{product.name}</td>
         <td>{product.description}</td>
         <td>{product.category_id.name}</td>

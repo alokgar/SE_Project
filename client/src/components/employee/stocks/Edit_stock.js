@@ -57,7 +57,7 @@ const Edit_stock = ({
         <td>{stock.product_id.name}</td>
         <td>{stock.size_id.packing_type + " " + stock.size_id.unit}</td>
         <td>{stock.quantity}</td>
-        <td>{stock.price}</td>
+        <td>{"Rs." + stock.price}</td>
         <td>{stock.last_update.slice(0, 10)}</td>
       </tr>
     </Fragment>

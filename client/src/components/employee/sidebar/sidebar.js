@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Sidebar1 = ({ auth: { user }, link }) => {
   return (
@@ -18,8 +20,13 @@ const Sidebar1 = ({ auth: { user }, link }) => {
         }}
       >
         <ul style={{ margin: "30px 0px" }}>
+          <li style={{ marginLeft: "50px" }}>
+            <a href={`/emp/profile/${user._id}`}>
+              <FontAwesomeIcon icon={faUser} size="5x" />
+            </a>
+          </li>
           <li>
-            <h5 style={{ textAlign: "center" }}>
+            <h5 style={{ textAlign: "center", marginTop: "5px" }}>
               Welcome {user && user.first_name}
             </h5>
           </li>
@@ -28,6 +35,9 @@ const Sidebar1 = ({ auth: { user }, link }) => {
           style={{ margin: "20px 0px 50px 0px" }}
           defaultActiveKey={link}
         >
+          <ListGroup.Item className="sidebar-item" action href="/emp/dashboard">
+            Dashboard
+          </ListGroup.Item>
           <ListGroup.Item className="sidebar-item" action href="/emp/products">
             Products
           </ListGroup.Item>

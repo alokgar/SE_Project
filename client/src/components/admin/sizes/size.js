@@ -41,6 +41,16 @@ const Size = ({ getSizes, addSize, editSize, sizes }) => {
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/sizes" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Size
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>

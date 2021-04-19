@@ -6,7 +6,7 @@ import { getProducts, addProduct, editProduct } from "../../../actions/product";
 import Table from "react-bootstrap/Table";
 import Edit_product from "./Edit_product";
 import Form from "react-bootstrap/Form";
-import { Button, Row, Col } from "react-bootstrap";
+import { Button, Row, Col, Spinner } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
 import FilterProducts from "./filterProducts";
 import CategoryOptions from "../category/categoryOptions";
@@ -47,19 +47,31 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
   };
 
   return products.length == null ? (
-    <div></div>
+    <div>
+      <Spinner />
+    </div>
   ) : showTable === true ? (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/products" />
+      <Sidebar1 link="/emp/products" />
       <div className="col-md-8 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Products
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>#</th>
                 <th>Product Name</th>
                 <th>Description</th>
                 <th>Category</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
@@ -84,7 +96,7 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
     </div>
   ) : (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/products" />
+      <Sidebar1 link="/emp/products" />
       <div className="col-md-10 mainContainer ScrollDiv">
         <h2>Add Product</h2>
         <br />

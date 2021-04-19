@@ -20,7 +20,7 @@ export const Datacard = ({ title, subtitle, link, color }) => {
         >
           View
         </Card.Link>
-        <div style={{ fontSize: "30px" }}>{subtitle}</div>
+        <div style={{ fontSize: "25px" }}>{subtitle}</div>
       </Card.Body>
     </Card>
   );
@@ -34,6 +34,7 @@ export const Tablecard = ({ title, link, table }) => {
         boxShadow: "rgba(0, 0, 0, 0.35) 0px 5px 15px",
         border: "solid ipx var(--dark-color)",
         overflow: "auto",
+        marginTop: "30px",
       }}
     >
       <Card.Header className="bg-dark">

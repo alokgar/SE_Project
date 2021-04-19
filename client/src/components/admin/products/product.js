@@ -52,19 +52,38 @@ const Product = ({ getProducts, addProduct, editProduct, products }) => {
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/products" />
       <div className="col-md-8 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Products
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>#</th>
-                <th>#</th>
+                <th>Product Name</th>
+                <th>Description</th>
+                <th>Category</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {products.map(function (product) {
-                return <Edit_product product={product} />;
-              })}
+              {products.length != 0 ? (
+                products.map(function (product, idx) {
+                  return <Edit_product product={product} idx={idx} />;
+                })
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: "center" }}>
+                    No products{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
           <br />

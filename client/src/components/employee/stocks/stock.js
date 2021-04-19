@@ -10,7 +10,7 @@ import Edit_stock from "./Edit_stock";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
-
+import Spinner from "../../layout/Spinner";
 const Stock = ({ getStocks, addStock, editStock, stocks }) => {
   const [showTable, setTable] = useState(true);
 
@@ -43,11 +43,23 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
   };
 
   return stocks === null ? (
-    <div></div>
+    <div>
+      <Spinner />
+    </div>
   ) : showTable === true ? (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/stocks" />
+      <Sidebar1 link="/emp/stocks" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Stocks
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
@@ -61,9 +73,17 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
               </tr>
             </thead>
             <tbody>
-              {stocks.map(function (stock, idx) {
-                return <Edit_stock stock={stock} idx={idx} />;
-              })}
+              {stocks.length !== 0 ? (
+                stocks.map(function (stock, idx) {
+                  return <Edit_stock stock={stock} idx={idx} />;
+                })
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

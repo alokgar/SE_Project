@@ -73,19 +73,39 @@ const Supplier = ({ getSuppliers, addSupplier, editSupplier, suppliers }) => {
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/suppliers" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Suppliers
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Name</th>
-                <th>#</th>
-                <th>#</th>
+                <th>Mobile No.</th>
+                <th>Email</th>
+                <th>City</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {suppliers.map(function (supplier) {
-                return <Edit_supplier supplier={supplier} />;
-              })}
+              {suppliers.length !== 0 ? (
+                suppliers.map(function (supplier) {
+                  return <Edit_supplier supplier={supplier} />;
+                })
+              ) : (
+                <tr>
+                  <td colSpan="5" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

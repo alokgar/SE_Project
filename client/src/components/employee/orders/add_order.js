@@ -97,7 +97,7 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
 
   return (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/orders" />
+      <Sidebar1 link="/emp/orders" />
       <div className="col-md-10 mainContainer ScrollDiv">
         <h2>Create Order</h2>
         <br />

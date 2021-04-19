@@ -171,24 +171,6 @@ export const getCustomerProfile = (id) => async (dispatch) => {
     const pay = await axios.get(`/api/payment/${id}/customer`);
     const cust = await axios.get(`/api/customer/${id}`);
 
-    function groupBy(list) {
-      const map = new Map();
-      list.forEach((item) => {
-        item.details.forEach((prod) => {
-          const key = [prod.size_id.packing_type, prod.product_id.name];
-          console.log(key);
-          const collection = map.get(key);
-          if (!collection) {
-            map.set(key, prod.quantity);
-          } else {
-            map.set(key, collection + prod.quantity);
-          }
-        });
-      });
-      return map;
-    }
-    var pwo = groupBy(order.data.order);
-    console.log(pwo);
     dispatch({
       type: CUSTOMERS_PROFILE,
       payload: {

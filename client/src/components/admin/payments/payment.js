@@ -88,50 +88,66 @@ const Payment = ({
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/payments" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Payments
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
               <tr>
                 <th>Customer Name</th>
                 <th>Date</th>
-                <th>#</th>
-                <th>#</th>
-                <th>#</th>
+                <th>Amount</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {payments.map(function (payment) {
-                return (
-                  <Fragment>
-                    <tr>
-                      <td>
-                        {payment.customer_id.first_name}{" "}
-                        {payment.customer_id.last_name}
-                      </td>
-                      <td>{payment.date.toString().slice(0, 10)}</td>
-                      <td>{payment.amount}</td>
-                      {/* <td><Button variant="success" onClick={() => onViewclick(payment._id)} >View</Button></td> */}
-                      <td>
-                        <Button
-                          variant="success"
-                          onClick={() => onEditclick(payment)}
-                        >
-                          Edit
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="danger"
-                          onClick={() => deletePayment(payment._id)}
-                        >
-                          Delete
-                        </Button>
-                      </td>
-                    </tr>
-                    {/* {viewId === payment._id?<tr><td>Content</td><td colSpan="4"> {payment.content}</td></tr>:null} */}
-                  </Fragment>
-                );
-              })}
+              {payments.length !== 0 ? (
+                payments.map(function (payment) {
+                  return (
+                    <Fragment>
+                      <tr>
+                        <td>
+                          {payment.customer_id.first_name}{" "}
+                          {payment.customer_id.last_name}
+                        </td>
+                        <td>{payment.date.toString().slice(0, 10)}</td>
+                        <td>{"Rs. " + payment.amount}</td>
+                        {/* <td><Button variant="success" onClick={() => onViewclick(payment._id)} >View</Button></td> */}
+                        <td>
+                          <Button
+                            variant="success"
+                            onClick={() => onEditclick(payment)}
+                          >
+                            Edit
+                          </Button>
+
+                          <Button
+                            variant="danger"
+                            onClick={() => deletePayment(payment._id)}
+                          >
+                            Delete
+                          </Button>
+                        </td>
+                      </tr>
+                      {/* {viewId === payment._id?<tr><td>Content</td><td colSpan="4"> {payment.content}</td></tr>:null} */}
+                    </Fragment>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

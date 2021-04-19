@@ -45,6 +45,16 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/category" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Category
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
@@ -54,14 +64,22 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
               </tr>
             </thead>
             <tbody>
-              {category.map(function (cat) {
-                return (
-                  <tr>
-                    <td>{cat.name}</td>
-                    <td>{cat.description}</td>
-                  </tr>
-                );
-              })}
+              {category.length !== 0 ? (
+                category.map(function (cat) {
+                  return (
+                    <tr>
+                      <td>{cat.name}</td>
+                      <td>{cat.description}</td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="2" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

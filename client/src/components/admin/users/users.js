@@ -19,36 +19,56 @@ const User = ({ getUsers, users }) => {
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/users" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Employees
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover responsive>
             <thead>
               <tr>
-                <th>First Name</th>
-                <th>Last Name</th>
-                <th>#</th>
+                <th>Name</th>
+                <th>Mobile No.</th>
+                <th>Salary</th>
+                <th>Email</th>
               </tr>
             </thead>
             <tbody>
-              {users.map(function (user) {
-                return (
-                  <tr>
-                    <td>
-                      <a
-                        href={`/profile/${user._id}`}
-                        style={{ color: "black" }}
-                      >
-                        {user.first_name + " " + user.last_name}
-                      </a>
-                    </td>
-                    <td>
-                      <Button variant="success">Edit</Button>
-                    </td>
-                    <td>
+              {users.length !== 0 ? (
+                users.map(function (user) {
+                  return (
+                    <tr>
+                      <td>
+                        <a
+                          href={`/profile/${user._id}`}
+                          style={{ color: "black" }}
+                        >
+                          {user.first_name + " " + user.last_name}
+                        </a>
+                      </td>
+
+                      <td>{user.mobile_no}</td>
+                      <td>{user.salary}</td>
+                      <td>{user.email}</td>
+                      {/* <td>
                       <Button variant="danger">Delete</Button>
-                    </td>
-                  </tr>
-                );
-              })}
+                    </td> */}
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

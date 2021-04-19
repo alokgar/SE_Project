@@ -48,6 +48,16 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/stocks" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Stocks
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
@@ -56,15 +66,22 @@ const Stock = ({ getStocks, addStock, editStock, stocks }) => {
                 <th>Packing</th>
                 <th>Quantity</th>
                 <th>Price</th>
-                <th>#</th>
-                <th>#</th>
                 <th>Last Update</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {stocks.map(function (stock) {
-                return <Edit_stock stock={stock} />;
-              })}
+              {stocks.length !== 0 ? (
+                stocks.map(function (stock) {
+                  return <Edit_stock stock={stock} />;
+                })
+              ) : (
+                <tr>
+                  <td colSpan="6" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

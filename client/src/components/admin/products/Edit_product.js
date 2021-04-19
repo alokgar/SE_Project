@@ -56,6 +56,8 @@ const Edit_product = ({
     <Fragment>
       <tr>
         <td>{product.name}</td>
+        <td>{product.description}</td>
+        <td>{product.category_id.name}</td>
         <td>
           <Button
             variant="success"
@@ -65,8 +67,6 @@ const Edit_product = ({
           >
             Edit
           </Button>
-        </td>
-        <td>
           <Button
             variant="danger"
             onClick={() => {
@@ -78,7 +78,7 @@ const Edit_product = ({
         </td>
       </tr>
       <tr>
-        <td colSpan="3">
+        <td colSpan="5">
           <Form onSubmit={(e) => onSubmit(e)} style={{ width: "60%" }}>
             <Form.Group>
               <Form.Label>Product Name</Form.Label>
@@ -128,6 +128,8 @@ const Edit_product = ({
     <Fragment>
       <tr>
         <td>{product.name}</td>
+        <td>{product.description}</td>
+        <td>{product.category_id.name}</td>
         <td>
           <Button
             variant="success"
@@ -137,8 +139,7 @@ const Edit_product = ({
           >
             Edit
           </Button>
-        </td>
-        <td>
+
           <Button
             variant="danger"
             onClick={() => {

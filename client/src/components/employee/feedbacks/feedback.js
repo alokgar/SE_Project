@@ -12,6 +12,7 @@ import Table from "react-bootstrap/Table";
 import Form from "react-bootstrap/Form";
 import { Button, Row, Col } from "react-bootstrap";
 import Sidebar1 from "../sidebar/sidebar";
+import Spinner from "../../layout/Spinner";
 
 const Feedback = ({
   getFeedbacks,
@@ -73,11 +74,23 @@ const Feedback = ({
       : setviewId(id);
   };
   return feedbacks === null ? (
-    <div></div>
+    <div>
+      <Spinner />
+    </div>
   ) : showTable === true ? (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link="/feedbacks" />
+      <Sidebar1 link="/emp/feedbacks" />
       <div className="col-md-10 mainContainer">
+        <p
+          style={{
+            borderBottom: "1px solid black ",
+            fontSize: "20px",
+            fontWeight: "bold",
+            color: "#17a2b8",
+          }}
+        >
+          Feedbacks
+        </p>
         <div className="tableDiv">
           <Table striped bordered hover>
             <thead>
@@ -85,54 +98,60 @@ const Feedback = ({
                 <th>Employee Name</th>
                 <th>Subject</th>
                 <th>#</th>
-                <th>#</th>
-                <th>#</th>
+                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
-              {feedbacks.map(function (feedback) {
-                return (
-                  <Fragment>
-                    <tr>
-                      <td>
-                        {feedback.employee_id.first_name}{" "}
-                        {feedback.employee_id.last_name}
-                      </td>
-                      <td>{feedback.subject}</td>
-                      <td>
-                        <Button
-                          variant="success"
-                          onClick={() => onViewclick(feedback._id)}
-                        >
-                          View
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="success"
-                          onClick={() => onEditclick(feedback)}
-                        >
-                          Edit
-                        </Button>
-                      </td>
-                      <td>
-                        <Button
-                          variant="danger"
-                          onClick={() => deleteFeedback(feedback._id, 1)}
-                        >
-                          Delete
-                        </Button>
-                      </td>
-                    </tr>
-                    {viewId === feedback._id ? (
+              {feedbacks.length !== 0 ? (
+                feedbacks.map(function (feedback) {
+                  return (
+                    <Fragment>
                       <tr>
-                        <td>Content</td>
-                        <td colSpan="4"> {feedback.content}</td>
+                        <td>
+                          {feedback.employee_id.first_name}{" "}
+                          {feedback.employee_id.last_name}
+                        </td>
+                        <td>{feedback.subject}</td>
+                        <td>
+                          <Button
+                            variant="success"
+                            onClick={() => onViewclick(feedback._id)}
+                          >
+                            View
+                          </Button>
+                        </td>
+                        <td>
+                          <Button
+                            variant="success"
+                            onClick={() => onEditclick(feedback)}
+                          >
+                            Edit
+                          </Button>
+
+                          <Button
+                            variant="danger"
+                            onClick={() => deleteFeedback(feedback._id, 1)}
+                          >
+                            Delete
+                          </Button>
+                        </td>
                       </tr>
-                    ) : null}
-                  </Fragment>
-                );
-              })}
+                      {viewId === feedback._id ? (
+                        <tr>
+                          <td>Content</td>
+                          <td colSpan="4"> {feedback.content}</td>
+                        </tr>
+                      ) : null}
+                    </Fragment>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="4" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>
@@ -141,7 +160,7 @@ const Feedback = ({
     </div>
   ) : (
     <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 />
+      <Sidebar1 link={"/emp/feebacks"} />
       <div className="col-md-10 mainContainer ScrollDiv">
         <Form onSubmit={(e) => onSubmit(e)}>
           <Form.Group controlId="formGridAddress1">

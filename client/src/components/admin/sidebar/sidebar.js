@@ -40,6 +40,12 @@ const Sidebar1 = ({ auth: { user }, link }) => {
           <ListGroup.Item className="sidebar-item" action href="/orders">
             Orders
           </ListGroup.Item>
+          <ListGroup.Item className="sidebar-item" action href="/sales">
+            Sales
+          </ListGroup.Item>
+          <ListGroup.Item className="sidebar-item" action href="/production">
+            Production
+          </ListGroup.Item>
           <ListGroup.Item className="sidebar-item" action href="/suppliers">
             Suppliers
           </ListGroup.Item>
@@ -57,9 +63,6 @@ const Sidebar1 = ({ auth: { user }, link }) => {
           </ListGroup.Item>
           <ListGroup.Item className="sidebar-item" action href="/feedbacks">
             Feedbacks
-          </ListGroup.Item>
-          <ListGroup.Item className="sidebar-item" action href="/sales">
-            Sales
           </ListGroup.Item>
         </ListGroup>
       </div>
