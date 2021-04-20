@@ -9,7 +9,7 @@ const Size = require("../../models/Size");
 const auth = require("../../middleware/auth");
 const Stock = require("../../models/Stock");
 
-// @route     GET api/orders/:id/customer
+// @route     GET api/sales
 // @desc      Get order by customer_id
 // @access    Private
 router.get("/", async (req, res) => {

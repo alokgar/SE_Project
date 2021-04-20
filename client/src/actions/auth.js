@@ -64,7 +64,9 @@ export const register = ({
       payload: res.data,
     });
 
-    dispatch(loadUser());
+    dispatch(
+      setAlert("Waiting for Admin Response,then you can login", "danger")
+    );
   } catch (err) {
     const errors = err.response.data.errors;
 
@@ -91,12 +93,13 @@ export const login = (email, password) => async (dispatch) => {
   try {
     const res = await axios.post("/api/auth", body, config);
 
-    dispatch({
+    await dispatch({
       type: LOGIN_SUCCESS,
       payload: res.data,
     });
 
-    dispatch(loadUser());
+    await dispatch(loadUser());
+    await dispatch(setAlert("Successful LogIn !", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
 

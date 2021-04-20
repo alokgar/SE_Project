@@ -48,11 +48,31 @@ router.get("/", async (req, res) => {
   }
 });
 
+// @route     GET api/customer
+// @desc      Get custmoers by employee
+// @access    Private
+router.get("/emp", auth, async (req, res) => {
+  try {
+    const cust = await Customer.find({ employee_id: req.user.id }).populate({
+      path: "employee_id address",
+      populate: "city",
+    });
+
+    if (!cust) {
+      return res.status(400).json({ msg: "There are no Customers !" });
+    }
+    res.json(cust);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 router.get("/:id", async (req, res) => {
   try {
-    const cust = await Customer.findById(req.params.id).populate(
-      "address employee_id"
-    );
+    const cust = await Customer.findById(req.params.id).populate({
+      path: "employee_id address",
+      populate: "city",
+    });
 
     if (!cust) {
       return res.status(400).json({ msg: "There are no Customer !" });
@@ -67,7 +87,7 @@ router.get("/:id", async (req, res) => {
 // @route     POST api/customer
 // @desc      Add a new customer
 // @access    Private
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -83,7 +103,7 @@ router.post("/", async (req, res) => {
     pincode,
     name,
   } = req.body;
-  var employee_id = "6048450ab5eef151323aa5da";
+  var employee_id = req.user.id;
   try {
     const cust1 = await Customer.findOne({ mobile_no });
     if (cust1) {

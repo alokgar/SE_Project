@@ -360,7 +360,7 @@ button {
 
 .tableDiv{
   overflow-Y:auto;
-  max-height: 85%;
+  max-height: 75%;
   max-Width:100%;
 }
 

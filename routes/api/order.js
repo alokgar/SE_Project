@@ -38,6 +38,29 @@ router.get("/", auth, async (req, res) => {
   }
 });
 
+// @route     GET api/orders
+// @desc      Get all orders made by employee
+// @access    Private
+router.get("/emp", auth, async (req, res) => {
+  try {
+    console.log(req.user);
+    const order = await Order.find({ employee_id: req.user.id })
+      .sort({ order_date: -1 })
+      .populate({
+        path: "employee_id customer_id details.product_id details.size_id",
+        populate: "category_id",
+      });
+
+    if (!order) {
+      return res.status(400).json({ msg: "No Orders found !" });
+    }
+    res.json(order);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
+
 // @route     GET api/orders/:id
 // @desc      Get order by id
 // @access    Private

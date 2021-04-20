@@ -60,22 +60,22 @@ describe("Payment", () => {
   // Test the payment POST route to add payment ---------------------------------------------------------------------------------------
   describe("/POST payment", () => {
     // POST a payment succesfully
-    it("it should POST a payment", (done) => {
-      let payment = {
-        amount: "15000",
-        customer_id: "604882eaeb0bd73de0965bce",
-      };
-      chai
-        .request(server)
-        .post("/api/payment")
-        .send(payment)
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a("object");
-          res.body.should.have.property("amount").eql(15000);
-          done();
-        });
-    });
+    // it("it should POST a payment", (done) => {
+    //   let payment = {
+    //     amount: "15000",
+    //     customer_id: "604882eaeb0bd73de0965bce",
+    //   };
+    //   chai
+    //     .request(server)
+    //     .post("/api/payment")
+    //     .send(payment)
+    //     .end((err, res) => {
+    //       res.should.have.status(200);
+    //       res.body.should.be.a("object");
+    //       res.body.should.have.property("amount").eql(15000);
+    //       done();
+    //     });
+    // });
   });
 
   // Test the Payment/PUT route ------------------------------------------------------------------------------------------------

@@ -41,6 +41,7 @@ export const addRaw_material = (raw_material) => async (dispatch) => {
       type: ADD_RAW_MATERIAL,
       payload: result.data,
     });
+    dispatch(setAlert("New Raw materials added", "danger"));
   } catch (err) {
     dispatch({
       type: RAW_MATERIALS_ERROR,
@@ -68,6 +69,7 @@ export const editRaw_material = (raw_material) => async (dispatch) => {
       type: GET_RAW_MATERIALS,
       payload: result.data,
     });
+    dispatch(setAlert(" Raw materials edited succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: RAW_MATERIALS_ERROR,
@@ -90,6 +92,7 @@ export const deleteRaw_material = (id) => async (dispatch) => {
       type: GET_RAW_MATERIALS,
       payload: result.data,
     });
+    dispatch(setAlert(" Raw materials deleted succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: RAW_MATERIALS_ERROR,

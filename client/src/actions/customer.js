@@ -25,6 +25,23 @@ export const getCustomers = () => async (dispatch) => {
   }
 };
 
+// Get all customers data
+export const getEmpCustomers = () => async (dispatch) => {
+  try {
+    const res = await axios.get("/api/customer/emp");
+
+    dispatch({
+      type: GET_CUSTOMERS,
+      payload: res.data,
+    });
+  } catch (err) {
+    dispatch({
+      type: CUSTOMERS_ERROR,
+      payload: { msg: err.response.statusText, status: err.response.status },
+    });
+  }
+};
+
 //Add Customer
 
 export const addCustomer = ({
@@ -35,6 +52,7 @@ export const addCustomer = ({
   landmark,
   pincode,
   name,
+  userType,
 }) => async (dispatch) => {
   const config = {
     headers: {
@@ -54,13 +72,16 @@ export const addCustomer = ({
 
   try {
     const res = await axios.post("/api/customer", body, config);
-    const res1 = await axios.get("/api/customer");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/customer/emp")
+        : await axios.get("/api/customer");
     dispatch({
       type: CUSTOMERS_SUCCESS,
       payload: res1.data,
     });
 
-    dispatch(getCustomers());
+    dispatch(setAlert("New Customer added", "danger"));
   } catch (err) {
     dispatch({
       type: CUSTOMERS_ERROR,
@@ -79,6 +100,7 @@ export const editCustomer = ({
   landmark,
   pincode,
   name,
+  userType,
 }) => async (dispatch) => {
   const config = {
     headers: {
@@ -101,12 +123,17 @@ export const editCustomer = ({
     console.log(id);
 
     const res = await axios.put(`/api/customer/${id}`, body, config);
-    const res1 = await axios.get("/api/customer");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/customer/emp")
+        : await axios.get("/api/customer");
     dispatch({
       type: GET_CUSTOMERS,
 
       payload: res1.data,
     });
+
+    dispatch(setAlert("Customer profile edited successfully", "danger"));
   } catch (err) {
     dispatch({
       type: CUSTOMERS_ERROR,
@@ -116,7 +143,7 @@ export const editCustomer = ({
 
 //delete Customer
 
-export const deleteCustomer = (id) => async (dispatch) => {
+export const deleteCustomer = (id, userType) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -125,7 +152,10 @@ export const deleteCustomer = (id) => async (dispatch) => {
 
   try {
     const res = await axios.delete(`/api/customer/${id}`, config);
-    const res1 = await axios.get("/api/customer");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/customer/emp")
+        : await axios.get("/api/customer");
     dispatch({
       type: GET_CUSTOMERS,
 
@@ -145,24 +175,6 @@ export const getCustomerProfile = (id) => async (dispatch) => {
     const pay = await axios.get(`/api/payment/${id}/customer`);
     const cust = await axios.get(`/api/customer/${id}`);
 
-    function groupBy(list) {
-      const map = new Map();
-      list.forEach((item) => {
-        item.details.forEach((prod) => {
-          const key = [prod.size_id.packing_type, prod.product_id.name];
-          console.log(key);
-          const collection = map.get(key);
-          if (!collection) {
-            map.set(key, prod.quantity);
-          } else {
-            map.set(key, collection + prod.quantity);
-          }
-        });
-      });
-      return map;
-    }
-    var pwo = groupBy(order.data.order);
-    console.log(pwo);
     dispatch({
       type: CUSTOMERS_PROFILE,
       payload: {

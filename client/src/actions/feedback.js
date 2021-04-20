@@ -4,10 +4,12 @@ import { setAlert } from "./alert";
 import { GET_FEEDBACKS, FEEDBACKS_ERROR, FEEDBACKS_SUCCESS } from "./types";
 
 // Get all feedbacks data
-export const getFeedbacks = () => async (dispatch) => {
+export const getFeedbacks = (userType) => async (dispatch) => {
   try {
-    const res = await axios.get("/api/feedback");
-
+    const res =
+      userType === 1
+        ? await axios.get("/api/feedback/emp")
+        : await axios.get("/api/feedback");
     dispatch({
       type: GET_FEEDBACKS,
       payload: res.data,
@@ -22,7 +24,9 @@ export const getFeedbacks = () => async (dispatch) => {
 
 //Add Feedback
 
-export const addFeedback = ({ subject, content }) => async (dispatch) => {
+export const addFeedback = ({ subject, content }, userType) => async (
+  dispatch
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -34,13 +38,15 @@ export const addFeedback = ({ subject, content }) => async (dispatch) => {
   try {
     console.log("--------------------------------");
     const res = await axios.post("/api/feedback", body, config);
-    const res1 = await axios.get("/api/feedback");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/feedback/emp")
+        : await axios.get("/api/feedback");
     dispatch({
       type: FEEDBACKS_SUCCESS,
       payload: res1.data,
     });
-
-    dispatch(getFeedbacks());
+    dispatch(setAlert(" Feedback added succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: FEEDBACKS_ERROR,
@@ -50,7 +56,9 @@ export const addFeedback = ({ subject, content }) => async (dispatch) => {
 
 //EDIT Feedback
 //change status
-export const editFeedback = ({ id, subject, content }) => async (dispatch) => {
+export const editFeedback = ({ id, subject, content }, userType) => async (
+  dispatch
+) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -63,12 +71,16 @@ export const editFeedback = ({ id, subject, content }) => async (dispatch) => {
     console.log(id);
 
     const res = await axios.put(`/api/feedback/${id}`, body, config);
-    const res1 = await axios.get("/api/feedback");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/feedback/emp")
+        : await axios.get("/api/feedback");
     dispatch({
       type: GET_FEEDBACKS,
 
       payload: res1.data,
     });
+    dispatch(setAlert(" Feedback edited succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: FEEDBACKS_ERROR,
@@ -78,7 +90,7 @@ export const editFeedback = ({ id, subject, content }) => async (dispatch) => {
 
 //delete Feedback
 
-export const deleteFeedback = (id) => async (dispatch) => {
+export const deleteFeedback = (id, userType) => async (dispatch) => {
   const config = {
     headers: {
       "Content-Type": "application/json",
@@ -87,12 +99,16 @@ export const deleteFeedback = (id) => async (dispatch) => {
 
   try {
     const res = await axios.delete(`/api/feedback/${id}`, config);
-    const res1 = await axios.get("/api/feedback");
+    const res1 =
+      userType === 1
+        ? await axios.get("/api/feedback/emp")
+        : await axios.get("/api/feedback");
     dispatch({
       type: GET_FEEDBACKS,
 
       payload: res1.data,
     });
+    dispatch(setAlert(" Feedback deleted succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: FEEDBACKS_ERROR,

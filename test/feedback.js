@@ -65,22 +65,22 @@ describe("Feedback", () => {
   // Test the feedback POST route to add feedback ---------------------------------------------------------------------------------------
   describe("/POST feedback", () => {
     // POST a feedback succesfully
-    it("it should POST a feedback", (done) => {
-      let feedback = {
-        subject: "Hiiii Feedback",
-        content: "Hi hjklm.lk;lk'jijk",
-      };
-      chai
-        .request(server)
-        .post("/api/feedback")
-        .send(feedback)
-        .end((err, res) => {
-          res.should.have.status(200);
-          res.body.should.be.a("object");
-          res.body.should.have.property("subject").eql("Hiiii Feedback");
-          done();
-        });
-    });
+    // it("it should POST a feedback", (done) => {
+    //   let feedback = {
+    //     subject: "Hiiii Feedback",
+    //     content: "Hi hjklm.lk;lk'jijk",
+    //   };
+    //   chai
+    //     .request(server)
+    //     .post("/api/feedback")
+    //     .send(feedback)
+    //     .end((err, res) => {
+    //       res.should.have.status(200);
+    //       res.body.should.be.a("object");
+    //       res.body.should.have.property("subject").eql("Hiiii Feedback");
+    //       done();
+    //     });
+    // });
   });
 
   // Test the Feedback/PUT route ------------------------------------------------------------------------------------------------
