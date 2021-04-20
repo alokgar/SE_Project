@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setAlert } from "./alert";
+
 import { GET_STOCKS, STOCKS_ERROR, ADD_STOCK } from "./types";
 
 // Get all stock data
@@ -33,7 +33,6 @@ export const addStock = (stock) => async (dispatch) => {
       type: ADD_STOCK,
       payload: result.data,
     });
-    dispatch(setAlert("New stock added", "danger"));
   } catch (err) {
     dispatch({
       type: STOCKS_ERROR,
@@ -57,7 +56,6 @@ export const editStock = (stock) => async (dispatch) => {
       type: GET_STOCKS,
       payload: result.data,
     });
-    dispatch(setAlert("Stocks edited succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: STOCKS_ERROR,
@@ -80,7 +78,6 @@ export const deleteStock = (id) => async (dispatch) => {
       type: GET_STOCKS,
       payload: result.data,
     });
-    dispatch(setAlert("Stocks deleted succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: STOCKS_ERROR,

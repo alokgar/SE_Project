@@ -1,29 +1,26 @@
-import React from "react";
-import { Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import PropTypes from "prop-types";
+import React from 'react';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-const Landing = ({ isAuthenticated, user }) => {
-  if (user) {
-    if (isAuthenticated) {
-      if (user.type === "Admin") return <Redirect to="/dashboard" />;
-
-      return <Redirect to="emp/dashboard" />;
-    }
+const Landing = ({ isAuthenticated }) => {
+  if (isAuthenticated) {
+    return <Redirect to='/dashboard' />;
   }
+
   return (
-    <section className="landing">
-      <div className="dark-overlay">
-        <div className="landing-inner">
-          <h1 className="x-large">IndustryAssist</h1>
-          <p className="lead">
-            Manage your day-to-day tasks performed at the industry .
+    <section className='landing'>
+      <div className='dark-overlay'>
+        <div className='landing-inner'>
+          <h1 className='x-large'>IndustryAssist</h1>
+          <p className='lead'>
+          Manage your  day-to-day tasks performed at the industry .
           </p>
-          <div className="buttons">
-            <Link to="/register" className="btn btn-primary">
+          <div className='buttons'>
+            <Link to='/register' className='btn btn-primary'>
               Sign Up
             </Link>
-            <Link to="/login" className="btn btn-light">
+            <Link to='/login' className='btn btn-light'>
               Login
             </Link>
           </div>
@@ -34,13 +31,11 @@ const Landing = ({ isAuthenticated, user }) => {
 };
 
 Landing.propTypes = {
-  isAuthenticated: PropTypes.bool,
-  user: PropTypes.object.isRequired,
+  isAuthenticated: PropTypes.bool
 };
 
-const mapStateToProps = (state) => ({
-  isAuthenticated: state.auth.isAuthenticated,
-  user: state.auth.user,
+const mapStateToProps = state => ({
+  isAuthenticated: state.auth.isAuthenticated
 });
 
 export default connect(mapStateToProps)(Landing);

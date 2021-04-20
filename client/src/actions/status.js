@@ -31,22 +31,12 @@ export const changeStatus = (Userid) => async (dispatch) => {
   try {
     // console.log(Userid)
 
-    if (Userid.i === 0) {
-      const res = await axios.get(`/api/users/${Userid.id}`);
+    const res = await axios.get(`/api/users/${Userid.id}`);
 
-      dispatch({
-        type: GET_USERS,
-        payload: res.data,
-      });
-      dispatch(setAlert("Employee Approved", "success"));
-    } else {
-      const res = await axios.get(`/api/users/reject/${Userid.id}`);
-      dispatch({
-        type: GET_USERS,
-        payload: res.data,
-      });
-      dispatch(setAlert("Employee Rejected", "danger"));
-    }
+    dispatch({
+      type: GET_USERS,
+      payload: res.data,
+    });
   } catch (err) {
     dispatch({
       type: PROFILE_ERROR,

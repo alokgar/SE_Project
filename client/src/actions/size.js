@@ -1,5 +1,5 @@
 import axios from "axios";
-import { setAlert } from "./alert";
+
 import { GET_SIZES, ADD_SIZE, SIZE_ERROR } from "./types";
 
 // Get all sizes data
@@ -33,7 +33,6 @@ export const addSize = (size) => async (dispatch) => {
       type: ADD_SIZE,
       payload: result.data,
     });
-    dispatch(setAlert("New size added", "danger"));
   } catch (err) {
     dispatch({
       type: SIZE_ERROR,
@@ -57,7 +56,6 @@ export const editSize = (size) => async (dispatch) => {
       type: GET_SIZES,
       payload: result.data,
     });
-    dispatch(setAlert("edited size succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: SIZE_ERROR,

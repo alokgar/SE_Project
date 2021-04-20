@@ -49,7 +49,6 @@ export const addProduct = ({ name, description, category_name }) => async (
       type: GET_PRODUCTS,
       payload: res1.data,
     });
-    dispatch(setAlert("Product added successfully", "danger"));
   } catch (err) {
     dispatch({
       type: PRODUCTS_ERROR,
@@ -80,7 +79,6 @@ export const editProduct = ({ id, name, description, category_name }) => async (
 
       payload: res1.data,
     });
-    dispatch(setAlert("Product updated successfully", "danger"));
   } catch (err) {
     dispatch({
       type: PRODUCTS_ERROR,
@@ -105,7 +103,6 @@ export const deleteProduct = (id) => async (dispatch) => {
 
       payload: res1.data,
     });
-    dispatch(setAlert("Product deleted successfully", "danger"));
   } catch (err) {
     dispatch({
       type: PRODUCTS_ERROR,
