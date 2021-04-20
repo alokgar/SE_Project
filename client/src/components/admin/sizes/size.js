@@ -62,14 +62,22 @@ const Size = ({ getSizes, addSize, editSize, sizes }) => {
               </tr>
             </thead>
             <tbody>
-              {sizes.map(function (size) {
-                return (
-                  <tr>
-                    <td>{size.packing_type}</td>
-                    <td>{size.unit}</td>
-                  </tr>
-                );
-              })}
+              {sizes.length !== 0 ? (
+                sizes.map(function (size) {
+                  return (
+                    <tr>
+                      <td>{size.packing_type}</td>
+                      <td>{size.unit}</td>
+                    </tr>
+                  );
+                })
+              ) : (
+                <tr>
+                  <td colSpan="2" style={{ textAlign: "center" }}>
+                    No Entry Found !{" "}
+                  </td>
+                </tr>
+              )}
             </tbody>
           </Table>
         </div>

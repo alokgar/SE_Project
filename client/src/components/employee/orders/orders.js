@@ -62,8 +62,8 @@ const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
                 <th>Order Date</th>
                 <th>Dispatch Date</th>
                 <th>Status</th>
-                <th>Action</th>
                 <th>#</th>
+                <th>Dispatch Number</th>
               </tr>
             </thead>
             <tbody>
@@ -110,31 +110,7 @@ const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
                               </Badge>
                             )}
                           </td>
-                          <td>
-                            {order.status === "Pending" ? (
-                              <Button
-                                variant="success"
-                                onClick={() => {
-                                  confirmOrder(id);
-                                }}
-                              >
-                                {" "}
-                                Confirm
-                              </Button>
-                            ) : order.status === "Confirmed" ? (
-                              <Button
-                                variant="danger"
-                                onClick={() => {
-                                  dispatchOrder(id, order.details);
-                                }}
-                              >
-                                {" "}
-                                Disptach
-                              </Button>
-                            ) : (
-                              order.dispatch_num
-                            )}
-                          </td>
+
                           <td>
                             <Button
                               variant="success"
@@ -149,6 +125,11 @@ const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
                               {" "}
                               View
                             </Button>
+                          </td>
+                          <td>
+                            {order.status !== "Dispatched"
+                              ? "Not Dispatched"
+                              : order.dispatch_num}
                           </td>
                         </tr>
                         {viewId === order._id ? (

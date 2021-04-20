@@ -6,7 +6,7 @@ import Spinner from "../../layout/Spinner";
 
 import { changeStatus } from "../../../actions/status";
 import { getUsers } from "../../../actions/status";
-
+import Alert from "../../layout/Alert";
 import Table from "react-bootstrap/Table";
 import { Button, Row, Col } from "react-bootstrap";
 const Approve_status = ({ getUsers, status: { users }, changeStatus }) => {
@@ -15,9 +15,19 @@ const Approve_status = ({ getUsers, status: { users }, changeStatus }) => {
   }, [getUsers]);
 
   return users.length === 0 ? (
-    <div style={{ height: "100%", width: "100%", textAlign: "center" }}>NO</div>
+    <div
+      style={{
+        height: "100%",
+        width: "100%",
+        textAlign: "center",
+        padding: "100px 0px",
+      }}
+    >
+      <b>No Entry Found!</b>
+    </div>
   ) : (
     <Fragment>
+      <Alert />
       <div style={{ width: "100%", overflow: "auto" }}>
         <Table striped bordered hover responsive>
           <thead>
@@ -40,7 +50,7 @@ const Approve_status = ({ getUsers, status: { users }, changeStatus }) => {
                     <Button
                       variant="success"
                       onClick={() => {
-                        changeStatus({ id });
+                        changeStatus({ id, i: 0 });
                       }}
                     >
                       ✓
@@ -48,7 +58,7 @@ const Approve_status = ({ getUsers, status: { users }, changeStatus }) => {
                     <Button
                       variant="danger"
                       onClick={() => {
-                        changeStatus({ id });
+                        changeStatus({ id, i: 1 });
                       }}
                     >
                       ✗<i class="fa fa-trash"></i>

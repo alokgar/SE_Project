@@ -93,7 +93,6 @@ const AddOrder = ({ setAlert, auth: { user }, addOrders, orders, table }) => {
     });
 
     if (details.length > 0) {
-      setAlert("Order place successfully!", "success");
       table();
     }
   };

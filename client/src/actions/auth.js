@@ -99,7 +99,7 @@ export const login = (email, password) => async (dispatch) => {
     });
 
     await dispatch(loadUser());
-    await dispatch(setAlert("Successfully SignIn !", "success"));
+    await dispatch(setAlert("Successful LogIn !", "success"));
   } catch (err) {
     const errors = err.response.data.errors;
 

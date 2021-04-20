@@ -160,6 +160,7 @@ const Payment = ({
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/emp/payments" />
       <div className="col-md-10 mainContainer ScrollDiv">
+        <h2>Add Payment</h2>
         <Form onSubmit={(e) => onSubmit(e)}>
           <Form.Group>
             <Form.Label>Customer</Form.Label>

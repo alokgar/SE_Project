@@ -12,7 +12,7 @@ const SizeOptions = ({ getSizes, sizes }) => {
     sizes !== null &&
     sizes.map((size) => (
       <option key={size._id} val={size.packing_type}>
-        {size.packing_type}
+        {size.packing_type + " " + size.unit}
       </option>
     ))
   );

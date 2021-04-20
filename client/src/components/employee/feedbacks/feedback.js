@@ -164,6 +164,7 @@ const Feedback = ({
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link={"/emp/feebacks"} />
       <div className="col-md-10 mainContainer ScrollDiv">
+        <h2>Add Feedback</h2>
         <Form onSubmit={(e) => onSubmit(e)}>
           <Form.Group controlId="formGridAddress1">
             <Form.Label>Subject</Form.Label>

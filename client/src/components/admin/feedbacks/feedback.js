@@ -78,7 +78,7 @@ const Feedback = ({
     <div>
       <Spinner />
     </div>
-  ) : showTable === true ? (
+  ) : (
     <div className="row" style={{ height: "100%" }}>
       <Sidebar1 link="/feedbacks" />
       <div className="col-md-10 mainContainer">
@@ -150,48 +150,6 @@ const Feedback = ({
             </tbody>
           </Table>
         </div>
-        <Button onClick={() => setTable(false)}>Add Feedback</Button>
-      </div>
-    </div>
-  ) : (
-    <div className="row" style={{ height: "100%" }}>
-      <Sidebar1 link={"/feedbacks"} />
-      <div className="col-md-10 mainContainer ScrollDiv">
-        <Form onSubmit={(e) => onSubmit(e)}>
-          <Form.Group controlId="formGridAddress1">
-            <Form.Label>Subject</Form.Label>
-            <Form.Control
-              name="subject"
-              placeholder="Subject"
-              value={subject}
-              onChange={(e) => onChange(e)}
-              required
-            />
-          </Form.Group>
-
-          <Form.Group controlId="formGridAddress2">
-            <Form.Label>Feedback</Form.Label>
-            <Form.Control
-              name="content"
-              placeholder="Enter your feedback"
-              value={content}
-              onChange={(e) => onChange(e)}
-              required
-            />
-          </Form.Group>
-
-          <Button variant="primary" size="lg" type="submit">
-            Submit
-          </Button>
-          <Button
-            variant="outline-primary"
-            size="lg"
-            href="/feedbacks"
-            style={{ float: "right", marginRight: "20px" }}
-          >
-            Cancel
-          </Button>
-        </Form>
       </div>
     </div>
   );

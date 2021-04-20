@@ -61,8 +61,8 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Packing_type</th>
-                <th>Unit</th>
+                <th>Category Name</th>
+                <th>Description</th>
               </tr>
             </thead>
             <tbody>
@@ -110,7 +110,7 @@ const Category = ({ getCategory, addCategory, editCategory, category }) => {
               </Form.Group>
 
               <Form.Group>
-                <Form.Label>Unit</Form.Label>
+                <Form.Label>Description</Form.Label>
                 <Form.Control
                   required
                   type="text"

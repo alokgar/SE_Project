@@ -97,7 +97,31 @@ export const addOrders = (
       type: GET_ORDERS,
       payload: res.data,
     });
-    dispatch(setAlert(`Order added successfully`, "danger"));
+    dispatch(setAlert(`Order placed successfully`, "success"));
+  } catch (err) {
+    dispatch({
+      type: ORDER_ERROR,
+    });
+  }
+};
+
+// Delete order
+export const deleteOrder = (id) => async (dispatch) => {
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
+
+  try {
+    const res1 = await axios.delete(`/api/order/${id}`, config);
+    const res = await axios.get("/api/order");
+
+    dispatch({
+      type: GET_ORDERS,
+      payload: res.data,
+    });
+    dispatch(setAlert("Order Deleted!", "Danger"));
   } catch (err) {
     dispatch({
       type: ORDER_ERROR,

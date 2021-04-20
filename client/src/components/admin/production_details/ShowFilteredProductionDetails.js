@@ -51,8 +51,18 @@ const ShowFilteredProductionDetails = ({
                   return (
                     <tr>
                       <td>{detail.product_id.name}</td>
-                      <td>{detail.size_id.packing_type}</td>
-                      <td>{detail.new_quantity - detail.prev_quantity}</td>
+                      <td>
+                        {detail.size_id.packing_type +
+                          " " +
+                          detail.size_id.unit}
+                      </td>
+                      <td>
+                        {detail.new_quantity - detail.prev_quantity}
+                        {detail.size_id.unit === "ltr" ||
+                        detail.size_id.unit === "ml"
+                          ? " Ltr"
+                          : " Kg"}
+                      </td>
                       <td>{detail.date.toString().slice(0, 10)}</td>
                     </tr>
                   );

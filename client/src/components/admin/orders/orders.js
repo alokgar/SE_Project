@@ -3,7 +3,12 @@ import { Link, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import Alert from "../../layout/Alert";
-import { getOrders, confirmOrder, dispatchOrder } from "../../../actions/order";
+import {
+  getOrders,
+  confirmOrder,
+  dispatchOrder,
+  deleteOrder,
+} from "../../../actions/order";
 import Table from "react-bootstrap/Table";
 import OrderList from "./order_list";
 import product from "../products/product";
@@ -15,7 +20,13 @@ import ListGroup from "react-bootstrap/ListGroup";
 import Spinner from "../../layout/Spinner";
 import Form from "react-bootstrap/Form";
 
-const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
+const Order = ({
+  getOrders,
+  confirmOrder,
+  deleteOrder,
+  dispatchOrder,
+  orders,
+}) => {
   const [showTable, setTable] = useState(true);
   const [viewId, setviewId] = useState(null);
   const [view, setview] = useState("all");
@@ -167,6 +178,14 @@ const Order = ({ getOrders, confirmOrder, dispatchOrder, orders }) => {
                               {" "}
                               View
                             </Button>
+                            <Button
+                              variant="danger"
+                              onClick={() => {
+                                deleteOrder(id);
+                              }}
+                            >
+                              Delete
+                            </Button>
                           </td>
                         </tr>
                         {viewId === order._id ? (
@@ -296,6 +315,7 @@ Order.propTypes = {
   getOrders: PropTypes.func.isRequired,
   confirmOrder: PropTypes.func.isRequired,
   dispatchOrder: PropTypes.func.isRequired,
+  deleteOrder: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -303,6 +323,7 @@ const mapStateToProps = (state) => ({
 });
 
 export default connect(mapStateToProps, {
+  deleteOrder,
   getOrders,
   confirmOrder,
   dispatchOrder,
