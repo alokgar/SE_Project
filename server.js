@@ -18,12 +18,6 @@ let options = {
 //db connection
 connectDB();
 
-// Set Static folder
-app.use(express.static("client/build"));
-app.get("*", (req, res) =>
-  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"))
-);
-
 //don't show the log when it is test
 if (config.util.getEnv("NODE_ENV") !== "test") {
   //use morgan to log at command line

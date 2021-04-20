@@ -38,7 +38,6 @@ export const addCategory = (category) => async (dispatch) => {
       type: ADD_CATEGORY,
       payload: result.data,
     });
-    dispatch(setAlert(" New Category added succesfully", "danger"));
   } catch (err) {
     dispatch({
       type: CATEGORY_ERROR,

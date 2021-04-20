@@ -68,71 +68,71 @@ describe("Cusmoter", () => {
   });
 
   // Test the customer POST route to add customer ---------------------------------------------------------------------------------------
-  // describe("/POST customer", () => {
-  //   // should not POST a customer with mobile number same as the previously stored cutomer's
-  //   it("it should not POST a customer with same  mobile number", (done) => {
-  //     let customer = new Customer({
-  //       first_name: "Alok",
-  //       last_name: "paisawala",
-  //       mobile_no: 656772233,
-  //       line1: "1namanddf2hjhjgfgjh",
-  //       landmark: "efdefefef",
-  //       pincode: "3493049",
-  //       name: "gtggdf",
-  //       employee_id: "6045947b0eeecc03af04900f",
-  //     });
+  describe("/POST customer", () => {
+    // should not POST a customer with mobile number same as the previously stored cutomer's
+    it("it should not POST a customer with same  mobile number", (done) => {
+      let customer = new Customer({
+        first_name: "Alok",
+        last_name: "paisawala",
+        mobile_no: 656772233,
+        line1: "1namanddf2hjhjgfgjh",
+        landmark: "efdefefef",
+        pincode: "3493049",
+        name: "gtggdf",
+        employee_id: "6045947b0eeecc03af04900f",
+      });
 
-  //     customer.save((err, customer1) => {
-  //       let customer2 = {
-  //         first_name: "Naman",
-  //         last_name: "paisawala",
-  //         mobile_no: 656772233,
-  //         line1: "1namanddf2hjhjgfgjh",
-  //         landmark: "efdefefef",
-  //         pincode: "3493049",
-  //         name: "Indore",
-  //         employee_id: "6045947b0eeecc03af04900f",
-  //       };
-  //       chai
-  //         .request(server)
-  //         .post("/api/customer")
-  //         .send(customer2)
-  //         .end((err, res) => {
-  //           res.should.have.status(404);
-  //           res.body.should.be.a("object");
-  //           res.body.should.have.property("msg");
-  //           res.body.should.have
-  //             .property("msg")
-  //             .eql("Customer Already exist with the mobile number !");
-  //           done();
-  //         });
-  //     });
-  //   });
+      customer.save((err, customer1) => {
+        let customer2 = {
+          first_name: "Naman",
+          last_name: "paisawala",
+          mobile_no: 656772233,
+          line1: "1namanddf2hjhjgfgjh",
+          landmark: "efdefefef",
+          pincode: "3493049",
+          name: "Indore",
+          employee_id: "6045947b0eeecc03af04900f",
+        };
+        chai
+          .request(server)
+          .post("/api/customer")
+          .send(customer2)
+          .end((err, res) => {
+            res.should.have.status(404);
+            res.body.should.be.a("object");
+            res.body.should.have.property("msg");
+            res.body.should.have
+              .property("msg")
+              .eql("Customer Already exist with the mobile number !");
+            done();
+          });
+      });
+    });
 
-  //   // POST a customer succesfully
-  //   it("it should POST a customer", (done) => {
-  //     let customer = {
-  //       first_name: "Alok",
-  //       last_name: "paisawala",
-  //       mobile_no: 9863847567,
-  //       line1: "1namanddf2hjhjgfgjh",
-  //       landmark: "efdefefef",
-  //       pincode: "3493049",
-  //       name: "gtggdf",
-  //       employee_id: "6045947b0eeecc03af04900f",
-  //     };
-  //     chai
-  //       .request(server)
-  //       .post("/api/customer")
-  //       .send(customer)
-  //       .end((err, res) => {
-  //         res.should.have.status(200);
-  //         res.body.should.be.a("object");
-  //         res.body.should.have.property("msg").eql("Customer Added !");
-  //         done();
-  //       });
-  //   });
-  // });
+    // POST a customer succesfully
+    it("it should POST a customer", (done) => {
+      let customer = {
+        first_name: "Alok",
+        last_name: "paisawala",
+        mobile_no: 9863847567,
+        line1: "1namanddf2hjhjgfgjh",
+        landmark: "efdefefef",
+        pincode: "3493049",
+        name: "gtggdf",
+        employee_id: "6045947b0eeecc03af04900f",
+      };
+      chai
+        .request(server)
+        .post("/api/customer")
+        .send(customer)
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a("object");
+          res.body.should.have.property("msg").eql("Customer Added !");
+          done();
+        });
+    });
+  });
 
   // Test the custome /PUT route ------------------------------------------------------------------------------------------------
   describe("/PUT customer/:id", () => {

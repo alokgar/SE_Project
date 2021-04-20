@@ -24,17 +24,17 @@ describe("Order", () => {
   // Test the order GET route   -----------------------------------------------------------------------------------------------------------
   describe("/GET order", () => {
     //get all the orders
-    // it("it should GET all the orders", (done) => {
-    //   chai
-    //     .request(server)
-    //     .get("/api/order")
-    //     .end((err, res) => {
-    //       res.should.have.status(200);
-    //       res.body.should.be.a("array");
-    //       res.body.length.should.be.eql(0);
-    //       done();
-    //     });
-    // });
+    it("it should GET all the orders", (done) => {
+      chai
+        .request(server)
+        .get("/api/order")
+        .end((err, res) => {
+          res.should.have.status(200);
+          res.body.should.be.a("array");
+          res.body.length.should.be.eql(0);
+          done();
+        });
+    });
 
     //get  order with id
     it("it should GET order with the given id", (done) => {

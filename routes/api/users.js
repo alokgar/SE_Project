@@ -31,27 +31,6 @@ router.get("/emp", auth, async (req, res) => {
   }
 });
 
-router.get("/reject/:email", async (req, res) => {
-  try {
-    // const query={id:req.params.id}
-
-    console.log(req.params.email);
-
-    var user = await User.findOneAndUpdate(
-      {
-        email: req.params.email,
-      },
-      { status: "Rejected" }
-    );
-
-    user = await User.find();
-
-    res.json(user);
-  } catch (err) {
-    console.error(err.message);
-    res.status(500).send("Server Error");
-  }
-});
 router.get("/:email", async (req, res) => {
   try {
     // const query={id:req.params.id}
