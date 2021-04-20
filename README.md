@@ -1,7 +1,17 @@
 # IndustryAssist
 It is a web application which fulfills the day-to-day requirement of Manufacturing Industries.This application aims at providing an efficient interface to the industry for managing their product  inventory based on each item sold/produced and help their marketing team with a simple and friendly way to create orders.
 
+## Tech/framework used
+- ReactJS
+- Redux
+- NodeJS
+- ExpressJS
+- MongoDB
+- 
 ## Folder Desciption
+- **Requirement and Designing Docs**
+  - Docs - This folder contains the docs related the SRS, ERdiagram , Data flow diagram of the application.
+
 - **Frontend** 
   - Client - This folder contains the frontend React application of our Web App.
 
@@ -12,7 +22,6 @@ It is a web application which fulfills the day-to-day requirement of Manufacturi
   - Route/Api -  This folder contains all the API's used  in the Application.
   - Test - This folder contains test file used to test the API's written.
   - Server.js - This file is the main file responsible for running the backend server.
-   
 
 
 ## TO RUN THE WEB APP:
