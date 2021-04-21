@@ -43,7 +43,7 @@ It is a web application which fulfills the day-to-day requirement of Manufacturi
 ## TO RUN THE WEB APP:
 A) Goto https://industryapp.herokuapp.com/'
 
-## Contribution -
+## Contributors -
 - [Naman Patidar](https://github.com/Pnaman03)
 - [Alok Garg](https://github.com/alokgar)
 - [Ashutosh Gupta](https://github.com/ashutosh987)
